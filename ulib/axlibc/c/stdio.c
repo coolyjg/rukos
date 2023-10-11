@@ -218,7 +218,7 @@ FILE *fopen(const char *filename, const char *mode)
     f = (FILE *)malloc(sizeof(FILE));
 
     flags = __fmodeflags(mode);
-    // TODO: currently mode is unused in ax_open
+    // TODO: currently mode is unused in open
     int fd = open(filename, flags, 0666);
     if (fd < 0)
         return NULL;

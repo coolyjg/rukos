@@ -43,7 +43,7 @@
 //!
 //! [inodes]: https://en.wikipedia.org/wiki/Inode
 
-#![no_std]
+#![cfg_attr(not(doc), no_std)]
 
 extern crate alloc;
 

@@ -290,8 +290,10 @@ pub unsafe fn sys_clone(
 
 /// Set child tid address
 pub fn sys_set_tid_address(tid: usize) -> c_int {
-    debug!("set_tid_address <= addr: {:#x}", tid);
-    let id = axtask::current().id().as_u64() as c_int;
-    axtask::current().as_task_ref().set_child_tid(tid);
-    id
+    syscall_body!(sys_set_tid_address, {
+        debug!("set_tid_address <= addr: {:#x}", tid);
+        let id = axtask::current().id().as_u64() as c_int;
+        axtask::current().as_task_ref().set_child_tid(tid);
+        Ok(id)
+    })
 }

@@ -29,7 +29,7 @@ pub struct ConsoleWinSize {
 pub fn sys_ioctl(fd: c_int, request: usize, data: usize) -> c_int {
     debug!("sys_ioctl <= fd: {}, request: {}", fd, request);
     if fd != 1 {
-        error!("Only support fd = 1");
+        debug!("Only support fd = 1");
         return -1;
     }
     syscall_body!(sys_ioctl, {

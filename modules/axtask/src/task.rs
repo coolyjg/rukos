@@ -65,7 +65,10 @@ pub struct TaskInner {
     #[cfg(feature = "tls")]
     tls: TlsArea,
 
-    tl: Option<usize>,
+    // set tid
+    set_tid: AtomicU64,
+    // clear tid
+    tl: AtomicU64,
 }
 
 impl TaskId {
@@ -124,10 +127,15 @@ impl TaskInner {
     /// set 0 to thread_list_lock
     pub fn free_thread_list_lock(&self) {
         unsafe {
-            if self.tl.is_some() {
-                let addr = self.tl.unwrap();
-                (addr as *mut core::ffi::c_int).write_volatile(0);
+            let addr = self.tl.load(Ordering::Relaxed);
+            if addr == 0 {
+                return;
             }
+            // 2 refer to main task ID
+            while (addr as *mut core::ffi::c_int).read_volatile() == 2 {
+                continue;
+            }
+            (addr as *mut core::ffi::c_int).write_volatile(0)
         }
     }
 }
@@ -155,11 +163,18 @@ impl TaskInner {
             ctx: UnsafeCell::new(TaskContext::new()),
             #[cfg(feature = "tls")]
             tls: TlsArea::alloc(),
-            tl: None,
+            set_tid: AtomicU64::new(0),
+            tl: AtomicU64::new(0),
         }
     }
 
-    fn new_common_tls(id: TaskId, name: String, tls: usize, tl: Option<usize>) -> Self {
+    fn new_common_tls(
+        id: TaskId,
+        name: String,
+        tls: usize,
+        set_tid: AtomicU64,
+        tl: AtomicU64,
+    ) -> Self {
         Self {
             id,
             name,
@@ -180,8 +195,15 @@ impl TaskInner {
             ctx: UnsafeCell::new(TaskContext::new()),
             #[cfg(feature = "tls")]
             tls: TlsArea::new_with_addr(tls),
+            set_tid,
+            // clear child tid
             tl,
         }
+    }
+
+    /// for set_tid_addr
+    pub fn set_child_tid(&self, tid: usize) {
+        self.set_tid.store(tid as _, Ordering::Release);
     }
 
     /// Create a new task with the given entry function, stack size and tls area address
@@ -190,13 +212,14 @@ impl TaskInner {
         name: String,
         stack_size: usize,
         tls: usize,
-        // thread list lock
-        tl: Option<usize>,
+        set_tid: AtomicU64,
+        // clear child tid
+        tl: AtomicU64,
     ) -> AxTaskRef
     where
         F: FnOnce() + Send + 'static,
     {
-        let mut t = Self::new_common_tls(TaskId::new(), name, tls, tl);
+        let mut t = Self::new_common_tls(TaskId::new(), name, tls, set_tid, tl);
         debug!("new task: {}", t.id_name());
         let kstack = TaskStack::alloc(align_up_4k(stack_size));
 

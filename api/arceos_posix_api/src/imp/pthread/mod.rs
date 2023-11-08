@@ -10,6 +10,7 @@
 use alloc::{boxed::Box, collections::BTreeMap, sync::Arc};
 use core::cell::UnsafeCell;
 use core::ffi::{c_int, c_void};
+use core::sync::atomic::AtomicU64;
 
 use axerrno::{LinuxError, LinuxResult};
 use axtask::AxTaskRef;
@@ -87,7 +88,8 @@ impl Pthread {
         start_routine: extern "C" fn(arg: *mut c_void) -> *mut c_void,
         arg: *mut c_void,
         tls: *mut c_void,
-        tl: Option<usize>,
+        set_tid: AtomicU64,
+        tl: AtomicU64,
     ) -> LinuxResult<u64> {
         let arg_wrapper = ForceSendSync(arg);
 
@@ -100,7 +102,7 @@ impl Pthread {
             start_routine(arg.0);
         };
 
-        let task_inner = axtask::spawn_musl(main, tls as usize, tl);
+        let task_inner = axtask::spawn_musl(main, tls as usize, set_tid, tl);
 
         let tid = task_inner.id().as_u64();
         let thread = Pthread {
@@ -124,19 +126,21 @@ impl Pthread {
         unsafe { core::ptr::NonNull::new(Self::current_ptr()).map(|ptr| ptr.as_ref()) }
     }
 
-
     fn exit_musl(retcode: usize) -> ! {
-        info!("Exit_musl");
-        let tid = Self::current().expect("fail to get current thread").inner.id().as_u64();
-        let thread = {TID_TO_PTHREAD.read().get(&tid).unwrap().0};
+        let tid = Self::current()
+            .expect("fail to get current thread")
+            .inner
+            .id()
+            .as_u64();
+        let thread = { TID_TO_PTHREAD.read().get(&tid).unwrap().0 };
         let thread = unsafe { Box::from_raw(thread as *mut Pthread) };
         TID_TO_PTHREAD.write().remove(&tid);
+        info!("Exit_musl, tid: {}", tid);
         drop(thread);
         axtask::exit(0)
     }
 
     fn exit_current(retval: *mut c_void) -> ! {
-        info!("Exit_current");
         let tid = {
             let thread = Self::current().expect("fail to get current thread");
             unsafe { *thread.retval.result.get() = retval };
@@ -148,7 +152,7 @@ impl Pthread {
             let thread = unsafe { Box::from_raw(thread as *mut Pthread) };
 
             TID_TO_PTHREAD.write().remove(&tid);
-            
+
             drop(thread);
             // core::mem::forget(thread);
         }
@@ -235,7 +239,10 @@ pub unsafe fn sys_clone(
     tls: *mut c_void,
     ctid: *mut ctypes::pid_t,
 ) -> c_int {
-    debug!("sys_clone <= flags: {:x}, stack: {:p}", flags, stack);
+    debug!(
+        "sys_clone <= flags: {:x}, stack: {:p}, ctid: {:x}",
+        flags, stack, ctid as usize
+    );
 
     syscall_body!(sys_clone, {
         if (flags as u32 & ctypes::CLONE_THREAD) == 0 {
@@ -250,12 +257,20 @@ pub unsafe fn sys_clone(
         };
         let args = unsafe { *((stack as usize + 8) as *mut usize) } as *mut c_void;
 
-        let clear_tid = if (flags as u32 & ctypes::CLONE_CHILD_CLEARTID) != 0 {
-            Some(ctid as usize)
+        let set_tid = if (flags as u32 & ctypes::CLONE_CHILD_SETTID) != 0 {
+            AtomicU64::new(ctid as _)
         } else {
-            None
+            AtomicU64::new(0)
         };
-        let tid = Pthread::pcreate(core::ptr::null(), func, args, tls, clear_tid)?;
+
+        let tid = Pthread::pcreate(
+            core::ptr::null(),
+            func,
+            args,
+            tls,
+            set_tid,
+            AtomicU64::from(ctid as u64),
+        )?;
 
         // write tid to ptid
         if (flags as u32 & ctypes::CLONE_PARENT_SETTID) != 0 {
@@ -263,20 +278,20 @@ pub unsafe fn sys_clone(
         }
 
         // clear tid in ctid
-        if (flags as u32 & ctypes::CLONE_CHILD_CLEARTID) != 0 {
-            unsafe { *ctid = 0 as _ };
-        }
+        // if (flags as u32 & ctypes::CLONE_CHILD_CLEARTID) != 0 {
+        //     unsafe { *ctid = 0 as _ };
+        // }
+
+        // axhal::arch::enable_irqs();
 
         Ok(tid)
     })
 }
 
 /// Set child tid address
-pub fn sys_set_tid_address(addr: usize) -> c_int {
-    debug!("set_tid_address <= addr: {:#x}", addr);
+pub fn sys_set_tid_address(tid: usize) -> c_int {
+    debug!("set_tid_address <= addr: {:#x}", tid);
     let id = axtask::current().id().as_u64() as c_int;
-    unsafe {
-        (addr as *mut c_int).write_volatile(id);
-    }
+    axtask::current().as_task_ref().set_child_tid(tid);
     id
 }

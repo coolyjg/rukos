@@ -9,6 +9,8 @@
 
 //! Task APIs for multi-task configuration.
 
+use core::sync::atomic::AtomicU64;
+
 use alloc::{string::String, sync::Arc};
 
 pub(crate) use crate::run_queue::{AxRunQueue, RUN_QUEUE};
@@ -115,12 +117,13 @@ pub fn spawn_raw_musl<F>(
     name: String,
     stack_size: usize,
     tls: usize,
-    tl: Option<usize>,
+    set_tid: AtomicU64,
+    tl: AtomicU64,
 ) -> AxTaskRef
 where
     F: FnOnce() + Send + 'static,
 {
-    let task = TaskInner::new_musl(f, name, stack_size, tls, tl);
+    let task = TaskInner::new_musl(f, name, stack_size, tls, set_tid, tl);
     RUN_QUEUE.lock().add_task(task.clone());
     task
 }
@@ -140,11 +143,11 @@ where
 
 /// Used by musl
 // pub fn spawn_musl<F>(f: Box<F>, tls: usize, tl: Option<usize>) -> AxTaskRef
-pub fn spawn_musl<F>(f: F, tls: usize, tl: Option<usize>) -> AxTaskRef
+pub fn spawn_musl<F>(f: F, tls: usize, set_tid: AtomicU64, tl: AtomicU64) -> AxTaskRef
 where
     F: FnOnce() + Send + 'static,
 {
-    spawn_raw_musl(f, "".into(), axconfig::TASK_STACK_SIZE, tls, tl)
+    spawn_raw_musl(f, "".into(), axconfig::TASK_STACK_SIZE, tls, set_tid, tl)
 }
 
 /// Set the priority for current task.
@@ -194,7 +197,7 @@ pub fn exit(exit_code: i32) -> ! {
 pub fn run_idle() -> ! {
     loop {
         yield_now();
-        debug!("idle task: waiting for IRQs...");
+        debug!("idle task[{}]: waiting for IRQs...", current().id().as_u64());
         #[cfg(feature = "irq")]
         axhal::arch::wait_for_irqs();
     }

@@ -131,10 +131,6 @@ impl TaskInner {
             if addr == 0 {
                 return;
             }
-            let tid = self.id().as_u64();
-            while (addr as *mut core::ffi::c_int).read_volatile() != tid as core::ffi::c_int {
-                continue;
-            }
             (addr as *mut core::ffi::c_int).write_volatile(0)
         }
     }

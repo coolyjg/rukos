@@ -124,7 +124,7 @@ where
     F: FnOnce() + Send + 'static,
 {
     let task = TaskInner::new_musl(f, name, stack_size, tls, set_tid, tl);
-    RUN_QUEUE.lock().add_task(task.clone());
+    // RUN_QUEUE.lock().add_task(task.clone());
     task
 }
 
@@ -142,12 +142,18 @@ where
 }
 
 /// Used by musl
-// pub fn spawn_musl<F>(f: Box<F>, tls: usize, tl: Option<usize>) -> AxTaskRef
 pub fn spawn_musl<F>(f: F, tls: usize, set_tid: AtomicU64, tl: AtomicU64) -> AxTaskRef
 where
     F: FnOnce() + Send + 'static,
 {
     spawn_raw_musl(f, "".into(), axconfig::TASK_STACK_SIZE, tls, set_tid, tl)
+}
+
+/// Used by musl
+/// 
+/// Put new thread into run_queue
+pub fn put_task(task: AxTaskRef){
+    RUN_QUEUE.lock().add_task(task);
 }
 
 /// Set the priority for current task.

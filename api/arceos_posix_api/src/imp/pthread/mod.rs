@@ -90,7 +90,7 @@ impl Pthread {
         tls: *mut c_void,
         set_tid: AtomicU64,
         tl: AtomicU64,
-    ) -> LinuxResult<u64> {
+    ) -> LinuxResult<(u64, AxTaskRef)> {
         let arg_wrapper = ForceSendSync(arg);
 
         let my_packet: Arc<Packet<*mut c_void>> = Arc::new(Packet {
@@ -106,12 +106,12 @@ impl Pthread {
 
         let tid = task_inner.id().as_u64();
         let thread = Pthread {
-            inner: task_inner,
+            inner: task_inner.clone(),
             retval: my_packet,
         };
         let ptr = Box::into_raw(Box::new(thread)) as *mut c_void;
         TID_TO_PTHREAD.write().insert(tid, ForceSendSync(ptr));
-        Ok(tid)
+        Ok((tid, task_inner))
     }
 
     fn current_ptr() -> *mut Pthread {
@@ -263,7 +263,7 @@ pub unsafe fn sys_clone(
             AtomicU64::new(0)
         };
 
-        let tid = Pthread::pcreate(
+        let (tid, task_inner) = Pthread::pcreate(
             core::ptr::null(),
             func,
             args,
@@ -277,12 +277,7 @@ pub unsafe fn sys_clone(
             unsafe { *ptid = tid as c_int };
         }
 
-        // clear tid in ctid
-        // if (flags as u32 & ctypes::CLONE_CHILD_CLEARTID) != 0 {
-        //     unsafe { *ctid = 0 as _ };
-        // }
-
-        // axhal::arch::enable_irqs();
+        axtask::put_task(task_inner);
 
         Ok(tid)
     })

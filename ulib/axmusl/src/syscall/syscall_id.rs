@@ -15,28 +15,19 @@ pub enum SyscallId {
     WRITE = 64,
     #[cfg(feature = "fd")]
     CLOSE = 57,
-    // #[cfg(feature = "fs")]
-    // STAT = ,
     #[cfg(feature = "fs")]
     FSTAT = 80,
     #[cfg(feature = "multitask")]
     SET_TID_ADDRESS = 96,
-    // #[cfg(feature = "fs")]
-    // LSTAT = ,
     #[cfg(feature = "fs")]
     LSEEK = 62,
     #[cfg(feature = "fd")]
     WRITEV = 66,
-    // TODO: this should be architecture-dependent
     #[cfg(feature = "pipe")]
     PIPE2 = 59,
-    // #[cfg(feature = "select")]
-    // SELECT = 23,
     SCHED_YIELD = 124,
     #[cfg(feature = "fd")]
     DUP = 23,
-    // #[cfg(feature = "fd")]
-    // DUP2 = 33,
     NANO_SLEEP = 101,
     #[cfg(feature = "multitask")]
     GETPID = 172,
@@ -50,6 +41,8 @@ pub enum SyscallId {
     SENDTO = 206,
     #[cfg(feature = "net")]
     RECVFROM = 207,
+    #[cfg(feature = "net")]
+    SETSOCKOPT = 208,
     #[cfg(feature = "net")]
     SHUTDOWN = 210,
     #[cfg(feature = "net")]
@@ -65,19 +58,18 @@ pub enum SyscallId {
     FCNTL = 25,
     #[cfg(feature = "fs")]
     GETCWD = 17,
-    // #[cfg(feature = "fs")]
-    // RENAME = ,
-    // #[cfg(feature = "epoll")]
-    // EPOLL_CREATE = 213,
+    #[cfg(feature = "poll")]
+    PPOLL = 73,
     CLOCK_GETTIME = 113,
-    // TODO: epoll_wait or epoll_pwait?
-    // #[cfg(feature = "epoll")]
-    // EPOLL_WAIT = 232,
+    #[cfg(feature = "epoll")]
+    EPOLL_CREATE1 = 20,
     #[cfg(feature = "epoll")]
     EPOLL_CTL = 21,
+    #[cfg(feature = "epoll")]
+    EPOLL_PWAIT = 22,
     #[cfg(feature = "multitask")]
     FUTEX = 98,
-    #[cfg(feature = "alloc")]
+    // #[cfg(feature = "signal")]
     RT_SIGPROCMASK = 135,
     #[cfg(feature = "alloc")]
     MUNMAP = 215,
@@ -87,41 +79,13 @@ pub enum SyscallId {
     MMAP = 222,
     #[cfg(feature = "alloc")]
     MPROTECT = 226,
+    UMASK = 166,
+    // #[cfg(feature = "signal")]
+    RT_SIGACTION = 134,
+    SYSINFO = 179,
+    PRLIMIT64 = 261,
+    GETRLIMIT = 163,
+    SETRLIMIT = 164,
     // #[cfg(feature = "fd")]
     // DUP3 = 292,
-
-    // // ArceOS specific syscall, starting from 500
-    // /// `send` should call `sendto`
-    // #[cfg(feature = "net")]
-    // SEND = 500,
-    // /// `recv` should call `recvfrom`
-    // #[cfg(feature = "net")]
-    // RECV = 501,
-    // /// This is not a syscall, but requires `dns send` in ArceOS
-    // #[cfg(feature = "net")]
-    // GETADDRINFO = 502,
-    // /// `open` should call `openat`
-    // #[cfg(feature = "fs")]
-    // OPEN = 503,
-    // /// This is not a syscall
-    // #[cfg(feature = "multitask")]
-    // PTHREAD_SELF = 504,
-    // /// `pthread_create` should call `sys_clone`
-    // #[cfg(feature = "multitask")]
-    // PTHREAD_CREATE = 505,
-    // /// Not a standard syscall
-    // #[cfg(feature = "multitask")]
-    // PTHREAD_EXIT = 506,
-    // /// `pthread_join` should use `futex`
-    // #[cfg(feature = "multitask")]
-    // PTHREAD_JOIN = 507,
-    // /// Not a standard syscall
-    // #[cfg(feature = "multitask")]
-    // PTHREAD_MUTEX_INIT = 508,
-    // /// `pthread_mutex_lock` should call `futex`
-    // #[cfg(feature = "multitask")]
-    // PTHREAD_MUTEX_LOCK = 509,
-    // /// `pthread_mutex_unlock` should call `futex`
-    // #[cfg(feature = "multitask")]
-    // PTHREAD_MUTEX_UNLOCK = 510,
 }

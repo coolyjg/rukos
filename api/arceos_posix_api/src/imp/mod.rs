@@ -11,6 +11,7 @@ mod stdio;
 
 pub mod io;
 pub mod resources;
+pub mod stat;
 pub mod sys;
 pub mod task;
 pub mod time;
@@ -31,7 +32,7 @@ pub mod net;
 pub mod pipe;
 #[cfg(feature = "multitask")]
 pub mod pthread;
-#[cfg(feature = "alloc")]
+// #[cfg(feature = "signal")]
 pub mod sig;
 
 /// Invalid syscall

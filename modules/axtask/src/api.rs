@@ -150,9 +150,9 @@ where
 }
 
 /// Used by musl
-/// 
+///
 /// Put new thread into run_queue
-pub fn put_task(task: AxTaskRef){
+pub fn put_task(task: AxTaskRef) {
     RUN_QUEUE.lock().add_task(task);
 }
 
@@ -203,7 +203,10 @@ pub fn exit(exit_code: i32) -> ! {
 pub fn run_idle() -> ! {
     loop {
         yield_now();
-        debug!("idle task[{}]: waiting for IRQs...", current().id().as_u64());
+        debug!(
+            "idle task[{}]: waiting for IRQs...",
+            current().id().as_u64()
+        );
         #[cfg(feature = "irq")]
         axhal::arch::wait_for_irqs();
     }

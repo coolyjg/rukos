@@ -46,7 +46,8 @@ pub mod config {
 pub mod ctypes;
 
 pub use imp::io::{sys_read, sys_write, sys_writev};
-pub use imp::resources::{sys_getrlimit, sys_setrlimit};
+pub use imp::resources::{sys_getrlimit, sys_prlimit64, sys_setrlimit};
+pub use imp::stat::sys_umask;
 pub use imp::sys::sys_sysinfo;
 pub use imp::sys_invalid;
 pub use imp::task::{sys_exit, sys_getpid, sys_sched_yield};
@@ -59,12 +60,12 @@ pub use imp::fs::{
     sys_fstat, sys_getcwd, sys_lseek, sys_lstat, sys_mkdir, sys_open, sys_openat, sys_rename,
     sys_rmdir, sys_stat, sys_unlink,
 };
-#[cfg(feature = "poll")]
-pub use imp::io_mpx::sys_poll;
 #[cfg(feature = "select")]
 pub use imp::io_mpx::sys_select;
 #[cfg(feature = "epoll")]
-pub use imp::io_mpx::{sys_epoll_create, sys_epoll_ctl, sys_epoll_wait};
+pub use imp::io_mpx::{sys_epoll_create, sys_epoll_ctl, sys_epoll_pwait, sys_epoll_wait};
+#[cfg(feature = "poll")]
+pub use imp::io_mpx::{sys_poll, sys_ppoll};
 #[cfg(feature = "fd")]
 pub use imp::ioctl::sys_ioctl;
 #[cfg(feature = "alloc")]
@@ -73,7 +74,7 @@ pub use imp::mmap::{sys_mmap, sys_mprotect, sys_munmap};
 pub use imp::net::{
     sys_accept, sys_bind, sys_connect, sys_freeaddrinfo, sys_getaddrinfo, sys_getpeername,
     sys_getsockname, sys_listen, sys_recv, sys_recvfrom, sys_send, sys_sendmsg, sys_sendto,
-    sys_shutdown, sys_socket,
+    sys_setsockopt, sys_shutdown, sys_socket,
 };
 #[cfg(feature = "pipe")]
 pub use imp::pipe::{sys_pipe, sys_pipe2};
@@ -95,5 +96,5 @@ pub use imp::pthread::{
     sys_clone, sys_pthread_create, sys_pthread_exit, sys_pthread_join, sys_pthread_self,
     sys_set_tid_address,
 };
-#[cfg(feature = "alloc")]
-pub use imp::sig::sys_rt_sigprocmask;
+// #[cfg(feature = "alloc")]
+pub use imp::sig::{sys_rt_sigaction, sys_rt_sigprocmask};

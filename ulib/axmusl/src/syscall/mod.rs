@@ -33,20 +33,10 @@ pub fn syscall(syscall_id: SyscallId, args: [usize; 6]) -> isize {
             ) as _,
             #[cfg(feature = "fd")]
             SyscallId::CLOSE => arceos_posix_api::sys_close(args[0] as c_int) as _,
-            // #[cfg(feature = "fs")]
-            // SyscallId::STAT => arceos_posix_api::sys_stat(
-            //     args[0] as *const core::ffi::c_char,
-            //     args[1] as *mut ctypes::stat,
-            // ) as _,
             #[cfg(feature = "fs")]
             SyscallId::FSTAT => {
                 arceos_posix_api::sys_fstat(args[0] as c_int, args[1] as *mut ctypes::stat) as _
             }
-            // #[cfg(feature = "fs")]
-            // SyscallId::LSTAT => arceos_posix_api::sys_lstat(
-            //     args[0] as *const core::ffi::c_char,
-            //     args[1] as *mut ctypes::stat,
-            // ) as _,
             #[cfg(feature = "fs")]
             SyscallId::LSEEK => arceos_posix_api::sys_lseek(
                 args[0] as c_int,
@@ -66,19 +56,9 @@ pub fn syscall(syscall_id: SyscallId, args: [usize; 6]) -> isize {
             ) as _,
             #[cfg(feature = "multitask")]
             SyscallId::SET_TID_ADDRESS => arceos_posix_api::sys_set_tid_address(args[0]) as _,
-            // #[cfg(feature = "select")]
-            // SyscallId::SELECT => arceos_posix_api::sys_select(
-            //     args[0] as c_int,
-            //     args[1] as *mut ctypes::fd_set,
-            //     args[2] as *mut ctypes::fd_set,
-            //     args[3] as *mut ctypes::fd_set,
-            //     args[4] as *mut ctypes::timeval,
-            // ) as _,
             SyscallId::SCHED_YIELD => arceos_posix_api::sys_sched_yield() as _,
             #[cfg(feature = "fd")]
             SyscallId::DUP => arceos_posix_api::sys_dup(args[0] as c_int) as _,
-            // #[cfg(feature = "fd")]
-            // SyscallId::DUP2 => arceos_posix_api::sys_dup2(args[0] as _, args[1] as _) as _,
             SyscallId::NANO_SLEEP => arceos_posix_api::sys_nanosleep(
                 args[0] as *const ctypes::timespec,
                 args[1] as *mut ctypes::timespec,
@@ -119,6 +99,14 @@ pub fn syscall(syscall_id: SyscallId, args: [usize; 6]) -> isize {
                 args[3] as c_int,
                 args[4] as *mut ctypes::sockaddr,
                 args[5] as *mut ctypes::socklen_t,
+            ) as _,
+            #[cfg(feature = "net")]
+            SyscallId::SETSOCKOPT => arceos_posix_api::sys_setsockopt(
+                args[0] as c_int,
+                args[1] as c_int,
+                args[2] as c_int,
+                args[3] as *const core::ffi::c_void,
+                args[4] as ctypes::socklen_t,
             ) as _,
             #[cfg(feature = "net")]
             SyscallId::SHUTDOWN => {
@@ -162,24 +150,29 @@ pub fn syscall(syscall_id: SyscallId, args: [usize; 6]) -> isize {
             SyscallId::GETCWD => {
                 arceos_posix_api::sys_getcwd(args[0] as *mut core::ffi::c_char, args[1]) as _
             }
-            // #[cfg(feature = "fs")]
-            // SyscallId::RENAME => arceos_posix_api::sys_rename(
-            //     args[0] as *const core::ffi::c_char,
-            //     args[1] as *const core::ffi::c_char,
-            // ) as _,
-            // #[cfg(feature = "epoll")]
-            // SyscallId::EPOLL_CREATE => arceos_posix_api::sys_epoll_create(args[0] as c_int) as _,
+            #[cfg(feature = "epoll")]
+            SyscallId::EPOLL_CREATE1 => arceos_posix_api::sys_epoll_create(args[0] as c_int) as _,
+            #[cfg(feature = "poll")]
+            SyscallId::PPOLL => arceos_posix_api::sys_ppoll(
+                args[0] as *mut ctypes::pollfd,
+                args[1] as ctypes::nfds_t,
+                args[2] as *const ctypes::timespec,
+                args[3] as *const ctypes::sigset_t,
+                args[4] as ctypes::size_t,
+            ) as _,
             SyscallId::CLOCK_GETTIME => arceos_posix_api::sys_clock_gettime(
                 args[0] as ctypes::clockid_t,
                 args[1] as *mut ctypes::timespec,
             ) as _,
-            // #[cfg(feature = "epoll")]
-            // SyscallId::EPOLL_WAIT => crate::sys_epoll_wait(
-            //     args[0] as c_int,
-            //     args[1] as *mut ctypes::epoll_event,
-            //     args[2] as c_int,
-            //     args[3] as c_int,
-            // ) as _,
+            #[cfg(feature = "epoll")]
+            SyscallId::EPOLL_PWAIT => arceos_posix_api::sys_epoll_pwait(
+                args[0] as c_int,
+                args[1] as *mut ctypes::epoll_event,
+                args[2] as c_int,
+                args[3] as c_int,
+                args[4] as *const ctypes::sigset_t,
+                args[5] as *const ctypes::size_t,
+            ) as _,
             #[cfg(feature = "epoll")]
             SyscallId::EPOLL_CTL => arceos_posix_api::sys_epoll_ctl(
                 args[0] as c_int,
@@ -187,13 +180,22 @@ pub fn syscall(syscall_id: SyscallId, args: [usize; 6]) -> isize {
                 args[2] as c_int,
                 args[3] as *mut ctypes::epoll_event,
             ) as _,
-            #[cfg(feature = "alloc")]
+            // #[cfg(feature = "alloc")]
             SyscallId::RT_SIGPROCMASK => arceos_posix_api::sys_rt_sigprocmask(
                 args[0] as c_int,
                 args[1] as *const usize,
                 args[2] as *mut usize,
                 args[3],
             ) as _,
+            SyscallId::RT_SIGACTION => arceos_posix_api::sys_rt_sigaction(
+                args[0] as c_int,
+                args[1] as *const ctypes::sigaction,
+                args[2] as *mut ctypes::sigaction,
+                args[3] as ctypes::size_t,
+            ) as _,
+            SyscallId::SYSINFO => {
+                arceos_posix_api::sys_sysinfo(args[0] as *mut ctypes::sysinfo) as _
+            }
             #[cfg(feature = "alloc")]
             SyscallId::MUNMAP => arceos_posix_api::sys_munmap(
                 args[0] as *mut core::ffi::c_void,
@@ -231,71 +233,21 @@ pub fn syscall(syscall_id: SyscallId, args: [usize; 6]) -> isize {
                 args[4] as c_int,
                 args[5] as c_int,
             ) as _,
-            // #[cfg(feature = "fd")]
-            // SyscallId::DUP3 => {
-            //     crate::sys_dup3(args[0] as c_int, args[1] as c_int, args[2] as c_int) as _
-            // }
-
-            // #[cfg(feature = "net")]
-            // SyscallId::SEND => crate::sys_send(
-            //     args[0] as c_int,
-            //     args[1] as *const core::ffi::c_void,
-            //     args[2] as ctypes::size_t,
-            //     args[3] as c_int,
-            // ) as _,
-
-            // #[cfg(feature = "net")]
-            // SyscallId::RECV => crate::sys_recv(
-            //     args[0] as c_int,
-            //     args[1] as *mut core::ffi::c_void,
-            //     args[2] as ctypes::size_t,
-            //     args[3] as c_int,
-            // ) as _,
-            // #[cfg(feature = "net")]
-            // SyscallId::GETADDRINFO => crate::sys_getaddrinfo(
-            //     args[0] as *const core::ffi::c_char,
-            //     args[1] as *const core::ffi::c_char,
-            //     args[2] as *mut ctypes::sockaddr,
-            //     args[3] as ctypes::size_t,
-            // ) as _,
-            // #[cfg(feature = "fs")]
-            // SyscallId::OPEN => crate::sys_open(
-            //     args[0] as *const core::ffi::c_char,
-            //     args[1] as c_int,
-            //     args[2] as ctypes::mode_t,
-            // ) as _,
-            // #[cfg(feature = "multitask")]
-            // SyscallId::PTHREAD_SELF => crate::sys_pthread_self() as _,
-            // #[cfg(feature = "multitask")]
-            // SyscallId::PTHREAD_CREATE => crate::sys_pthread_create(
-            //     args[0] as *mut ctypes::pthread_t,
-            //     args[1] as *const ctypes::pthread_attr_t,
-            //     args[2] as *mut core::ffi::c_void,
-            //     args[3] as *mut core::ffi::c_void,
-            // ) as _,
-            // #[allow(unreachable_code)]
-            // #[cfg(feature = "multitask")]
-            // SyscallId::PTHREAD_EXIT => {
-            //     crate::sys_pthread_exit(args[0] as *mut core::ffi::c_void) as _
-            // }
-            // #[cfg(feature = "multitask")]
-            // SyscallId::PTHREAD_JOIN => crate::sys_pthread_join(
-            //     args[0] as ctypes::pthread_t,
-            //     args[1] as *mut *mut core::ffi::c_void,
-            // ) as _,
-            // #[cfg(feature = "multitask")]
-            // SyscallId::PTHREAD_MUTEX_INIT => crate::sys_pthread_mutex_init(
-            //     args[0] as *mut ctypes::pthread_mutex_t,
-            //     args[1] as *const ctypes::pthread_mutexattr_t,
-            // ) as _,
-            // #[cfg(feature = "multitask")]
-            // SyscallId::PTHREAD_MUTEX_LOCK => {
-            //     crate::sys_pthread_mutex_lock(args[0] as *mut ctypes::pthread_mutex_t) as _
-            // }
-            // #[cfg(feature = "multitask")]
-            // SyscallId::PTHREAD_MUTEX_UNLOCK => {
-            //     crate::sys_pthread_mutex_unlock(args[0] as *mut ctypes::pthread_mutex_t) as _
-            // }
+            SyscallId::UMASK => arceos_posix_api::sys_umask(args[0] as ctypes::mode_t) as _,
+            SyscallId::PRLIMIT64 => arceos_posix_api::sys_prlimit64(
+                args[0] as ctypes::pid_t,
+                args[1] as c_int,
+                args[2] as *const ctypes::rlimit,
+                args[3] as *mut ctypes::rlimit,
+            ) as _,
+            SyscallId::GETRLIMIT => {
+                arceos_posix_api::sys_getrlimit(args[0] as c_int, args[1] as *mut ctypes::rlimit)
+                    as _
+            }
+            SyscallId::SETRLIMIT => {
+                arceos_posix_api::sys_setrlimit(args[0] as c_int, args[1] as *const ctypes::rlimit)
+                    as _
+            }
         }
     }
 }

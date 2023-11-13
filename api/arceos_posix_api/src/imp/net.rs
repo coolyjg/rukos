@@ -256,6 +256,21 @@ pub fn sys_socket(domain: c_int, socktype: c_int, protocol: c_int) -> c_int {
     })
 }
 
+/// `setsockopt`, currently ignored
+pub fn sys_setsockopt(
+    fd: c_int,
+    level: c_int,
+    optname: c_int,
+    _optval: *const c_void,
+    optlen: ctypes::socklen_t,
+) -> c_int {
+    debug!(
+        "sys_setsockopt <= fd: {}, level: {}, optname: {}, optlen: {}",
+        fd, level, optname, optlen
+    );
+    syscall_body!(sys_setsockopt, Ok(0))
+}
+
 /// Bind a address to a socket.
 ///
 /// Return 0 if success.

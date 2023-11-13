@@ -96,6 +96,8 @@ typedef struct {{
             "pthread_condattr_t",
             "sysinfo",
             "pid_t",
+            "sigset_t",
+            "sigaction",
         ];
         let allow_vars = [
             "O_.*",

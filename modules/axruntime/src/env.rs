@@ -42,8 +42,10 @@ pub(crate) unsafe fn init_argv(args: Vec<&str>) {
     }
     // end of argv
     RX_ARGV.push(ptr::null_mut());
-    // end of envp
-    RX_ARGV.push(ptr::null_mut());
+
+    for e in &RX_ENVIRON {
+        RX_ARGV.push(*e);
+    }
 
     RX_ARGV.push(AT_PAGESIZE as *mut c_char);
     RX_ARGV.push(PAGE_SIZE_4K as *mut c_char);

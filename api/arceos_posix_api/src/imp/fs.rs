@@ -258,6 +258,19 @@ pub fn sys_unlink(pathname: *const c_char) -> c_int {
     })
 }
 
+pub fn sys_unlinkat(fd: c_int, pathname: *const c_char, flags: c_int) -> c_int {
+    debug!(
+        "sys_unlinkat <= fd: {}, pathname: {:?}, flags: {}",
+        fd,
+        char_ptr_to_str(pathname),
+        flags
+    );
+    if flags as u32 & ctypes::AT_REMOVEDIR != 0 {
+        return sys_rmdir(pathname);
+    }
+    sys_unlink(pathname)
+}
+
 /// Creates a new, empty directory at the provided path.
 pub fn sys_mkdir(pathname: *const c_char, mode: ctypes::mode_t) -> c_int {
     // TODO: implement mode
@@ -267,4 +280,14 @@ pub fn sys_mkdir(pathname: *const c_char, mode: ctypes::mode_t) -> c_int {
         axfs::api::create_dir(path)?;
         Ok(0)
     })
+}
+
+pub fn sys_mkdirat(fd: c_int, pathname: *const c_char, mode: ctypes::mode_t) -> c_int {
+    debug!(
+        "sys_mkdirat <= fd: {}, pathname: {:?}, mode: {:x?}",
+        fd,
+        char_ptr_to_str(pathname),
+        mode
+    );
+    sys_mkdir(pathname, mode)
 }

@@ -8,9 +8,15 @@ use num_enum::TryFromPrimitive;
 pub enum SyscallId {
     INVALID = 999,
     #[cfg(feature = "fd")]
+    DUP3 = 24,
+    #[cfg(feature = "fd")]
     IOCTL = 29,
     #[cfg(feature = "fs")]
     OPENAT = 56,
+    #[cfg(feature = "fs")]
+    MKDIRAT = 34,
+    #[cfg(feature = "fs")]
+    UNLINKAT = 35,
     READ = 63,
     WRITE = 64,
     #[cfg(feature = "fd")]

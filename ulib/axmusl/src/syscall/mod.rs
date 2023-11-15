@@ -11,6 +11,11 @@ pub fn syscall(syscall_id: SyscallId, args: [usize; 6]) -> isize {
         match syscall_id {
             SyscallId::INVALID => arceos_posix_api::sys_invalid(syscall_id as usize as c_int) as _,
             #[cfg(feature = "fd")]
+            SyscallId::DUP3 => {
+                arceos_posix_api::sys_dup3(args[0] as c_int, args[1] as c_int, args[2] as c_int)
+                    as _
+            }
+            #[cfg(feature = "fd")]
             SyscallId::IOCTL => {
                 arceos_posix_api::sys_ioctl(args[0] as c_int, args[1], args[2]) as _
             }
@@ -20,6 +25,18 @@ pub fn syscall(syscall_id: SyscallId, args: [usize; 6]) -> isize {
                 args[1] as *const core::ffi::c_char,
                 args[2] as c_int,
                 args[3] as ctypes::mode_t,
+            ) as _,
+            #[cfg(feature = "fs")]
+            SyscallId::MKDIRAT => arceos_posix_api::sys_mkdirat(
+                args[0] as c_int,
+                args[1] as *const core::ffi::c_char,
+                args[2] as ctypes::mode_t,
+            ) as _,
+            #[cfg(feature = "fs")]
+            SyscallId::UNLINKAT => arceos_posix_api::sys_unlinkat(
+                args[0] as c_int,
+                args[1] as *const core::ffi::c_char,
+                args[2] as c_int,
             ) as _,
             SyscallId::READ => arceos_posix_api::sys_read(
                 args[0] as c_int,

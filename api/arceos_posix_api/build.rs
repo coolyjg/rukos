@@ -113,6 +113,7 @@ typedef struct {{
             "EAI_.*",
             "MAXADDRS",
             "CLONE_.*",
+            "AT_.*",
         ];
 
         #[derive(Debug)]

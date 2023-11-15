@@ -8,4 +8,5 @@ net
 pipe
 epoll
 poll
+virtio-9p
 rtc

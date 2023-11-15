@@ -18,7 +18,7 @@ ifeq ($(APP_TYPE),c)
   else
     lib_feat_prefix := axlibc/
   endif
-  lib_features := fp_simd alloc multitask fs net fd pipe select poll epoll random-hw
+  lib_features := fp_simd alloc multitask fs net fd pipe select poll epoll random-hw signal
 else
   # TODO: it's better to use `axfeat/` as `ax_feat_prefix`, but all apps need to have `axfeat` as a dependency
   ax_feat_prefix := axstd/

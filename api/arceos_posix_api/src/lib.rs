@@ -47,11 +47,15 @@ pub mod ctypes;
 
 pub use imp::io::{sys_read, sys_write, sys_writev};
 pub use imp::resources::{sys_getrlimit, sys_prlimit64, sys_setrlimit};
+#[cfg(feature = "signal")]
+pub use imp::signal::sys_sigaction;
 pub use imp::stat::sys_umask;
 pub use imp::sys::sys_sysinfo;
 pub use imp::sys_invalid;
 pub use imp::task::{sys_exit, sys_getpid, sys_sched_yield};
 pub use imp::time::{sys_clock_gettime, sys_clock_settime, sys_nanosleep};
+#[cfg(feature = "signal")]
+pub use imp::time::{sys_getitimer, sys_setitimer};
 
 #[cfg(feature = "fd")]
 pub use imp::fd_ops::{sys_close, sys_dup, sys_dup2, sys_dup3, sys_fcntl};
@@ -80,13 +84,18 @@ pub use imp::net::{
 pub use imp::pipe::{sys_pipe, sys_pipe2};
 #[cfg(feature = "multitask")]
 pub use imp::pthread::condvar::{
-    sys_pthread_cond_broadcast, sys_pthread_cond_init, sys_pthread_cond_signal,
-    sys_pthread_cond_wait,
+    sys_pthread_cond_broadcast, sys_pthread_cond_destroy, sys_pthread_cond_init,
+    sys_pthread_cond_signal, sys_pthread_cond_timedwait, sys_pthread_cond_wait,
 };
 #[cfg(feature = "multitask")]
 pub use imp::pthread::mutex::{
-    sys_pthread_mutex_init, sys_pthread_mutex_lock, sys_pthread_mutex_trylock,
-    sys_pthread_mutex_unlock,
+    sys_pthread_mutex_destroy, sys_pthread_mutex_init, sys_pthread_mutex_lock,
+    sys_pthread_mutex_trylock, sys_pthread_mutex_unlock,
+};
+#[cfg(feature = "multitask")]
+pub use imp::pthread::tsd::{
+    sys_pthread_getspecific, sys_pthread_key_create, sys_pthread_key_delete,
+    sys_pthread_setspecific,
 };
 
 #[cfg(feature = "multitask")]

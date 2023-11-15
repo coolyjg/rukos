@@ -10,18 +10,24 @@
 #	  - `ENVS`: Environment variables, separated by comma between key value pairs. Only available when feature `alloc` is enabled.
 # * App options:
 #     - `A` or `APP`: Path to the application
-#     - `FEATURES`: Features os ArceOS modules to be enabled.
+#     - `FEATURES`: Features of ArceOS modules to be enabled.
 #     - `APP_FEATURES`: Features of (rust) apps to be enabled.
 # * QEMU options:
 #     - `BLK`: Enable storage devices (virtio-blk)
 #     - `NET`: Enable network devices (virtio-net)
 #     - `GRAPHIC`: Enable display devices and graphic output (virtio-gpu)
+#     - `V9P`: Enable virtio-9p devices
 #     - `BUS`: Device bus type: mmio, pci
 #     - `DISK_IMG`: Path to the virtual disk image
 #     - `ACCEL`: Enable hardware acceleration (KVM on linux)
 #     - `QEMU_LOG`: Enable QEMU logging (log file is "qemu.log")
 #     - `NET_DUMP`: Enable network packet dump (log file is "netdump.pcap")
 #     - `NET_DEV`: QEMU netdev backend types: user, tap
+# * 9P options:
+#     - `V9P_PATH`: Host path for backend of virtio-9p
+#     - `NET_9P_ADDR`: Server address and port for 9P netdev 
+#     - `ANAME_9P`: Path for root of 9pfs(parameter of TATTACH for root)
+#     - `PROTOCOL_9P`: Default protocol version selected for 9P
 # * Network options:
 #     - `IP`: ArceOS IPv4 address (default is 10.0.2.15 for QEMU user netdev)
 #     - `GW`: Gateway IPv4 address (default is 10.0.2.2 for QEMU user netdev)
@@ -46,12 +52,18 @@ APP_FEATURES ?=
 BLK ?= n
 NET ?= n
 GRAPHIC ?= n
+V9P ?= n
 BUS ?= mmio
+
 
 DISK_IMG ?= disk.img
 QEMU_LOG ?= n
 NET_DUMP ?= n
 NET_DEV ?= user
+V9P_PATH ?= ./
+NET_9P_ADDR ?= 127.0.0.1:564
+ANAME_9P ?= ./
+PROTOCOL_9P ?= 9P2000.L
 
 # Network options
 IP ?= 10.0.2.15
@@ -126,6 +138,9 @@ export AX_LOG=$(LOG)
 export AX_TARGET=$(TARGET)
 export AX_IP=$(IP)
 export AX_GW=$(GW)
+export AX_9P_ADDR = $(NET_9P_ADDR)
+export AX_ANAME_9P = $(ANAME_9P)
+export AX_PROTOCOL_9P = $(PROTOCOL_9P)
 export AX_MUSL=$(MUSL)
 
 # Binutils

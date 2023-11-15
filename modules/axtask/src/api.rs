@@ -17,6 +17,7 @@ pub(crate) use crate::run_queue::{AxRunQueue, RUN_QUEUE};
 
 #[doc(cfg(feature = "multitask"))]
 pub use crate::task::{CurrentTask, TaskId, TaskInner};
+use crate::tsd;
 #[doc(cfg(feature = "multitask"))]
 pub use crate::wait_queue::WaitQueue;
 
@@ -79,6 +80,7 @@ pub fn init_scheduler() {
     crate::run_queue::init();
     #[cfg(feature = "irq")]
     crate::timers::init();
+    tsd::init();
 
     info!("  use {} scheduler.", Scheduler::scheduler_name());
 }
@@ -194,6 +196,7 @@ pub fn sleep_until(deadline: axhal::time::TimeValue) {
 
 /// Exits the current task.
 pub fn exit(exit_code: i32) -> ! {
+    current().destroy_keys();
     RUN_QUEUE.lock().exit_current(exit_code)
 }
 

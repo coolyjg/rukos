@@ -107,14 +107,20 @@ impl WaitQueue {
     /// notify it, or the given duration has elapsed.
     #[cfg(feature = "irq")]
     pub fn wait_timeout(&self, dur: core::time::Duration) -> bool {
+        let deadline = dur + axhal::time::current_time();
+        self.wait_timeout_absolutely(deadline)
+    }
+    /// Blocks the current task and put it into the wait queue, until other tasks
+    /// notify it, or the given deadling has elapsed.
+    pub fn wait_timeout_absolutely(&self, _deadline: core::time::Duration) -> bool {
         let curr = crate::current();
-        let deadline = axhal::time::current_time() + dur;
         debug!(
             "task wait_timeout: {} deadline={:?}",
             curr.id_name(),
-            deadline
+            _deadline
         );
-        crate::timers::set_alarm_wakeup(deadline, curr.clone());
+        #[cfg(feature = "irq")]
+        crate::timers::set_alarm_wakeup(_deadline, curr.clone());
 
         RUN_QUEUE.lock().block_current(|task| {
             task.set_in_wait_queue(true);

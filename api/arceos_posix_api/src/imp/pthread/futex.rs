@@ -135,10 +135,7 @@ pub fn sys_futex(
                 debug!("unimplemented for REQUEUE");
                 Ok(0)
             }
-            _ => {
-                // return EFAULT
-                Err(LinuxError::EFAULT)
-            }
+            _ => Err(LinuxError::EFAULT),
         }
     })
 }

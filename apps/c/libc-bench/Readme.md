@@ -4,7 +4,7 @@
 
 - Run with following command
 ```
-make A=apps/c/libc-bench/ MUSL=y BLK=y ARCH=aarch64 LOG=error run
+make A=apps/c/libc-bench/ MUSL=y BLK=y ARCH=aarch64 LOG=error SMP=4 run
 ```
 
 - This benchmark includes (all codes are really simple to read):
@@ -148,7 +148,7 @@ b_regex_search ("a{25}b")
 
 - For SMP bug, something seems to be wrong for tls (should checkout tls implementation, and pay attention to `tpidr_el0/tpidr_el1`). By running with `SMP=4`, it seems that this benchmark fails when reading `tpidr_el1`(a weird value).
 
-- Memory is expanded to 2G (two files are changed, `platforms/aarch64-qemu-virt.toml`, `scripts/make/qemu.mk`), so CI fails (mostly because RISC-V cannot support such a large memory space).
+- Memory is expanded to 4G (two files are changed, `platforms/aarch64-qemu-virt.toml`, `scripts/make/qemu.mk`), so CI fails (mostly because RISC-V cannot support such a large memory space).
 
 - It is recommended to know how musl-libc is integrated in `ulib/axmusl`.
 

@@ -28,7 +28,7 @@ pub fn sys_mmap(
     _fd: c_int,
     _off: ctypes::off_t,
 ) -> *mut c_void {
-    debug!("sys_mmap <= start: {:p}, len: {}", start, len);
+    debug!("sys_mmap <= start: {:p}, len: {}, fd: {}", start, len, _fd);
     syscall_body!(sys_mmap, {
         if !start.is_null() {
             debug!("Do not support explicitly specifying start addr");
@@ -60,11 +60,12 @@ pub fn sys_munmap(start: *mut c_void, len: ctypes::size_t) -> c_int {
 /// Changes the access protections for the calling process's memory pages
 /// containing any part of the address range in the interval [addr, addr+len-1].  
 /// addr must be aligned to a page boundary.
+/// 
+/// TODO: implement this
 pub fn sys_mprotect(addr: *mut c_void, len: ctypes::size_t, prot: c_int) -> c_int {
     debug!(
-        "sys_mprotect <= addr: {:p}, len: {}, prot: {}",
+        "sys_mprotect <= addr: {:p}, len: {}, prot: {}, Currently IGNORED",
         addr, len, prot
     );
-    debug!("Currently IGNORED");
     syscall_body!(sys_mprotect, Ok(0))
 }

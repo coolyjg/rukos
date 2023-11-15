@@ -68,9 +68,6 @@ fn handle_sync_exception(tf: &mut TrapFrame) {
                 ],
             );
             tf.r[0] = result as u64;
-            // Jump to next instruction
-            // tf.elr += 4;
-            // debug!("elr = {:#x}", tf.elr);
         }
         Some(ESR_EL1::EC::Value::DataAbortLowerEL)
         | Some(ESR_EL1::EC::Value::InstrAbortLowerEL) => {

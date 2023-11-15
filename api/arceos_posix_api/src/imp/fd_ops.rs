@@ -110,7 +110,8 @@ pub fn sys_dup2(old_fd: c_int, new_fd: c_int) -> c_int {
     })
 }
 
-/// `dup3` used by A64
+/// `dup3` used by A64 for MUSL
+#[cfg(feature = "musl")]
 pub fn sys_dup3(old_fd: c_int, new_fd: c_int, flags: c_int) -> c_int {
     debug!(
         "sys_dup3 <= old_fd: {}, new_fd: {}, flags: {:x}",

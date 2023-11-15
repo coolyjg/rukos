@@ -38,7 +38,7 @@ epoll = ["arceos_posix_api/epoll"]
 poll = ["arceos_posix_api/poll"]
 rtc = ["axfeat/rtc"]
 
-musl = ["axfeat/musl", "arceos_posix_api/musl", "axfeat/tls", "arceos_posix_api/tls"]
+musl = ["axfeat/musl", "arceos_posix_api/musl", "tls"]
 
 # Interrupts
 irq = ["axruntime/irq", "arceos_posix_api/irq", "axfeat/irq"]

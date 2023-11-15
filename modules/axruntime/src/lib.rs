@@ -71,9 +71,6 @@ const LOGO: &str = r#"
 d88P     888 888      "Y8888P  "Y8888   "Y88888P"   "Y8888P"
 "#;
 
-// int __libc_start_main(int (*main)(int,char **,char **), int argc, char **argv,
-// 	void (*init_dummy)(), void(*fini_dummy)(), void(*ldso_dummy)())
-
 #[no_mangle]
 extern "C" fn init_dummy() {}
 

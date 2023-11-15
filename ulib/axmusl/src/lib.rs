@@ -23,6 +23,9 @@ mod trap;
 
 use core::ffi::c_int;
 
+/// parse error number for `getaddr` and `freeaddr`
+///
+/// TODO: remove this
 pub fn e(ret: c_int) -> c_int {
     if ret < 0 {
         -1

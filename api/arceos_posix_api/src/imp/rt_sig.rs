@@ -1,4 +1,4 @@
-//! Signal implementation
+//! Signal implementation, used by musl
 
 use core::ffi::c_int;
 
@@ -18,6 +18,7 @@ pub fn sys_rt_sigprocmask(
     syscall_body!(sys_rt_sigprocmask, Ok(0))
 }
 
+/// sigaction syscall for A64 musl
 pub fn sys_rt_sigaction(
     sig: c_int,
     _sa: *const ctypes::sigaction,

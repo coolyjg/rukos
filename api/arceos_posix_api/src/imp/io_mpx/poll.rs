@@ -15,10 +15,7 @@ use crate::{ctypes, imp::fd_ops::get_file_like};
 use axerrno::{LinuxError, LinuxResult};
 use axhal::time::current_time;
 
-use core::{
-    ffi::{c_int, c_void},
-    time::Duration,
-};
+use core::{ffi::c_int, time::Duration};
 
 fn poll_all(fds: &mut [ctypes::pollfd]) -> LinuxResult<usize> {
     let mut events_num = 0;

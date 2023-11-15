@@ -34,7 +34,7 @@ int main(int argc, char *argv[])
     for (i = 0; i < n; i++) {
         p[i] = (uintptr_t *)malloc(sizeof(uint64_t));
         *p[i] = 233;
-        printf("%d: allocated addr=%p\n", i, p[i]);
+        printf("allocated addr=%p\n", p[i]);
     }
     for (i = 0; i < n; i++) {
         free(p[i]);

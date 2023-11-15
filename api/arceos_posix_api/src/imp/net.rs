@@ -257,6 +257,8 @@ pub fn sys_socket(domain: c_int, socktype: c_int, protocol: c_int) -> c_int {
 }
 
 /// `setsockopt`, currently ignored
+/// 
+/// TODO: implement this
 pub fn sys_setsockopt(
     fd: c_int,
     level: c_int,
@@ -265,7 +267,7 @@ pub fn sys_setsockopt(
     optlen: ctypes::socklen_t,
 ) -> c_int {
     debug!(
-        "sys_setsockopt <= fd: {}, level: {}, optname: {}, optlen: {}",
+        "sys_setsockopt <= fd: {}, level: {}, optname: {}, optlen: {}, IGNORED",
         fd, level, optname, optlen
     );
     syscall_body!(sys_setsockopt, Ok(0))

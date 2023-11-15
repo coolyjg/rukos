@@ -89,6 +89,7 @@ extern "C" {
 /// The memory region for thread-local storage.
 pub struct TlsArea {
     base: NonNull<u8>,
+    #[allow(dead_code)]
     layout: Layout,
 }
 

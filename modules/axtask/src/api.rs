@@ -9,14 +9,13 @@
 
 //! Task APIs for multi-task configuration.
 
-use core::sync::atomic::AtomicU64;
-
 use alloc::{string::String, sync::Arc};
 
 pub(crate) use crate::run_queue::{AxRunQueue, RUN_QUEUE};
 
 #[doc(cfg(feature = "multitask"))]
 pub use crate::task::{CurrentTask, TaskId, TaskInner};
+#[cfg(not(feature = "musl"))]
 use crate::tsd;
 #[doc(cfg(feature = "multitask"))]
 pub use crate::wait_queue::WaitQueue;
@@ -80,6 +79,7 @@ pub fn init_scheduler() {
     crate::run_queue::init();
     #[cfg(feature = "irq")]
     crate::timers::init();
+    #[cfg(not(feature = "musl"))]
     tsd::init();
 
     info!("  use {} scheduler.", Scheduler::scheduler_name());
@@ -113,21 +113,19 @@ where
 }
 
 /// Used by musl
-// pub fn spawn_raw_musl<F>(f: Box<F>, name: String, stack_size: usize, tls: usize, tl: Option<usize>) -> AxTaskRef
-pub fn spawn_raw_musl<F>(
+#[cfg(feature = "musl")]
+pub fn pspawn_raw<F>(
     f: F,
     name: String,
     stack_size: usize,
     tls: usize,
-    set_tid: AtomicU64,
-    tl: AtomicU64,
+    set_tid: core::sync::atomic::AtomicU64,
+    tl: core::sync::atomic::AtomicU64,
 ) -> AxTaskRef
 where
     F: FnOnce() + Send + 'static,
 {
-    let task = TaskInner::new_musl(f, name, stack_size, tls, set_tid, tl);
-    // RUN_QUEUE.lock().add_task(task.clone());
-    task
+    TaskInner::new_musl(f, name, stack_size, tls, set_tid, tl)
 }
 
 /// Spawns a new task with the default parameters.
@@ -144,11 +142,17 @@ where
 }
 
 /// Used by musl
-pub fn spawn_musl<F>(f: F, tls: usize, set_tid: AtomicU64, tl: AtomicU64) -> AxTaskRef
+#[cfg(feature = "musl")]
+pub fn pspawn<F>(
+    f: F,
+    tls: usize,
+    set_tid: core::sync::atomic::AtomicU64,
+    tl: core::sync::atomic::AtomicU64,
+) -> AxTaskRef
 where
     F: FnOnce() + Send + 'static,
 {
-    spawn_raw_musl(f, "".into(), axconfig::TASK_STACK_SIZE, tls, set_tid, tl)
+    pspawn_raw(f, "".into(), axconfig::TASK_STACK_SIZE, tls, set_tid, tl)
 }
 
 /// Used by musl
@@ -196,6 +200,7 @@ pub fn sleep_until(deadline: axhal::time::TimeValue) {
 
 /// Exits the current task.
 pub fn exit(exit_code: i32) -> ! {
+    #[cfg(not(feature = "musl"))]
     current().destroy_keys();
     RUN_QUEUE.lock().exit_current(exit_code)
 }

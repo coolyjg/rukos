@@ -101,6 +101,7 @@ typedef struct {{
             "k_sigaction",
             "pid_t",
             "sigset_t",
+            "kstat",
         ];
         let allow_vars = [
             "O_.*",

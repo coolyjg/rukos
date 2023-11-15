@@ -86,7 +86,6 @@ impl GlobalAllocator {
     /// a small region (32 KB) to initialize the byte allocator. Therefore,
     /// the given region must be larger than 32 KB.
     pub fn init(&self, start_vaddr: usize, size: usize) {
-        debug!("init start_vaddr: {:#x}, size = {}", start_vaddr, size);
         assert!(size > MIN_HEAP_SIZE);
         let init_heap_size = MIN_HEAP_SIZE;
         self.palloc.lock().init(start_vaddr, size);
@@ -220,10 +219,9 @@ pub fn global_allocator() -> &'static GlobalAllocator {
 /// This function should be called only once, and before any allocation.
 pub fn global_init(start_vaddr: usize, size: usize) {
     debug!(
-        "initialize global allocator at: [{:#x}, {:#x}), size = {}",
+        "initialize global allocator at: [{:#x}, {:#x})",
         start_vaddr,
         start_vaddr + size,
-        size,
     );
     GLOBAL_ALLOCATOR.init(start_vaddr, size);
 }

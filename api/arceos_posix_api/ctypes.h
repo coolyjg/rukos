@@ -15,8 +15,8 @@
 #include <netinet/in.h>
 #include <poll.h>
 #include <pthread.h>
-#include <signal.h>
 #include <sched.h>
+#include <signal.h>
 #include <stddef.h>
 #include <sys/epoll.h>
 #include <sys/resource.h>

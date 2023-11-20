@@ -60,7 +60,7 @@ pub fn sys_munmap(start: *mut c_void, len: ctypes::size_t) -> c_int {
 /// Changes the access protections for the calling process's memory pages
 /// containing any part of the address range in the interval [addr, addr+len-1].  
 /// addr must be aligned to a page boundary.
-/// 
+///
 /// TODO: implement this
 pub fn sys_mprotect(addr: *mut c_void, len: ctypes::size_t, prot: c_int) -> c_int {
     debug!(

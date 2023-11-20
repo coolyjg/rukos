@@ -257,7 +257,7 @@ pub fn sys_socket(domain: c_int, socktype: c_int, protocol: c_int) -> c_int {
 }
 
 /// `setsockopt`, currently ignored
-/// 
+///
 /// TODO: implement this
 pub fn sys_setsockopt(
     fd: c_int,

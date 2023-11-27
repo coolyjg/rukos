@@ -6,11 +6,11 @@
 #     - `MODE`: Build mode: release, debug
 #     - `LOG:` Logging level: warn, error, info, debug, trace
 #     - `V`: Verbose level: (empty), 1, 2
-#	  - `ARGS`: Command-line arguments separated by comma. Only available when feature `alloc` is enabled.
-#	  - `ENVS`: Environment variables, separated by comma between key value pairs. Only available when feature `alloc` is enabled.
+#	    - `ARGS`: Command-line arguments separated by comma. Only available when feature `alloc` is enabled.
+#	    - `ENVS`: Environment variables, separated by comma between key value pairs. Only available when feature `alloc` is enabled.
 # * App options:
 #     - `A` or `APP`: Path to the application
-#     - `FEATURES`: Features of ArceOS modules to be enabled.
+#     - `FEATURES`: Features of Rukos modules to be enabled.
 #     - `APP_FEATURES`: Features of (rust) apps to be enabled.
 # * QEMU options:
 #     - `BLK`: Enable storage devices (virtio-blk)
@@ -29,7 +29,7 @@
 #     - `ANAME_9P`: Path for root of 9pfs(parameter of TATTACH for root)
 #     - `PROTOCOL_9P`: Default protocol version selected for 9P
 # * Network options:
-#     - `IP`: ArceOS IPv4 address (default is 10.0.2.15 for QEMU user netdev)
+#     - `IP`: Rukos IPv4 address (default is 10.0.2.15 for QEMU user netdev)
 #     - `GW`: Gateway IPv4 address (default is 10.0.2.2 for QEMU user netdev)
 # * Libc options:
 #     - `MUSL`: Link C app with musl libc
@@ -54,7 +54,6 @@ NET ?= n
 GRAPHIC ?= n
 V9P ?= n
 BUS ?= mmio
-
 
 DISK_IMG ?= disk.img
 QEMU_LOG ?= n

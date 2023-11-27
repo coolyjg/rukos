@@ -19,7 +19,7 @@ use super::stdio::{stdin, stdout};
 use crate::ctypes;
 
 /// Maximum number of files per process
-pub const AX_FILE_LIMIT: usize = 1024;
+pub const RX_FILE_LIMIT: usize = 1024;
 
 pub trait FileLike: Send + Sync {
     fn read(&self, buf: &mut [u8]) -> LinuxResult<usize>;
@@ -31,7 +31,7 @@ pub trait FileLike: Send + Sync {
 }
 
 lazy_static::lazy_static! {
-    static ref FD_TABLE: RwLock<FlattenObjects<Arc<dyn FileLike>, AX_FILE_LIMIT>> = {
+    static ref FD_TABLE: RwLock<FlattenObjects<Arc<dyn FileLike>, RX_FILE_LIMIT>> = {
         let mut fd_table = FlattenObjects::new();
         fd_table.add_at(0, Arc::new(stdin()) as _).unwrap(); // stdin
         fd_table.add_at(1, Arc::new(stdout()) as _).unwrap(); // stdout
@@ -96,7 +96,7 @@ pub fn sys_dup2(old_fd: c_int, new_fd: c_int) -> c_int {
                 return Ok(r);
             }
         }
-        if new_fd as usize >= AX_FILE_LIMIT {
+        if new_fd as usize >= RX_FILE_LIMIT {
             return Err(LinuxError::EBADF);
         }
 

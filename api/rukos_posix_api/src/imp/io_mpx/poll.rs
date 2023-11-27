@@ -7,10 +7,6 @@
  *   See the Mulan PSL v2 for more details.
  */
 
-/// Add `poll` feature to use poll() interface.
-/// poll() is a system call function used to monitor I/O events across multiple file descriptors.
-/// poll() is a blocking type of interface, make sure that this does not cost too much.
-/// To monitor I/O events, you can also use `select` or `epoll` instead.
 use crate::{ctypes, imp::fd_ops::get_file_like};
 use axerrno::{LinuxError, LinuxResult};
 use axhal::time::current_time;
@@ -60,7 +56,7 @@ pub unsafe fn sys_ppoll(
 
 /// Used to monitor multiple file descriptors for events
 pub unsafe fn sys_poll(fds: *mut ctypes::pollfd, nfds: ctypes::nfds_t, timeout: c_int) -> c_int {
-    debug!("ax_poll <= nfds: {} timeout: {} ms", nfds, timeout);
+    debug!("sys_poll <= nfds: {} timeout: {} ms", nfds, timeout);
 
     syscall_body!(ax_poll, {
         if nfds == 0 {

@@ -7,14 +7,14 @@
  *   See the Mulan PSL v2 for more details.
  */
 
-use arceos_posix_api::{sys_exit, sys_getpid};
 use core::ffi::c_int;
+use rukos_posix_api::{sys_exit, sys_getpid};
 #[cfg(feature = "signal")]
 use {
     crate::getitimer,
     crate::{ctypes, utils::e},
-    arceos_posix_api::sys_setitimer,
     core::ffi::c_uint,
+    rukos_posix_api::sys_setitimer,
 };
 
 /// Get current thread ID.

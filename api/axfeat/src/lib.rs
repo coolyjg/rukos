@@ -7,7 +7,7 @@
  *   See the Mulan PSL v2 for more details.
  */
 
-//! Top-level feature selection for [ArceOS].
+//! Top-level feature selection for [Rukos].
 //!
 //! # Cargo Features
 //!
@@ -28,12 +28,17 @@
 //!     - `sched_fifo`: Use the FIFO cooperative scheduler.
 //!     - `sched_rr`: Use the Round-robin preemptive scheduler.
 //!     - `sched_cfs`: Use the Completely Fair Scheduler (CFS) preemptive scheduler.
-//! - Upperlayer stacks (fs, net, display)
+//! - Upperlayer stacks (fs, net, display, rtc)
 //!     - `fs`: Enable file system support.
 //!     - `myfs`: Allow users to define their custom filesystems to override the default.
+//!     - `blkfs`: Mount block device in root directory.
+//!     - `9pfs`: Allow user apps to access files in host end by 9p protocol.
+//!     - `virtio-9p`: Use virtio-9p in hypervisor for 9pfs.
+//!     - `net-9p`: Use net protocol for 9pfs.
 //!     - `net`: Enable networking support.
 //!     - `display`: Enable graphics support.
 //!     - `signal`: Enable signal support.
+//!     - `rtc`: Allow user apps to get real time.
 //! - Device drivers
 //!     - `bus-mmio`: Use device tree to probe all MMIO devices.
 //!     - `bus-pci`: Use PCI bus to probe all PCI devices.
@@ -45,6 +50,6 @@
 //!     - `log-level-error`, `log-level-warn`, `log-level-info`, `log-level-debug`,
 //!       `log-level-trace`: Keep logging only at the specified level or higher.
 //!
-//! [ArceOS]: https://github.com/rcore-os/arceos
+//! [Rukos]: https://github.com/syswonder/rukos
 
 #![no_std]

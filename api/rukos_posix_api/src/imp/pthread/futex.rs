@@ -7,9 +7,9 @@
  *   See the Mulan PSL v2 for more details.
  */
 
+use alloc::collections::{BTreeMap, VecDeque};
 use core::{ffi::c_int, time::Duration};
 
-use alloc::collections::{BTreeMap, VecDeque};
 use axerrno::LinuxError;
 use axsync::Mutex;
 use axtask::{current, AxTaskRef, TaskState, WaitQueue};

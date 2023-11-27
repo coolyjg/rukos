@@ -25,15 +25,15 @@ Connection: close\r\n\
 
 const char content[] = "<html>\n\
 <head>\n\
-  <title>Hello, ArceOS</title>\n\
+  <title>Hello, Rukos</title>\n\
 </head>\n\
 <body>\n\
   <center>\n\
-    <h1>Hello, <a href=\"https://github.com/rcore-os/arceos\">ArceOS</a></h1>\n\
+    <h1>Hello, <a href=\"https://github.com/syswonder/rukos\">Rukos</a></h1>\n\
   </center>\n\
   <hr>\n\
   <center>\n\
-    <i>Powered by <a href=\"https://github.com/rcore-os/arceos/tree/main/apps/net/httpserver\">ArceOS example HTTP server</a> v0.1.0</i>\n\
+    <i>Powered by <a href=\"https://github.com/syswonder/rukos/tree/main/apps/net/httpserver\">Rukos example HTTP server</a> v0.1.0</i>\n\
   </center>\n\
 </body>\n\
 </html>\n\
@@ -41,7 +41,7 @@ const char content[] = "<html>\n\
 
 int main()
 {
-    puts("Hello, ArceOS C HTTP server!");
+    puts("Hello, Rukos C HTTP server!");
     struct sockaddr_in local, remote;
     int addr_len = sizeof(remote);
     local.sin_family = AF_INET;

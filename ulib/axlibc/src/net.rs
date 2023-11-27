@@ -7,12 +7,12 @@
  *   See the Mulan PSL v2 for more details.
  */
 
-use arceos_posix_api::{
+use core::ffi::{c_char, c_int, c_void};
+use rukos_posix_api::{
     sys_accept, sys_bind, sys_connect, sys_freeaddrinfo, sys_getaddrinfo, sys_getpeername,
     sys_getsockname, sys_listen, sys_recv, sys_recvfrom, sys_send, sys_sendmsg, sys_sendto,
     sys_shutdown, sys_socket,
 };
-use core::ffi::{c_char, c_int, c_void};
 
 use crate::{ctypes, utils::e};
 

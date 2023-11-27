@@ -7,9 +7,9 @@
  *   See the Mulan PSL v2 for more details.
  */
 
-//! POSIX-compatible APIs for [ArceOS] modules
+//! POSIX-compatible APIs for [Rukos] modules
 //!
-//! [ArceOS]: https://github.com/rcore-os/arceos
+//! [Rukos]: https://github.com/syswonder/rukos
 
 #![cfg_attr(all(not(test), not(doc)), no_std)]
 #![feature(ip_in_core)]
@@ -98,9 +98,7 @@ pub use imp::pthread::{
     sys_pthread_setspecific,
 };
 #[cfg(feature = "signal")]
-pub use imp::signal::sys_sigaction;
-#[cfg(feature = "signal")]
-pub use imp::time::{sys_getitimer, sys_setitimer};
+pub use imp::signal::{sys_getitimer, sys_setitimer, sys_sigaction};
 
 #[cfg(feature = "multitask")]
 pub use imp::pthread::futex::sys_futex;

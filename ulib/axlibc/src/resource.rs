@@ -9,7 +9,7 @@
 
 use core::ffi::c_int;
 
-use arceos_posix_api::{sys_getrlimit, sys_setrlimit};
+use rukos_posix_api::{sys_getrlimit, sys_setrlimit};
 
 use crate::utils::e;
 

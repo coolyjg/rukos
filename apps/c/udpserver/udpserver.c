@@ -17,7 +17,7 @@ const char res_suffix[11] = "_response\n";
 
 int main()
 {
-    puts("Hello, ArceOS C UDP server!");
+    puts("Hello, Rukos C UDP server!");
     struct sockaddr_in local, remote;
     int addr_len = sizeof(remote);
     local.sin_family = AF_INET;

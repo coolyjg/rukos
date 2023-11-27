@@ -30,7 +30,7 @@ Accept: */*\r\n\
 
 int main()
 {
-    puts("Hello, ArceOS C HTTP client!");
+    puts("Hello, Rukos C HTTP client!");
     int sock = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
     if (sock == -1) {
         perror("socket() error");

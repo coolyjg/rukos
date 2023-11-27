@@ -8,8 +8,8 @@
  */
 
 use crate::ctypes;
-use arceos_posix_api::{config, sys_getrlimit};
 use core::ffi::{c_int, c_long};
+use rukos_posix_api::{config, sys_getrlimit};
 
 /// Return system configuration infomation
 ///
@@ -32,7 +32,7 @@ pub unsafe extern "C" fn sysconf(name: c_int) -> c_long {
         // Avaliable physical pages
         ctypes::_SC_AVPHYS_PAGES => {
             let mut info: ctypes::sysinfo = core::mem::zeroed();
-            arceos_posix_api::sys_sysinfo(&mut info);
+            rukos_posix_api::sys_sysinfo(&mut info);
             (info.freeram / config::PAGE_SIZE_4K as u64) as c_long
         }
         // Maximum number of files per process

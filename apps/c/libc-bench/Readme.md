@@ -113,11 +113,11 @@ b_utf8_onebyone (0)
   time: 0.127939568
 
 b_stdio_putcgetc (0)
-[  2.098431 0:2 arceos_posix_api::imp::ioctl:32] Only support fd = 1
+[  2.098431 0:2 rukos_posix_api::imp::ioctl:32] Only support fd = 1
   time: 0.395968752
 
 b_stdio_putcgetc_unlocked (0)
-[  2.493650 0:2 arceos_posix_api::imp::ioctl:32] Only support fd = 1
+[  2.493650 0:2 rukos_posix_api::imp::ioctl:32] Only support fd = 1
   time: 0.245682432
 
 b_regex_compile ("(a|b|c)*d*b")

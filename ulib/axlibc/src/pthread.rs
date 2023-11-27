@@ -8,8 +8,8 @@
  */
 
 use crate::{ctypes, utils::e};
-use arceos_posix_api as api;
 use core::ffi::{c_int, c_void};
+use rukos_posix_api as api;
 
 /// Returns the `pthread` struct of current thread.
 #[no_mangle]

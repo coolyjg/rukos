@@ -20,7 +20,7 @@ RukOS was inspired by [Unikraft](https://github.com/unikraft/unikraft) and [Arce
 * [x] Synchronization/Mutex
 * [x] SMP scheduling with single run queue
 * [x] File system
-* [ ] Compatible with Linux apps
+* [x] Compatible with Linux apps
 * [ ] Interrupt driven device I/O
 * [ ] Async I/O
 
@@ -35,6 +35,8 @@ Example applications can be found in the [apps/](apps/) directory. All applicati
 
 The currently supported applications (Rust), as well as their dependent modules and features, are shown in the following table:
 
+### Rust
+
 | App | Extra modules | Enabled features | Description |
 |-|-|-|-|
 | [helloworld](apps/helloworld/) | | | A minimal app that just prints a string |
@@ -48,6 +50,28 @@ The currently supported applications (Rust), as well as their dependent modules 
 | [httpclient](apps/net/httpclient/) | axalloc, axdriver, axnet | alloc, paging, net | A simple client that sends an HTTP request and then prints the response |
 | [echoserver](apps/net/echoserver/) | axalloc, axdriver, axnet, axtask | alloc, paging, net, multitask | A multi-threaded TCP server that reverses messages sent by the client  |
 | [httpserver](apps/net/httpserver/) | axalloc, axdriver, axnet, axtask | alloc, paging, net, multitask | A multi-threaded HTTP server that serves a static web page |
+
+### C
+
+| App | Enabled features | Description |
+|-|-|-|
+| [helloworld](apps/c/helloworld/) | | A minimal app that just prints a string by C |
+| [envtest](apps/c/envtest/) | alloc, paging | An environment variable test |
+| [memtest](apps/c/memtest/) | alloc, paging | Dynamic memory allocation test by C |
+| [filetest](apps/c/filetest/) | alloc, paging, fs, blkfs | File system operation test |
+| [httpclient](apps/c/httpclient/) | alloc, paging, net | A simple client that sends an HTTP request and then prints the response by C |
+| [httpserver](apps/c/httpserver/) | alloc, paging, net | A multi-threaded HTTP server that serves a static web page by C |
+| [udpserver](apps/c/udpserver/) | alloc, paging, net | A simple UDP server that send back original message |
+| [systime](apps/c/systime/) | rtc | A simple test for real time clock module |
+| [basic](apps/c/pthread/basic/) | alloc, paging, multitask, irq | A simple test for basic pthread-related API in C standard library |
+| [parallel](apps/c/pthread/parallel/) | alloc, paging, multitask | Parallel computing test to test synchronization by C |
+| [pipe](apps/c/pthread/pipe/) | alloc, paging, multitask, pipe | A test for pipe API |
+| [sleep](apps/c/pthread/sleep/) | alloc, paging, multitask, irq | Thread sleeping test |
+| [tsd](apps/c/pthread/tsd/) | alloc, paging, multitask, irq | A test for pthread-key related API |
+| [libc-bench](apps/c/libc-bench/) | alloc, multitask, fs, musl | A standard libc test for musl libc integration |
+| [iperf](apps/c/iperf/) | alloc, paging, net, fs, blkfs, select, fp_simd | A network performance test tool |
+| [redis](apps/c/redis/) | alloc, paging, fp_simd, irq, multitask, fs, blkfs, net, pipe, epoll, poll, virtio-9p, rtc | A Redis server on Rukos |
+| [sqlite3](apps/c/sqlite3/) | alloc, paging, fs, fp_simd, blkfs | A simple test for Sqlite3 API |
 
 ## Build & Run
 

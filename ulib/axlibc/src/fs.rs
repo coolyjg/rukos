@@ -9,7 +9,7 @@
 
 use core::ffi::{c_char, c_int};
 
-use arceos_posix_api::{
+use rukos_posix_api::{
     sys_fstat, sys_getcwd, sys_lseek, sys_lstat, sys_mkdir, sys_open, sys_rename, sys_rmdir,
     sys_stat, sys_unlink,
 };

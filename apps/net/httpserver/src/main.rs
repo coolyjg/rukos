@@ -43,15 +43,15 @@ Connection: close\r\n\
 
 const CONTENT: &str = r#"<html>
 <head>
-  <title>Hello, ArceOS</title>
+  <title>Hello, Rukos</title>
 </head>
 <body>
   <center>
-    <h1>Hello, <a href="https://github.com/rcore-os/arceos">ArceOS</a></h1>
+    <h1>Hello, <a href="https://github.com/rcore-os/rukos">Rukos</a></h1>
   </center>
   <hr>
   <center>
-    <i>Powered by <a href="https://github.com/rcore-os/arceos/tree/main/apps/net/httpserver">ArceOS example HTTP server</a> v0.1.0</i>
+    <i>Powered by <a href="https://github.com/rcore-os/rukos/tree/main/apps/net/httpserver">Rukos example HTTP server</a> v0.1.0</i>
   </center>
 </body>
 </html>
@@ -100,6 +100,6 @@ fn accept_loop() -> io::Result<()> {
 
 #[cfg_attr(feature = "axstd", no_mangle)]
 fn main() {
-    println!("Hello, ArceOS HTTP server!");
+    println!("Hello, Rukos HTTP server!");
     accept_loop().expect("test HTTP server failed");
 }

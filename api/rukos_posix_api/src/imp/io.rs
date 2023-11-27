@@ -62,7 +62,8 @@ pub fn sys_write(fd: c_int, buf: *const c_void, count: usize) -> ctypes::ssize_t
     })
 }
 
-/// Write a vector.
+/// The `readv()` system call reads `iocnt` buffers from the  file  associated
+/// with the file descriptor `fd` into the buffers described by `iov`
 pub unsafe fn sys_writev(fd: c_int, iov: *const ctypes::iovec, iocnt: c_int) -> ctypes::ssize_t {
     debug!("sys_writev <= fd: {}, iocnt: {}", fd, iocnt);
     syscall_body!(sys_writev, {

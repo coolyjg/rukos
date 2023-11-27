@@ -200,30 +200,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "arceos_posix_api"
-version = "0.1.0"
-dependencies = [
- "axalloc",
- "axconfig",
- "axerrno",
- "axfeat",
- "axfs",
- "axhal",
- "axio",
- "axlog",
- "axnet",
- "axruntime",
- "axsync",
- "axtask",
- "bindgen",
- "flatten_objects",
- "lazy_static",
- "memory_addr",
- "spin 0.9.8",
- "static_assertions",
-]
-
-[[package]]
 name = "arm_gic"
 version = "0.1.0"
 dependencies = [
@@ -435,11 +411,11 @@ dependencies = [
 name = "axlibc"
 version = "0.1.0"
 dependencies = [
- "arceos_posix_api",
  "axerrno",
  "axfeat",
  "axio",
  "bindgen",
+ "rukos_posix_api",
 ]
 
 [[package]]
@@ -458,13 +434,13 @@ dependencies = [
 name = "axmusl"
 version = "0.1.0"
 dependencies = [
- "arceos_posix_api",
  "axfeat",
  "axhal",
  "axlog",
  "crate_interface",
  "kernel_guard",
  "num_enum",
+ "rukos_posix_api",
 ]
 
 [[package]]
@@ -1708,6 +1684,30 @@ dependencies = [
  "const-default",
  "libc",
  "svgbobdoc",
+]
+
+[[package]]
+name = "rukos_posix_api"
+version = "0.1.0"
+dependencies = [
+ "axalloc",
+ "axconfig",
+ "axerrno",
+ "axfeat",
+ "axfs",
+ "axhal",
+ "axio",
+ "axlog",
+ "axnet",
+ "axruntime",
+ "axsync",
+ "axtask",
+ "bindgen",
+ "flatten_objects",
+ "lazy_static",
+ "memory_addr",
+ "spin 0.9.8",
+ "static_assertions",
 ]
 
 [[package]]

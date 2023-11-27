@@ -43,10 +43,7 @@ const SPACE: u8 = b' ';
 const MAX_CMD_LEN: usize = 256;
 
 fn print_prompt() {
-    print!(
-        "arceos:{}$ ",
-        path_to_str!(std::env::current_dir().unwrap())
-    );
+    print!("rukos:{}$ ", path_to_str!(std::env::current_dir().unwrap()));
     std::io::stdout().flush().unwrap();
 }
 

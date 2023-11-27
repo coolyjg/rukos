@@ -50,9 +50,6 @@ net = ["alloc", "paging", "axdriver/virtio-net", "dep:axnet", "axruntime/net"]
 # Display
 display = ["alloc", "paging", "axdriver/virtio-gpu", "dep:axdisplay", "axruntime/display"]
 
-# Signal
-signal = ["axruntime/signal"]
-
 # 9P
 virtio-9p = ["9pfs", "axdriver/virtio-9p", "ax9p/virtio-9p", "axruntime/virtio-9p"]
 net-9p = ["9pfs", "net", "ax9p/net-9p", "axruntime/net-9p"]
@@ -71,9 +68,6 @@ log-level-warn = ["axlog/log-level-warn"]
 log-level-info = ["axlog/log-level-info"]
 log-level-debug = ["axlog/log-level-debug"]
 log-level-trace = ["axlog/log-level-trace"]
-
-# musl
-musl = ["axhal/musl", "axruntime/musl", "axalloc/slab", "axtask/musl"]
 
 [dependencies]
 axruntime = { path = "../../modules/axruntime" }

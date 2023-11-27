@@ -1,5 +1,5 @@
 [package]
-name = "arceos_posix_api"
+name = "rukos_posix_api"
 version = "0.1.0"
 edition = "2021"
 authors = [
@@ -12,18 +12,18 @@ authors = [
 ]
 description = "POSIX-compatible APIs for ArceOS modules"
 license = "GPL-3.0-or-later OR Apache-2.0"
-repository = "https://github.com/rcore-os/arceos/tree/main/api/arceos_posix_api"
+repository = "https://github.com/syswonder/rukos/tree/main/api/rukos_posix_api"
 
 [features]
 default = []
 
 smp = ["axfeat/smp"]
 alloc = ["dep:axalloc", "axfeat/alloc"]
-multitask = ["axtask/multitask", "axfeat/multitask", "axsync/multitask"]
+multitask = ["axfeat/multitask", "axtask/multitask"]
 fd = ["alloc"]
 fs = ["dep:axfs", "axfeat/fs", "fd"]
 net = ["dep:axnet", "axfeat/net", "fd"]
-signal = ["axfeat/signal"]
+signal = ["axruntime/signal"]
 pipe = ["fd"]
 select = ["fd"]
 epoll = ["fd"]
@@ -31,10 +31,10 @@ poll = ["fd"]
 tls = ["axfeat/tls"]
 irq = ["axfeat/irq"]
 
-musl = ["axfeat/musl"]
+musl = ["axhal/musl", "axruntime/musl", "axalloc/slab", "axtask/musl"]
 
 [dependencies]
-# ArceOS modules
+# Rukos modules
 axfeat = { path = "../axfeat" }
 axruntime = { path = "../../modules/axruntime" }
 axconfig = { path = "../../modules/axconfig" }

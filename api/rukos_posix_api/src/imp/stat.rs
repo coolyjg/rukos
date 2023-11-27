@@ -9,7 +9,9 @@
 
 use crate::ctypes;
 
-/// `umask`
+/// Set file mode creation mask
+///
+/// TODO:
 pub fn sys_umask(mode: ctypes::mode_t) -> ctypes::mode_t {
     debug!("sys_umask <= mode: {:x}", mode);
     syscall_body!(sys_umask, Ok(0))

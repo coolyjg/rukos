@@ -9,7 +9,7 @@
 
 use core::ffi::{c_int, c_void};
 
-use arceos_posix_api::{sys_read, sys_write, sys_writev};
+use rukos_posix_api::{sys_read, sys_write, sys_writev};
 
 use crate::{ctypes, utils::e};
 

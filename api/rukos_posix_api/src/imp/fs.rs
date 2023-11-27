@@ -312,7 +312,7 @@ pub fn sys_rmdir(pathname: *const c_char) -> c_int {
 pub fn sys_unlink(pathname: *const c_char) -> c_int {
     syscall_body!(sys_unlink, {
         let path = char_ptr_to_str(pathname)?;
-        debug!("ax_unlink <= path: {:?}", path);
+        debug!("sys_unlink <= path: {:?}", path);
         axfs::api::remove_file(path)?;
         Ok(0)
     })
@@ -337,7 +337,7 @@ pub fn sys_mkdir(pathname: *const c_char, mode: ctypes::mode_t) -> c_int {
     // TODO: implement mode
     syscall_body!(sys_mkdir, {
         let path = char_ptr_to_str(pathname)?;
-        debug!("ax_mkdir <= path: {:?}, mode: {:?}", path, mode);
+        debug!("sys_mkdir <= path: {:?}, mode: {:?}", path, mode);
         axfs::api::create_dir(path)?;
         Ok(0)
     })

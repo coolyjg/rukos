@@ -7,7 +7,7 @@
  *   See the Mulan PSL v2 for more details.
  */
 
-//! [ArceOS](https://github.com/rcore-os/arceos) filesystem module.
+//! [Rukos](https://github.com/syswonder/rukos) filesystem module.
 //!
 //! It provides unified filesystem operations for various filesystems.
 //!

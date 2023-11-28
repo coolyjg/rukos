@@ -35,7 +35,7 @@ pub fn start_secondary_cpus(primary_cpu_id: usize) {
     }
 }
 
-/// The main entry point of the ArceOS runtime for secondary CPUs.
+/// The main entry point of the Rukos runtime for secondary CPUs.
 ///
 /// It is called from the bootstrapping code in [axhal].
 #[no_mangle]

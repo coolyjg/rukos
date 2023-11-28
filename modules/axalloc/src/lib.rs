@@ -7,7 +7,7 @@
  *   See the Mulan PSL v2 for more details.
  */
 
-//! [ArceOS](https://github.com/rcore-os/arceos) global memory allocator.
+//! [Rukos](https://github.com/syswonder/rukos) global memory allocator.
 //!
 //! It provides [`GlobalAllocator`], which implements the trait
 //! [`core::alloc::GlobalAlloc`]. A static global variable of type
@@ -42,7 +42,7 @@ cfg_if::cfg_if! {
     }
 }
 
-/// The global allocator used by ArceOS.
+/// The global allocator used by Rukos.
 ///
 /// It combines a [`ByteAllocator`] and a [`PageAllocator`] into a simple
 /// two-level allocator: firstly tries allocate from the byte allocator, if

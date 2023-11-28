@@ -23,7 +23,7 @@ else ifeq ($(filter $(MAKECMDGOALS),clippy unittest unittest_no_fail_fast),) # n
     $(info APP: "$(APP)")
     $(info APP_TYPE: "$(APP_TYPE)")
     $(info FEATURES: "$(FEATURES)")
-    $(info arceos features: "$(AX_FEAT)")
+    $(info rukos features: "$(AX_FEAT)")
     $(info lib features: "$(LIB_FEAT)")
     $(info app features: "$(APP_FEAT)")
   endif

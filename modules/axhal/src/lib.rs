@@ -7,7 +7,7 @@
  *   See the Mulan PSL v2 for more details.
  */
 
-//! [ArceOS] hardware abstraction layer, provides unified APIs for
+//! [Rukos] hardware abstraction layer, provides unified APIs for
 //! platform-specific operations.
 //!
 //! It does the bootstrapping and initialization process for the specified
@@ -30,7 +30,7 @@
 //! - `paging`: Enable page table manipulation.
 //! - `irq`: Enable interrupt handling support.
 //!
-//! [ArceOS]: https://github.com/rcore-os/arceos
+//! [Rukos]: https://github.com/syswonder/rukos
 //! [cargo test]: https://doc.rust-lang.org/cargo/guide/tests.html
 
 #![no_std]

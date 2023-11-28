@@ -69,23 +69,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "arceos-display-basic-painting"
-version = "0.1.0"
-dependencies = [
- "axstd",
- "embedded-graphics",
-]
-
-[[package]]
-name = "arceos-display-draw-map"
-version = "0.1.0"
-dependencies = [
- "axstd",
- "embedded-graphics",
- "tinybmp",
-]
-
-[[package]]
 name = "arceos-echoserver"
 version = "0.1.0"
 dependencies = [
@@ -1684,6 +1667,23 @@ dependencies = [
  "const-default",
  "libc",
  "svgbobdoc",
+]
+
+[[package]]
+name = "rukos-display-basic-painting"
+version = "0.1.0"
+dependencies = [
+ "axstd",
+ "embedded-graphics",
+]
+
+[[package]]
+name = "rukos-display-draw-map"
+version = "0.1.0"
+dependencies = [
+ "axstd",
+ "embedded-graphics",
+ "tinybmp",
 ]
 
 [[package]]

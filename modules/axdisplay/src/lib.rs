@@ -7,7 +7,7 @@
  *   See the Mulan PSL v2 for more details.
  */
 
-//! [ArceOS](https://github.com/rcore-os/arceos) graphics module.
+//! [Rukos](https://github.com/syswonder/rukos) graphics module.
 //!
 //! Currently only supports direct writing to the framebuffer.
 

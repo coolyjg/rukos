@@ -76,7 +76,7 @@ impl DrawingBoard {
         .into_styled(PrimitiveStyle::with_stroke(Rgb888::GREEN, 10))
         .draw(&mut self.disp)
         .ok();
-        let text = "ArceOS";
+        let text = "Rukos";
         Text::with_alignment(
             text,
             self.latest_pos + Point::new(0, 300),

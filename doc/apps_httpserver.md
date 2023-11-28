@@ -30,7 +30,7 @@ make A=apps/net/httpserver SMP=4 NET=y LOG=info run
 [  0.132189 axnet::smoltcp_impl:278]   gateway:  10.0.2.2
 [  0.133746 axruntime:134] Initialize interrupt handlers...
 ...
-Hello, ArceOS HTTP server!
+Hello, Rukos HTTP server!
 ...
 [  0.148419 0:2 axnet::smoltcp_impl:67] socket #0: created
 [  0.148850 0:2 axnet::smoltcp_impl::tcp:111] socket listening on 10.0.2.15:5555
@@ -44,15 +44,15 @@ Open http://127.0.0.1:5555/ in your browser, or use command lines in another she
 $ curl http://127.0.0.1:5555/
 <html>
 <head>
-  <title>Hello, ArceOS</title>
+  <title>Hello, Rukos</title>
 </head>
 <body>
   <center>
-    <h1>Hello, <a href="https://github.com/rcore-os/arceos">ArceOS</a></h1>
+    <h1>Hello, <a href="https://github.com/syswonder/rukos">Rukos</a></h1>
   </center>
   <hr>
   <center>
-    <i>Powered by <a href="https://github.com/rcore-os/arceos/tree/main/apps/net/httpserver">ArceOS example HTTP server</a> v0.1.0</i>
+    <i>Powered by <a href="https://github.com/syswonder/rukos/tree/main/apps/net/httpserver">Rukos example HTTP server</a> v0.1.0</i>
   </center>
 </body>
 </html>
@@ -63,7 +63,7 @@ $ curl http://127.0.0.1:5555/
 ## step 1
 [init](./init.md)
 
-After executed all initial actions, then arceos calls `main` function in `memtest` app.
+After executed all initial actions, then Rukos calls `main` function in `memtest` app.
 
 ## step 2
 ```Rust
@@ -95,7 +95,7 @@ fn accept_loop() -> io::Result {
 
 #[no_mangle]
 fn main() {
-    println!("Hello, ArceOS HTTP server!");
+    println!("Hello, Rukos HTTP server!");
     accept_loop().expect("test HTTP server failed");
 }
 ```

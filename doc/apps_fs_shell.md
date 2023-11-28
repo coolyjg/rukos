@@ -48,7 +48,7 @@ Available commands:
   pwd
   rm
   uname
-arceos:/$
+Rukos:/$
 ```
 
 # STEPS
@@ -57,7 +57,7 @@ arceos:/$
 
 [init](./init.md)
 
-After executed all initial actions, then arceos calls `main` function in `shell` app.
+After executed all initial actions, then Rukos calls `main` function in `shell` app.
 
 ## Step2
 

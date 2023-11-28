@@ -42,7 +42,7 @@ Sleep tests run OK!
 
 ## step1
 [init](./init.md)
-After executed all initial actions, then arceos calls `main` function in `helloworld` app.
+After executed all initial actions, then rukos calls `main` function in `helloworld` app.
 
 ## step2
 ```Rust

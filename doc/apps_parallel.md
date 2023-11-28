@@ -92,7 +92,7 @@ Parallel summation tests run OK!
 
 [init](./init.md)
 
-After executed all initial actions, then arceos calls `main` function in `parallel` app.
+After executed all initial actions, then Rukos calls `main` function in `parallel` app.
 
 ## step2
 

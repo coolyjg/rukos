@@ -39,7 +39,7 @@ Task yielding tests run OK!
 ## step1
 
 * OS init
-* After executed all initial actions, then arceos call main function in `yield` app.
+* After executed all initial actions, then Rukos call main function in `yield` app.
 
 ## step2
 

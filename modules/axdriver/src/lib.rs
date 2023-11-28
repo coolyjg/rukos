@@ -7,7 +7,7 @@
  *   See the Mulan PSL v2 for more details.
  */
 
-//! [ArceOS](https://github.com/rcore-os/arceos) device drivers.
+//! [Rukos](https://github.com/syswonder/rukos) device drivers.
 //!
 //! # Usage
 //!

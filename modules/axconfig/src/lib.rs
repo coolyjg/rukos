@@ -7,13 +7,13 @@
  *   See the Mulan PSL v2 for more details.
  */
 
-//! Platform-specific constants and parameters for [ArceOS].
+//! Platform-specific constants and parameters for [Rukos].
 //!
 //! Currently supported platforms can be found in the [platforms] directory of
-//! the [ArceOS] root.
+//! the [Rukos] root.
 //!
-//! [ArceOS]: https://github.com/rcore-os/arceos
-//! [platforms]: https://github.com/rcore-os/arceos/tree/main/platforms
+//! [Rukos]: https://github.com/syswonder/rukos
+//! [platforms]: https://github.com/syswonder/rukos/tree/main/platforms
 
 #![no_std]
 

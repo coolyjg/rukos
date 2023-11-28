@@ -11,7 +11,7 @@
 //!
 //! The normal malloc(size_t) and free(size_t) are provided by the library malloc.h, and
 //! sys_brk is used internally to apply for memory from the kernel. But in a unikernel like
-//! `ArceOS`, we noticed that the heap of the Rust user program is shared with the kernel. In
+//! `Rukos`, we noticed that the heap of the Rust user program is shared with the kernel. In
 //! order to maintain consistency, C user programs also choose to share the kernel heap,
 //! skipping the sys_brk step.
 

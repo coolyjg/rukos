@@ -22,7 +22,7 @@ Exception tests run OK!
 
 [init](./init.md)
 
-After executed all initial actions, then arceos calls `main` function in `exception` app.
+After executed all initial actions, then Rukos calls `main` function in `exception` app.
 
 ## step2
 

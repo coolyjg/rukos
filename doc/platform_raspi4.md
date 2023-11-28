@@ -1,4 +1,4 @@
-# How to run ArceOS on raspi4
+# How to run Rukos on raspi4
 
 Recommand you download this tutorial first:
 
@@ -9,7 +9,7 @@ It will help you to connect your raspi4 to your computer and it will also teach 
 
 Then run with features `ARCH=aarch64 PLATFORM = raspi4-aarch64` and use the command `make chainboot` to transmit the xxxx_raspi4-aarch64.bin to your raspi4.
 
-# How to debug ArceOS on raspi4
+# How to debug Rukos on raspi4
 
 Recommand you download this tutorial first:
 

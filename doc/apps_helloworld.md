@@ -14,7 +14,7 @@ make A=apps/helloworld SMP=4 LOG=debug run
 ## step1
 [init](./init.md)
 
-After executed all initial actions, then arceos calls `main` function in `helloworld` app.
+After executed all initial actions, then Rukos calls `main` function in `helloworld` app.
 
 ## step2
 

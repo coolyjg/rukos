@@ -7,23 +7,27 @@
  *   See the Mulan PSL v2 for more details.
  */
 
-//! Runtime library of [ArceOS](https://github.com/rcore-os/arceos).
+//! Runtime library of [Rukos](https://github.com/syswonder/rukos).
 //!
-//! Any application uses ArceOS should link this library. It does some
+//! Any application uses Rukos should link this library. It does some
 //! initialization work before entering the application's `main` function.
 //!
 //! # Cargo Features
 //!
 //! - `alloc`: Enable global memory allocator.
 //! - `paging`: Enable page table manipulation support.
+//! - `tls`: Enable thread local storage support.
 //! - `irq`: Enable interrupt handling support.
 //! - `multitask`: Enable multi-threading support.
 //! - `smp`: Enable SMP (symmetric multiprocessing) support.
 //! - `fs`: Enable filesystem support.
+//! - `blkfs`: Enable disk filesystem.
+//! - `signal`: Enable signal support
 //! - `net`: Enable networking support.
 //! - `display`: Enable graphics support.
 //! - `virtio-9p`: Enable virtio-based 9pfs support.
 //! - `net-9p`: Enable net-based 9pfs support.
+//! - `musl`: Enable musl libc support.
 //!
 //! All the features are optional and disabled by default.
 
@@ -61,11 +65,14 @@ use self::env::{boot_add_environ, init_argv};
 use core::ffi::{c_char, c_int};
 
 const LOGO: &str = r#"
-____    _   _   _  __   ___    ____  
-|  _ \  | | | | | |/ /  / _ \  / ___| 
-| |_) | | | | | | ' /  | | | | \___ \ 
-|  _ <  | |_| | | . \  | |_| |  ___) |
-|_| \_\  \___/  |_|\_\  \___/  |____/ 
+8888888b.  888     888 888    d8P   .d88888b.   .d8888b.  
+888   Y88b 888     888 888   d8P   d88P" "Y88b d88P  Y88b 
+888    888 888     888 888  d8P    888     888 Y88b.      
+888   d88P 888     888 888d88K     888     888  "Y888b.   
+8888888P"  888     888 8888888b    888     888     "Y88b. 
+888 T88b   888     888 888  Y88b   888     888       "888 
+888  T88b  Y88b. .d88P 888   Y88b  Y88b. .d88P Y88b  d88P 
+888   T88b  "Y88888P"  888    Y88b  "Y88888P"   "Y8888P"  
 "#;
 
 #[no_mangle]
@@ -134,7 +141,7 @@ fn is_init_ok() -> bool {
     INITED_CPUS.load(Ordering::Acquire) == axconfig::SMP
 }
 
-/// The main entry point of the ArceOS runtime.
+/// The main entry point of the Rukos runtime.
 ///
 /// It is called from the bootstrapping code in [axhal]. `cpu_id` is the ID of
 /// the current CPU, and `dtb` is the address of the device tree blob. It

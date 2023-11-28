@@ -7,7 +7,7 @@
  *   See the Mulan PSL v2 for more details.
  */
 
-//! 9P filesystem used by [RukOS](https://github.com/rcore-os/arceos).
+//! 9P filesystem used by [Rukos](https://github.com/syswonder/rukos).
 //!
 //! The implementation is based on [`axfs_vfs`].
 use crate::drv::{self, Drv9pOps};

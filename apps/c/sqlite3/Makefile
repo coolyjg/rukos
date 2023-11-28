@@ -1,4 +1,5 @@
-AX_ROOT := /home/oslab/OS/arceos
+# This path is out of date
+AX_ROOT := /home/oslab/OS/rukos
 
 all:
 	$(MAKE) -C $(AX_ROOT) A=$(PWD)

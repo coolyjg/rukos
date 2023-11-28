@@ -2,8 +2,12 @@
 name = "axmusl"
 version = "0.1.0"
 edition = "2021"
-
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+authors = ["yanjuguang <coolyanjg@163.com>"]
+description = "Rukos compatible layer for Musl libc"
+license = "GPL-3.0-or-later OR Apache-2.0 OR MulanPSL2"
+homepage = "https://github.com/syswonder/rukos"
+repository = "https://github.com/syswonder/rukos/tree/main/ulib/axmusl"
+documentation = "https://github.com/syswonder/rukos/axmusl/index.html"
 
 [lib]
 crate-type = ["staticlib"]

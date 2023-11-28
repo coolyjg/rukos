@@ -22,7 +22,7 @@ Memory tests run OK!
 
 [init](./init.md)
 
-After executed all initial actions, then arceos calls `main` function in `memtest` app.
+After executed all initial actions, then Rukos calls `main` function in `memtest` app.
 
 ## step2
 ```Rust

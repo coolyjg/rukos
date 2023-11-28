@@ -7,7 +7,7 @@
  *   See the Mulan PSL v2 for more details.
  */
 
-//! [ArceOS](https://github.com/rcore-os/arceos) task management module.
+//! [Rukos](https://github.com/syswonder/rukos) task management module.
 //!
 //! This module provides primitives for task management, including task
 //! creation, scheduling, sleeping, termination, etc. The scheduler algorithm

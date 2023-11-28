@@ -10,7 +10,7 @@ authors = [
     "scPointer <bhy18@mails.tsinghua.edu.cn>",
     "Shiping Yuan <robert_yuan@pku.edu.com>",
 ]
-description = "POSIX-compatible APIs for ArceOS modules"
+description = "POSIX-compatible APIs for Rukos modules"
 license = "GPL-3.0-or-later OR Apache-2.0"
 repository = "https://github.com/syswonder/rukos/tree/main/api/rukos_posix_api"
 

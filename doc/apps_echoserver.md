@@ -40,7 +40,7 @@ olleh
 
 [init](./init.md)
 
-After executed all initial actions, then arceos calls `main` function in `echoserver` app.
+After executed all initial actions, then Rukos calls `main` function in `echoserver` app.
 
 ## step2
 

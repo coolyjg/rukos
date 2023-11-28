@@ -7,8 +7,8 @@
 #   - `APP_FEATURES`: a list of features to be enabled for the Rust app.
 #
 # Outputs:
-#   - `AX_FEAT`: features to be enabled for ArceOS modules (crate `axfeat`).
-#   - `LIB_FEAT`: features to be enabled for the user library (crate `axstd`, `axlibc`).
+#   - `AX_FEAT`: features to be enabled for Rukos modules (crate `axfeat`).
+#   - `LIB_FEAT`: features to be enabled for the user library (crate `axstd`, `axlibc`, `axmusl`).
 #   - `APP_FEAT`: features to be enabled for the Rust app.
 
 ifeq ($(APP_TYPE),c)

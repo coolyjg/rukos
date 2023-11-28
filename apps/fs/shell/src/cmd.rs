@@ -261,7 +261,7 @@ fn do_uname(_args: &str) {
     };
     let version = option_env!("CARGO_PKG_VERSION").unwrap_or("0.1.0");
     println!(
-        "ArceOS {ver}{smp} {arch} {plat}",
+        "Rukos {ver}{smp} {arch} {plat}",
         ver = version,
         smp = smp,
         arch = arch,

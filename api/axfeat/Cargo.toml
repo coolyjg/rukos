@@ -2,12 +2,14 @@
 name = "axfeat"
 version = "0.1.0"
 edition = "2021"
-authors = ["Yuekai Jia <equation618@gmail.com>"]
-description = "Top-level feature selection for ArceOS"
+authors = [
+    "Yuekai Jia <equation618@gmail.com>",
+    "yanjuguang <coolyanjg@163.com>",
+]
+description = "Top-level feature selection for Rukos"
 license = "GPL-3.0-or-later OR Apache-2.0"
-homepage = "https://github.com/rcore-os/arceos"
-repository = "https://github.com/rcore-os/arceos/tree/main/api/axfeat"
-documentation = "https://rcore-os.github.io/arceos/axfeat/index.html"
+homepage = "https://github.com/syswonder/rukos"
+repository = "https://github.com/syswonder/rukos/tree/main/api/axfeat"
 
 [features]
 default = []

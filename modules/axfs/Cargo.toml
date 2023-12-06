@@ -2,12 +2,14 @@
 name = "axfs"
 version = "0.1.0"
 edition = "2021"
-authors = ["Yuekai Jia <equation618@gmail.com>"]
-description = "ArceOS filesystem module"
+authors = [
+    "Yuekai Jia <equation618@gmail.com>",
+    "Zheng Wu <hello_weekday@163.com>",
+]
+description = "Rukos filesystem module"
 license = "GPL-3.0-or-later OR Apache-2.0"
-homepage = "https://github.com/rcore-os/arceos"
-repository = "https://github.com/rcore-os/arceos/tree/main/modules/axfs"
-documentation = "https://rcore-os.github.io/arceos/axfs/index.html"
+homepage = "https://github.com/syswonder/rukos"
+repository = "https://github.com/syswonder/rukos/tree/main/modules/axfs"
 
 [features]
 devfs = ["dep:axfs_devfs"]

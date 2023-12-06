@@ -3,11 +3,10 @@ name = "axdisplay"
 version = "0.1.0"
 edition = "2021"
 authors = ["Shiping Yuan <robert_yuan@pku.edu.com>"]
-description = "ArceOS graphics module"
+description = "Rukos graphics module"
 license = "GPL-3.0-or-later OR Apache-2.0"
-homepage = "https://github.com/rcore-os/arceos"
-repository = "https://github.com/rcore-os/arceos/tree/main/modules/axdisplay"
-documentation = "https://rcore-os.github.io/arceos/axdisplay/index.html"
+homepage = "https://github.com/syswonder/rukos"
+repository = "https://github.com/syswonder/rukos/tree/main/modules/axdisplay"
 
 [dependencies]
 log = "0.4"

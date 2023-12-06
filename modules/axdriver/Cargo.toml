@@ -2,12 +2,15 @@
 name = "axdriver"
 version = "0.1.0"
 edition = "2021"
-authors = ["Yuekai Jia <equation618@gmail.com>", "ChengXiang Qi <kuangjux@outlook.com>"]
-description = "ArceOS device drivers"
+authors = [
+    "Yuekai Jia <equation618@gmail.com>", 
+    "ChengXiang Qi <kuangjux@outlook.com>",
+    "Zheng Wu <hello_weekday@163.com>",
+]
+description = "Rukos device drivers"
 license = "GPL-3.0-or-later OR Apache-2.0"
-homepage = "https://github.com/rcore-os/arceos"
-repository = "https://github.com/rcore-os/arceos/tree/main/modules/axdriver"
-documentation = "https://rcore-os.github.io/arceos/axdriver/index.html"
+homepage = "https://github.com/syswonder/rukos"
+repository = "https://github.com/syswonder/rukos/tree/main/modules/axdriver"
 
 [features]
 dyn = []

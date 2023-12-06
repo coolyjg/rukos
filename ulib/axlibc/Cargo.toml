@@ -14,7 +14,6 @@ description = "Rukos user program library for C apps"
 license = "GPL-3.0-or-later OR Apache-2.0"
 homepage = "https://github.com/syswonder/rukos"
 repository = "https://github.com/syswonder/rukos/tree/main/ulib/axlibc"
-documentation = "https://github.com/syswonder/rukos/axlibc/index.html"
 
 [lib]
 crate-type = ["staticlib"]

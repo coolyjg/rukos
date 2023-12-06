@@ -6,8 +6,7 @@ authors = ["Zheng Wu <hello_weekday@163.com>"]
 description = "Common traits and types for block storage drivers"
 license = "GPL-3.0-or-later OR Apache-2.0"
 homepage = "https://github.com/syswonder/rukos"
-repository = "https://github.com/syswonder/rukos/tree/main/crates/driver_common"
-documentation = "https://github.com/syswonder/rukos/driver_common/index.html"
+repository = "https://github.com/syswonder/rukos/tree/main/crates/driver_9p"
 
 [features]
 default = []

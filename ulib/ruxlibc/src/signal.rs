@@ -13,7 +13,7 @@ use core::ffi::c_int;
 use crate::ctypes::k_sigaction;
 use crate::ctypes::{sigaction, EINVAL, SIGKILL, SIGSTOP};
 #[cfg(feature = "signal")]
-use rukos_posix_api::sys_sigaction;
+use ruxos_posix_api::sys_sigaction;
 
 #[cfg(feature = "signal")]
 unsafe extern "C" fn ignore_handler(_: c_int) {}

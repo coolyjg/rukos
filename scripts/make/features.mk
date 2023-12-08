@@ -2,17 +2,17 @@
 #
 # Inputs:
 #   - `FEATURES`: a list of features to be enabled split by spaces or commas.
-#     The features can be selected from the crate `axfeat` or the user library
+#     The features can be selected from the crate `ruxfeat` or the user library
 #     (crate `axstd` or `ruxlibc`).
 #   - `APP_FEATURES`: a list of features to be enabled for the Rust app.
 #
 # Outputs:
-#   - `AX_FEAT`: features to be enabled for Rukos modules (crate `axfeat`).
+#   - `AX_FEAT`: features to be enabled for Rukos modules (crate `ruxfeat`).
 #   - `LIB_FEAT`: features to be enabled for the user library (crate `axstd`, `ruxlibc`, `ruxmusl`).
 #   - `APP_FEAT`: features to be enabled for the Rust app.
 
 ifeq ($(APP_TYPE),c)
-  ax_feat_prefix := axfeat/
+  ax_feat_prefix := ruxfeat/
   ifeq ($(MUSL), y)
     lib_feat_prefix := ruxmusl/
   else
@@ -20,7 +20,7 @@ ifeq ($(APP_TYPE),c)
   endif
   lib_features := fp_simd alloc multitask fs net fd pipe select poll epoll random-hw signal
 else
-  # TODO: it's better to use `axfeat/` as `ax_feat_prefix`, but all apps need to have `axfeat` as a dependency
+  # TODO: it's better to use `ruxfeat/` as `ax_feat_prefix`, but all apps need to have `ruxfeat` as a dependency
   ax_feat_prefix := axstd/
   lib_feat_prefix := axstd/
   lib_features :=

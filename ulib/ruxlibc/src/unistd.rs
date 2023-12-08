@@ -8,13 +8,13 @@
  */
 
 use core::ffi::c_int;
-use rukos_posix_api::{sys_exit, sys_getpid};
+use ruxos_posix_api::{sys_exit, sys_getpid};
 #[cfg(feature = "signal")]
 use {
     crate::getitimer,
     crate::{ctypes, utils::e},
     core::ffi::c_uint,
-    rukos_posix_api::sys_setitimer,
+    ruxos_posix_api::sys_setitimer,
 };
 
 /// Get current thread ID.

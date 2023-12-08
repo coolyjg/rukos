@@ -8,7 +8,7 @@
  */
 
 use core::ffi::{c_char, c_int, c_void};
-use rukos_posix_api as api;
+use ruxos_posix_api as api;
 
 use crate::{ctypes, utils::e};
 

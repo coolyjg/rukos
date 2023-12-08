@@ -9,8 +9,8 @@
 
 use crate::e;
 use core::ffi::{c_char, c_int};
-use rukos_posix_api::ctypes;
-use rukos_posix_api::{sys_freeaddrinfo, sys_getaddrinfo};
+use ruxos_posix_api::ctypes;
+use ruxos_posix_api::{sys_freeaddrinfo, sys_getaddrinfo};
 
 /// Query addresses for a domain name.
 ///

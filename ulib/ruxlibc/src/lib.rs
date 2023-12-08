@@ -54,7 +54,7 @@ mod ctypes {
     mod libctypes;
 
     pub use libctypes::*;
-    pub use rukos_posix_api::ctypes::*;
+    pub use ruxos_posix_api::ctypes::*;
 }
 
 #[macro_use]

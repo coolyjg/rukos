@@ -22,38 +22,38 @@ crate-type = ["staticlib"]
 default = []
 
 # Multicore
-smp = ["rukos_posix_api/smp"]
+smp = ["ruxos_posix_api/smp"]
 
 # Floating point/SIMD
-fp_simd = ["axfeat/fp_simd"]
+fp_simd = ["ruxfeat/fp_simd"]
 
 # Memory
-alloc = ["rukos_posix_api/alloc"]
-tls = ["alloc", "axfeat/tls"]
+alloc = ["ruxos_posix_api/alloc"]
+tls = ["alloc", "ruxfeat/tls"]
 
 # Multi-task
-multitask = ["rukos_posix_api/multitask"]
+multitask = ["ruxos_posix_api/multitask"]
 
 # File system
-fs = ["rukos_posix_api/fs", "fd"]
+fs = ["ruxos_posix_api/fs", "fd"]
 
 # Networking
-net = ["rukos_posix_api/net", "fd"]
+net = ["ruxos_posix_api/net", "fd"]
 
 # Signal
-signal = ["rukos_posix_api/signal"]
+signal = ["ruxos_posix_api/signal"]
 
 # Libc features
 fd = []
-pipe = ["rukos_posix_api/pipe"]
-select = ["rukos_posix_api/select"]
-poll = ["rukos_posix_api/poll"]
-epoll = ["rukos_posix_api/epoll"]
+pipe = ["ruxos_posix_api/pipe"]
+select = ["ruxos_posix_api/select"]
+poll = ["ruxos_posix_api/poll"]
+epoll = ["ruxos_posix_api/epoll"]
 random-hw = []
 
 [dependencies]
-axfeat = { path = "../../api/axfeat" }
-rukos_posix_api = { path = "../../api/rukos_posix_api" }
+ruxfeat = { path = "../../api/ruxfeat" }
+ruxos_posix_api = { path = "../../api/ruxos_posix_api" }
 axio = { path = "../../crates/axio" }
 axerrno = { path = "../../crates/axerrno" }
 

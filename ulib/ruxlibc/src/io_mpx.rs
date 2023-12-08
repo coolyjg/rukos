@@ -12,11 +12,11 @@ use crate::{ctypes, utils::e};
 use core::ffi::c_int;
 
 #[cfg(feature = "poll")]
-use rukos_posix_api::sys_poll;
+use ruxos_posix_api::sys_poll;
 #[cfg(feature = "select")]
-use rukos_posix_api::sys_select;
+use ruxos_posix_api::sys_select;
 #[cfg(feature = "epoll")]
-use rukos_posix_api::{sys_epoll_create, sys_epoll_ctl, sys_epoll_wait};
+use ruxos_posix_api::{sys_epoll_create, sys_epoll_ctl, sys_epoll_wait};
 
 /// Creates a new epoll instance.
 ///

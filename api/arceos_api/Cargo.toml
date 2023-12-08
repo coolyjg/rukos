@@ -12,21 +12,21 @@ documentation = "https://rcore-os.github.io/arceos/arceos_api/index.html"
 [features]
 default = []
 
-irq = ["axfeat/irq"]
-rtc = ["axfeat/rtc"]
-alloc = ["dep:axalloc", "axfeat/alloc"]
-multitask = ["ruxtask/multitask", "axfeat/multitask"]
-fs = ["dep:ruxfs", "axfeat/fs"]
-net = ["dep:axnet", "axfeat/net"]
-display = ["dep:ruxdisplay", "axfeat/display"]
+irq = ["ruxfeat/irq"]
+rtc = ["ruxfeat/rtc"]
+alloc = ["dep:axalloc", "ruxfeat/alloc"]
+multitask = ["ruxtask/multitask", "ruxfeat/multitask"]
+fs = ["dep:ruxfs", "ruxfeat/fs"]
+net = ["dep:axnet", "ruxfeat/net"]
+display = ["dep:ruxdisplay", "ruxfeat/display"]
 
-myfs = ["axfeat/myfs"]
+myfs = ["ruxfeat/myfs"]
 
 # Use dummy functions if the feature is not enabled
 dummy-if-not-enabled = []
 
 [dependencies]
-axfeat = { path = "../axfeat" }
+ruxfeat = { path = "../ruxfeat" }
 ruxruntime = { path = "../../modules/ruxruntime" }
 ruxconfig = { path = "../../modules/ruxconfig" }
 axlog = { path = "../../modules/axlog" }

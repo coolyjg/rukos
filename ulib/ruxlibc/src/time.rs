@@ -8,9 +8,9 @@
  */
 
 use core::ffi::c_int;
-use rukos_posix_api::{sys_clock_gettime, sys_clock_settime, sys_nanosleep};
+use ruxos_posix_api::{sys_clock_gettime, sys_clock_settime, sys_nanosleep};
 #[cfg(feature = "signal")]
-use rukos_posix_api::{sys_getitimer, sys_setitimer};
+use ruxos_posix_api::{sys_getitimer, sys_setitimer};
 
 use crate::{ctypes, utils::e};
 

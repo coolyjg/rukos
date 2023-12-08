@@ -1,5 +1,5 @@
 [package]
-name = "rukos_posix_api"
+name = "ruxos_posix_api"
 version = "0.1.0"
 edition = "2021"
 authors = [
@@ -12,30 +12,30 @@ authors = [
 ]
 description = "POSIX-compatible APIs for Rukos modules"
 license = "GPL-3.0-or-later OR Apache-2.0"
-repository = "https://github.com/syswonder/rukos/tree/main/api/rukos_posix_api"
+repository = "https://github.com/syswonder/rukos/tree/main/api/ruxos_posix_api"
 
 [features]
 default = []
 
-smp = ["axfeat/smp"]
-alloc = ["dep:axalloc", "axfeat/alloc"]
-multitask = ["axfeat/multitask", "ruxtask/multitask"]
+smp = ["ruxfeat/smp"]
+alloc = ["dep:axalloc", "ruxfeat/alloc"]
+multitask = ["ruxfeat/multitask", "ruxtask/multitask"]
 fd = ["alloc"]
-fs = ["dep:ruxfs", "axfeat/fs", "fd"]
-net = ["dep:axnet", "axfeat/net", "fd"]
+fs = ["dep:ruxfs", "ruxfeat/fs", "fd"]
+net = ["dep:axnet", "ruxfeat/net", "fd"]
 signal = ["ruxruntime/signal"]
 pipe = ["fd"]
 select = ["fd"]
 epoll = ["fd"]
 poll = ["fd"]
-tls = ["axfeat/tls"]
-irq = ["axfeat/irq"]
+tls = ["ruxfeat/tls"]
+irq = ["ruxfeat/irq"]
 
 musl = ["ruxhal/musl", "ruxruntime/musl", "axalloc/slab", "ruxtask/musl"]
 
 [dependencies]
 # Rukos modules
-axfeat = { path = "../axfeat" }
+ruxfeat = { path = "../ruxfeat" }
 ruxruntime = { path = "../../modules/ruxruntime" }
 ruxconfig = { path = "../../modules/ruxconfig" }
 axlog = { path = "../../modules/axlog" }

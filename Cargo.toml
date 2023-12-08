@@ -50,9 +50,9 @@ members = [
     "modules/ruxruntime",
     "modules/ruxtask",
 
-    "api/axfeat",
+    "api/ruxfeat",
     "api/arceos_api",
-    "api/rukos_posix_api",
+    "api/ruxos_posix_api",
 
     "ulib/axstd",
     "ulib/ruxlibc",

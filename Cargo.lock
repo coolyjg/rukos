@@ -76,12 +76,12 @@ version = "0.1.0"
 dependencies = [
  "axalloc",
  "axerrno",
- "axfeat",
  "axio",
  "axlog",
  "axnet",
  "ruxconfig",
  "ruxdisplay",
+ "ruxfeat",
  "ruxfs",
  "ruxhal",
  "ruxruntime",
@@ -134,24 +134,6 @@ name = "axerrno"
 version = "0.1.0"
 dependencies = [
  "log",
-]
-
-[[package]]
-name = "axfeat"
-version = "0.1.0"
-dependencies = [
- "axalloc",
- "axlog",
- "axnet",
- "axsync",
- "rux9p",
- "ruxdisplay",
- "ruxdriver",
- "ruxfs",
- "ruxhal",
- "ruxruntime",
- "ruxtask",
- "spinlock",
 ]
 
 [[package]]
@@ -224,8 +206,8 @@ version = "0.1.0"
 dependencies = [
  "arceos_api",
  "axerrno",
- "axfeat",
  "axio",
+ "ruxfeat",
  "spinlock",
 ]
 
@@ -1419,30 +1401,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "rukos_posix_api"
-version = "0.1.0"
-dependencies = [
- "axalloc",
- "axerrno",
- "axfeat",
- "axio",
- "axlog",
- "axnet",
- "axsync",
- "bindgen",
- "flatten_objects",
- "lazy_static",
- "memory_addr",
- "ruxconfig",
- "ruxfs",
- "ruxhal",
- "ruxruntime",
- "ruxtask",
- "spin 0.9.8",
- "static_assertions",
-]
-
-[[package]]
 name = "rustc-hash"
 version = "1.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1537,6 +1495,24 @@ dependencies = [
 ]
 
 [[package]]
+name = "ruxfeat"
+version = "0.1.0"
+dependencies = [
+ "axalloc",
+ "axlog",
+ "axnet",
+ "axsync",
+ "rux9p",
+ "ruxdisplay",
+ "ruxdriver",
+ "ruxfs",
+ "ruxhal",
+ "ruxruntime",
+ "ruxtask",
+ "spinlock",
+]
+
+[[package]]
 name = "ruxfs"
 version = "0.1.0"
 dependencies = [
@@ -1598,23 +1574,47 @@ name = "ruxlibc"
 version = "0.1.0"
 dependencies = [
  "axerrno",
- "axfeat",
  "axio",
  "bindgen",
- "rukos_posix_api",
+ "ruxfeat",
+ "ruxos_posix_api",
 ]
 
 [[package]]
 name = "ruxmusl"
 version = "0.1.0"
 dependencies = [
- "axfeat",
  "axlog",
  "crate_interface",
  "kernel_guard",
  "num_enum",
- "rukos_posix_api",
+ "ruxfeat",
  "ruxhal",
+ "ruxos_posix_api",
+]
+
+[[package]]
+name = "ruxos_posix_api"
+version = "0.1.0"
+dependencies = [
+ "axalloc",
+ "axerrno",
+ "axio",
+ "axlog",
+ "axnet",
+ "axsync",
+ "bindgen",
+ "flatten_objects",
+ "lazy_static",
+ "memory_addr",
+ "ruxconfig",
+ "ruxfeat",
+ "ruxfs",
+ "ruxhal",
+ "ruxruntime",
+ "ruxtask",
+ "spin 0.9.8",
+ "static_assertions",
 ]
 
 [[package]]

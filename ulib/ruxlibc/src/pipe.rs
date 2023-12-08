@@ -9,7 +9,7 @@
 
 use core::ffi::c_int;
 
-use rukos_posix_api::sys_pipe;
+use ruxos_posix_api::sys_pipe;
 
 use crate::utils::e;
 

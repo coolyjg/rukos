@@ -1,15 +1,15 @@
 [package]
-name = "axfeat"
+name = "ruxfeat"
 version = "0.1.0"
 edition = "2021"
 authors = [
     "Yuekai Jia <equation618@gmail.com>",
     "yanjuguang <coolyanjg@163.com>",
 ]
-description = "Top-level feature selection for Rukos"
+description = "Top-level feature selection for RuxOS"
 license = "GPL-3.0-or-later OR Apache-2.0"
 homepage = "https://github.com/syswonder/rukos"
-repository = "https://github.com/syswonder/rukos/tree/main/api/axfeat"
+repository = "https://github.com/syswonder/rukos/tree/main/api/ruxfeat"
 
 [features]
 default = []

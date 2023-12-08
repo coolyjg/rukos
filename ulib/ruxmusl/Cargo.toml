@@ -15,42 +15,42 @@ crate-type = ["staticlib"]
 default = []
 
 # Multicore
-smp = ["rukos_posix_api/smp"]
+smp = ["ruxos_posix_api/smp"]
 
 # Floating point/SIMD
-fp_simd = ["axfeat/fp_simd"]
+fp_simd = ["ruxfeat/fp_simd"]
 
 # Memory
-alloc = ["rukos_posix_api/alloc"]
-tls = ["alloc", "axfeat/tls"]
+alloc = ["ruxos_posix_api/alloc"]
+tls = ["alloc", "ruxfeat/tls"]
 
 # Multi-task
-multitask = ["rukos_posix_api/multitask"]
+multitask = ["ruxos_posix_api/multitask"]
 
 # File system
-fs = ["rukos_posix_api/fs", "fd"]
+fs = ["ruxos_posix_api/fs", "fd"]
 
 # Networking
-net = ["rukos_posix_api/net", "fd"]
+net = ["ruxos_posix_api/net", "fd"]
 
 # Libc features
-fd = ["rukos_posix_api/fd"]
-pipe = ["rukos_posix_api/pipe"]
-select = ["rukos_posix_api/select"]
-epoll = ["rukos_posix_api/epoll"]
-poll = ["rukos_posix_api/poll"]
-rtc = ["axfeat/rtc"]
+fd = ["ruxos_posix_api/fd"]
+pipe = ["ruxos_posix_api/pipe"]
+select = ["ruxos_posix_api/select"]
+epoll = ["ruxos_posix_api/epoll"]
+poll = ["ruxos_posix_api/poll"]
+rtc = ["ruxfeat/rtc"]
 
-musl = ["rukos_posix_api/musl", "tls"]
+musl = ["ruxos_posix_api/musl", "tls"]
 
 # Interrupts
-irq = ["rukos_posix_api/irq", "axfeat/irq"]
+irq = ["ruxos_posix_api/irq", "ruxfeat/irq"]
 
-sched_rr = ["irq", "axfeat/sched_rr"]
+sched_rr = ["irq", "ruxfeat/sched_rr"]
 
 [dependencies]
-axfeat = { path = "../../api/axfeat" }
-rukos_posix_api = { path = "../../api/rukos_posix_api" }
+ruxfeat = { path = "../../api/ruxfeat" }
+ruxos_posix_api = { path = "../../api/ruxos_posix_api" }
 num_enum = { version = "0.5.11", default-features = false }
 ruxhal = { path = "../../modules/ruxhal" }
 axlog = { path = "../../modules/axlog" }

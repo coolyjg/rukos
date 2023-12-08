@@ -42,14 +42,14 @@ The currently supported applications (Rust), as well as their dependent modules 
 | [helloworld](apps/helloworld/) | | | A minimal app that just prints a string |
 | [exception](apps/exception/) | | paging | Exception handling test |
 | [memtest](apps/memtest/) | axalloc | alloc, paging | Dynamic memory allocation test |
-| [display](apps/display/) | axalloc, axdisplay | alloc, paging, display | Graphic/GUI test |
+| [display](apps/display/) | axalloc, ruxdisplay | alloc, paging, display | Graphic/GUI test |
 | [yield](apps/task/yield/) | axalloc, axtask | alloc, paging, multitask, sched_fifo | Multi-threaded yielding test |
 | [parallel](apps/task/parallel/) | axalloc, axtask | alloc, paging, multitask, sched_fifo | Parallel computing test (to test synchronization & mutex) |
 | [sleep](apps/task/sleep/) | axalloc, axtask | alloc, paging, multitask, sched_fifo | Thread sleeping test |
-| [shell](apps/fs/shell/) | axalloc, axdriver, axfs | alloc, paging, fs | A simple shell that responds to filesystem operations |
-| [httpclient](apps/net/httpclient/) | axalloc, axdriver, axnet | alloc, paging, net | A simple client that sends an HTTP request and then prints the response |
-| [echoserver](apps/net/echoserver/) | axalloc, axdriver, axnet, axtask | alloc, paging, net, multitask | A multi-threaded TCP server that reverses messages sent by the client  |
-| [httpserver](apps/net/httpserver/) | axalloc, axdriver, axnet, axtask | alloc, paging, net, multitask | A multi-threaded HTTP server that serves a static web page |
+| [shell](apps/fs/shell/) | axalloc, ruxdriver, ruxfs | alloc, paging, fs | A simple shell that responds to filesystem operations |
+| [httpclient](apps/net/httpclient/) | axalloc, ruxdriver, axnet | alloc, paging, net | A simple client that sends an HTTP request and then prints the response |
+| [echoserver](apps/net/echoserver/) | axalloc, ruxdriver, axnet, axtask | alloc, paging, net, multitask | A multi-threaded TCP server that reverses messages sent by the client  |
+| [httpserver](apps/net/httpserver/) | axalloc, ruxdriver, axnet, axtask | alloc, paging, net, multitask | A multi-threaded HTTP server that serves a static web page |
 
 ### C
 

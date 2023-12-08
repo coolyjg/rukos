@@ -46,7 +46,7 @@ pub use self::net_impl::UdpSocket;
 pub use self::net_impl::{bench_receive, bench_transmit};
 pub use self::net_impl::{dns_query, poll_interfaces};
 
-use axdriver::{prelude::*, AxDeviceContainer};
+use ruxdriver::{prelude::*, AxDeviceContainer};
 
 /// Initializes the network subsystem by NIC devices.
 pub fn init_network(mut net_devs: AxDeviceContainer<AxNetDevice>) {

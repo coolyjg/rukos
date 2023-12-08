@@ -28,12 +28,12 @@ mod fs;
 mod netdev;
 
 use alloc::sync::Arc;
-use axfs::MountPoint;
+use ruxfs::MountPoint;
 use log::*;
 use spin::RwLock;
 
 #[cfg(feature = "virtio-9p")]
-use axdriver::{prelude::*, AxDeviceContainer};
+use ruxdriver::{prelude::*, AxDeviceContainer};
 #[cfg(feature = "net-9p")]
 use {
     alloc::{boxed::Box, vec::Vec},
@@ -70,7 +70,7 @@ pub fn init_net_9pfs(ip_port: &str, aname: &str, protocol: &str) -> MountPoint {
     };
     info!("use 9pfs device 0: {:?}", net9p.device_name());
 
-    // Enabling `dyn` feature in axdriver, pub type Ax9pDevice = Box<dyn _9pDriverOps>;
+    // Enabling `dyn` feature in ruxdriver, pub type Ax9pDevice = Box<dyn _9pDriverOps>;
     // TODO: consider a more elegant implement.
     let net9p_driver = self::drv::Drv9pOps::new(Box::new(net9p));
     let n9p_fs = self::fs::_9pFileSystem::new(Arc::new(RwLock::new(net9p_driver)), aname, protocol);

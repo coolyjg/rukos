@@ -18,7 +18,7 @@ use alloc::vec;
 use core::cell::RefCell;
 use core::ops::DerefMut;
 
-use axdriver::prelude::*;
+use ruxdriver::prelude::*;
 use axhal::time::{current_time_nanos, NANOS_PER_MICROS};
 use axsync::Mutex;
 use driver_net::{DevError, NetBufPtr};

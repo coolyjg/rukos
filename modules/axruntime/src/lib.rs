@@ -204,7 +204,7 @@ pub extern "C" fn rust_main(cpu_id: usize, dtb: usize) -> ! {
     #[cfg(any(feature = "fs", feature = "net", feature = "display"))]
     {
         #[allow(unused_variables)]
-        let all_devices = axdriver::init_drivers();
+        let all_devices = ruxdriver::init_drivers();
 
         #[cfg(feature = "net")]
         axnet::init_network(all_devices.net);
@@ -214,15 +214,15 @@ pub extern "C" fn rust_main(cpu_id: usize, dtb: usize) -> ! {
             extern crate alloc;
             use alloc::vec::Vec;
             // By default, mount_points[0] will be rootfs
-            let mut mount_points: Vec<axfs::MountPoint> = Vec::new();
+            let mut mount_points: Vec<ruxfs::MountPoint> = Vec::new();
 
             //setup ramfs as rootfs if no other filesystem can be mounted
             #[cfg(not(any(feature = "blkfs", feature = "virtio-9p", feature = "net-9p")))]
-            mount_points.push(axfs::init_tempfs());
+            mount_points.push(ruxfs::init_tempfs());
 
             // setup and initialize blkfs as one mountpoint for rootfs
             #[cfg(feature = "blkfs")]
-            mount_points.push(axfs::init_blkfs(all_devices.block));
+            mount_points.push(ruxfs::init_blkfs(all_devices.block));
 
             // setup and initialize 9pfs as mountpoint
             #[cfg(feature = "virtio-9p")]
@@ -237,14 +237,14 @@ pub extern "C" fn rust_main(cpu_id: usize, dtb: usize) -> ! {
                 option_env!("AX_ANAME_9P").unwrap_or(""),
                 option_env!("AX_PROTOCOL_9P").unwrap_or(""),
             ));
-            axfs::prepare_commonfs(&mut mount_points);
+            ruxfs::prepare_commonfs(&mut mount_points);
 
             // setup and initialize rootfs
-            axfs::init_filesystems(mount_points);
+            ruxfs::init_filesystems(mount_points);
         }
 
         #[cfg(feature = "display")]
-        axdisplay::init_display(all_devices.display);
+        ruxdisplay::init_display(all_devices.display);
     }
 
     #[cfg(feature = "smp")]

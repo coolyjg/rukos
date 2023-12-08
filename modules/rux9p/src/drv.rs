@@ -10,7 +10,7 @@
 #![allow(dead_code)]
 
 use alloc::{string::String, string::ToString, sync::Arc, vec, vec::Vec};
-use axdriver::prelude::*;
+use ruxdriver::prelude::*;
 use log::*;
 use spin::RwLock;
 

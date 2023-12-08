@@ -23,7 +23,7 @@ axerrno = { path = "../../crates/axerrno" }
 axhal = { path = "../axhal" }
 axsync = { path = "../axsync" }
 axtask = { path = "../axtask" }
-axdriver = { path = "../axdriver", features = ["net"] }
+ruxdriver = { path = "../ruxdriver", features = ["net"] }
 axio = { path = "../../crates/axio" }
 
 [dependencies.smoltcp]

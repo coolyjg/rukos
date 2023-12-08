@@ -11,7 +11,7 @@ use alloc::sync::Arc;
 use core::ffi::{c_char, c_int};
 
 use axerrno::{LinuxError, LinuxResult};
-use axfs::fops::OpenOptions;
+use ruxfs::fops::OpenOptions;
 use axio::{PollState, SeekFrom};
 use axsync::Mutex;
 
@@ -19,11 +19,11 @@ use super::fd_ops::{get_file_like, FileLike};
 use crate::{ctypes, utils::char_ptr_to_str};
 
 pub struct File {
-    inner: Mutex<axfs::fops::File>,
+    inner: Mutex<ruxfs::fops::File>,
 }
 
 impl File {
-    fn new(inner: axfs::fops::File) -> Self {
+    fn new(inner: ruxfs::fops::File) -> Self {
         Self {
             inner: Mutex::new(inner),
         }
@@ -120,7 +120,7 @@ pub fn sys_open(filename: *const c_char, flags: c_int, mode: ctypes::mode_t) -> 
     debug!("sys_open <= {:?} {:#o} {:#o}", filename, flags, mode);
     syscall_body!(sys_open, {
         let options = flags_to_options(flags, mode);
-        let file = axfs::fops::File::open(filename?, &options)?;
+        let file = ruxfs::fops::File::open(filename?, &options)?;
         File::new(file).add_to_fd_table()
     })
 }
@@ -133,7 +133,7 @@ pub fn sys_openat(_fd: usize, path: *const c_char, flags: c_int, mode: ctypes::m
     debug!("sys_openat <= {:?}, {:#o} {:#o}", path, flags, mode);
     syscall_body!(sys_openat, {
         let options = flags_to_options(flags, mode);
-        let file = axfs::fops::File::open(path?, &options)?;
+        let file = ruxfs::fops::File::open(path?, &options)?;
         File::new(file).add_to_fd_table()
     })
 }
@@ -183,7 +183,7 @@ pub unsafe fn sys_stat(path: *const c_char, buf: *mut ctypes::stat) -> c_int {
         }
         let mut options = OpenOptions::new();
         options.read(true);
-        let file = axfs::fops::File::open(path?, &options)?;
+        let file = ruxfs::fops::File::open(path?, &options)?;
         let st = File::new(file).stat()?;
         unsafe { *buf = st };
         Ok(0)
@@ -257,7 +257,7 @@ pub unsafe fn sys_newfstatat(
         }
         let mut options = OpenOptions::new();
         options.read(true);
-        let file = axfs::fops::File::open(path?, &options)?;
+        let file = ruxfs::fops::File::open(path?, &options)?;
         let st = File::new(file).stat()?;
         unsafe {
             (*kst).st_dev = st.st_dev;
@@ -282,7 +282,7 @@ pub fn sys_getcwd(buf: *mut c_char, size: usize) -> c_int {
             return Err(LinuxError::EINVAL);
         }
         let dst = unsafe { core::slice::from_raw_parts_mut(buf as *mut u8, size as _) };
-        let cwd = axfs::api::current_dir()?;
+        let cwd = ruxfs::api::current_dir()?;
         let cwd = cwd.as_bytes();
         if cwd.len() < size {
             dst[..cwd.len()].copy_from_slice(cwd);
@@ -303,7 +303,7 @@ pub fn sys_rename(old: *const c_char, new: *const c_char) -> c_int {
         let old_path = char_ptr_to_str(old)?;
         let new_path = char_ptr_to_str(new)?;
         debug!("sys_rename <= old: {:?}, new: {:?}", old_path, new_path);
-        axfs::api::rename(old_path, new_path)?;
+        ruxfs::api::rename(old_path, new_path)?;
         Ok(0)
     })
 }
@@ -321,7 +321,7 @@ pub fn sys_renameat(oldfd: c_int, old: *const c_char, newfd: c_int, new: *const 
     assert_eq!(oldfd, ctypes::AT_FDCWD as c_int);
     assert_eq!(newfd, ctypes::AT_FDCWD as c_int);
     syscall_body!(sys_renameat, {
-        axfs::api::rename(old_path?, new_path?)?;
+        ruxfs::api::rename(old_path?, new_path?)?;
         Ok(0)
     })
 }
@@ -331,7 +331,7 @@ pub fn sys_rmdir(pathname: *const c_char) -> c_int {
     syscall_body!(sys_rmdir, {
         let path = char_ptr_to_str(pathname)?;
         debug!("sys_rmdir <= path: {:?}", path);
-        axfs::api::remove_dir(path)?;
+        ruxfs::api::remove_dir(path)?;
         Ok(0)
     })
 }
@@ -341,7 +341,7 @@ pub fn sys_unlink(pathname: *const c_char) -> c_int {
     syscall_body!(sys_unlink, {
         let path = char_ptr_to_str(pathname)?;
         debug!("sys_unlink <= path: {:?}", path);
-        axfs::api::remove_file(path)?;
+        ruxfs::api::remove_file(path)?;
         Ok(0)
     })
 }
@@ -366,7 +366,7 @@ pub fn sys_mkdir(pathname: *const c_char, mode: ctypes::mode_t) -> c_int {
     syscall_body!(sys_mkdir, {
         let path = char_ptr_to_str(pathname)?;
         debug!("sys_mkdir <= path: {:?}, mode: {:?}", path, mode);
-        axfs::api::create_dir(path)?;
+        ruxfs::api::create_dir(path)?;
         Ok(0)
     })
 }

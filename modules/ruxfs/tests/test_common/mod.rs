@@ -7,7 +7,7 @@
  *   See the Mulan PSL v2 for more details.
  */
 
-use axfs::api as fs;
+use ruxfs::api as fs;
 use axio as io;
 
 use fs::{File, FileType, OpenOptions};

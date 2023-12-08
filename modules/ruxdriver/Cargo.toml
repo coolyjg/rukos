@@ -1,5 +1,5 @@
 [package]
-name = "axdriver"
+name = "ruxdriver"
 version = "0.1.0"
 edition = "2021"
 authors = [
@@ -10,7 +10,7 @@ authors = [
 description = "Rukos device drivers"
 license = "GPL-3.0-or-later OR Apache-2.0"
 homepage = "https://github.com/syswonder/rukos"
-repository = "https://github.com/syswonder/rukos/tree/main/modules/axdriver"
+repository = "https://github.com/syswonder/rukos/tree/main/modules/ruxdriver"
 
 [features]
 dyn = []

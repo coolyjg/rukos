@@ -45,7 +45,7 @@ pub mod fops;
 
 use alloc::vec::Vec;
 
-use axdriver::{prelude::*, AxDeviceContainer};
+use ruxdriver::{prelude::*, AxDeviceContainer};
 
 cfg_if::cfg_if! {
     if #[cfg(feature = "myfs")] {

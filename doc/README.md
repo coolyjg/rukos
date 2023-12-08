@@ -9,9 +9,9 @@
 * [rux9p](../modules/rux9p/): 9pfs integration for Rukos.
 * [axalloc](../modules/axalloc): Rukos global memory allocator.
 * [ruxconfig](../modules/ruxconfig): Platform-specific constants and parameters for Rukos.
-* [axdisplay](../modules/axdisplay): Rukos graphics module.
-* [axdriver](../modules/axdriver): Rukos device drivers.
-* [axfs](../modules/axfs): Rukos filesystem module.
+* [ruxdisplay](../modules/ruxdisplay): Rukos graphics module.
+* [ruxdriver](../modules/ruxdriver): Rukos device drivers.
+* [ruxfs](../modules/ruxfs): Rukos filesystem module.
 * [axhal](../modules/axhal): Rukos hardware abstraction layer, provides unified APIs for platform-specific operations.
 * [axlog](../modules/axlog): Macros for multi-level formatted logging used by Rukos.
 * [axnet](../modules/axnet): Rukos network module.
@@ -60,25 +60,25 @@
 | [helloworld](../apps/helloworld/) | | | A minimal app that just prints a string |
 | [exception](../apps/exception/) | | paging | Exception handling test |
 | [memtest](../apps/memtest/) | axalloc | alloc, paging | Dynamic memory allocation test |
-| [display](../apps/display/) | axalloc, axdisplay | alloc, paging, display | Graphic/GUI test |
+| [display](../apps/display/) | axalloc, ruxdisplay | alloc, paging, display | Graphic/GUI test |
 | [yield](../apps/task/yield/) | axalloc, axtask | alloc, paging, multitask, sched_fifo | Multi-threaded yielding test |
 | [parallel](../apps/task/parallel/) | axalloc, axtask | alloc, paging, multitask, sched_fifo, irq | Parallel computing test (to test synchronization & mutex) |
 | [sleep](../apps/task/sleep/) | axalloc, axtask | alloc, paging, multitask, sched_fifo, irq | Thread sleeping test |
 | [priority](../apps/task/priority/) | axalloc, axtask | alloc, paging, multitask, sched_cfs | Thread priority test |
-| [shell](../apps/fs/shell/) | axalloc, axdriver, axfs | alloc, paging, fs | A simple shell that responds to filesystem operations |
-| [httpclient](../apps/net/httpclient/) | axalloc, axdriver, axnet | alloc, paging, net | A simple client that sends an HTTP request and then prints the response |
-| [echoserver](../apps/net/echoserver/) | axalloc, axdriver, axnet, axtask | alloc, paging, net, multitask | A multi-threaded TCP server that reverses messages sent by the client  |
-| [httpserver](../apps/net/httpserver/) | axalloc, axdriver, axnet, axtask | alloc, paging, net, multitask | A multi-threaded HTTP server that serves a static web page |
-| [udpserver](../apps/net/udpserver/) | axalloc, axdriver, axnet | alloc, paging, net | A simple echo server using UDP protocol |
+| [shell](../apps/fs/shell/) | axalloc, ruxdriver, ruxfs | alloc, paging, fs | A simple shell that responds to filesystem operations |
+| [httpclient](../apps/net/httpclient/) | axalloc, ruxdriver, axnet | alloc, paging, net | A simple client that sends an HTTP request and then prints the response |
+| [echoserver](../apps/net/echoserver/) | axalloc, ruxdriver, axnet, axtask | alloc, paging, net, multitask | A multi-threaded TCP server that reverses messages sent by the client  |
+| [httpserver](../apps/net/httpserver/) | axalloc, ruxdriver, axnet, axtask | alloc, paging, net, multitask | A multi-threaded HTTP server that serves a static web page |
+| [udpserver](../apps/net/udpserver/) | axalloc, ruxdriver, axnet | alloc, paging, net | A simple echo server using UDP protocol |
 
 ## Applications (C)
 | App | Extra modules | Enabled features | Description |
 |-|-|-|-|
 | [helloworld](../apps/c/helloworld/) | | | A minimal C app that just prints a string |
 | [memtest](../apps/c/memtest/) | axalloc | alloc, paging | Dynamic memory allocation test in C |
-| [sqlite3](../apps/c/sqlite3/) | axalloc, axdriver, axfs | alloc, paging, fp_simd, fs | Porting of [SQLite3](https://sqlite.org/index.html) |
-| [iperf](../apps/c/iperf/) | axalloc, axdriver, axfs, axnet | alloc, paging, fp_simd, fs, net, select | Porting of [iPerf3](https://iperf.fr/) |
-| [redis](../apps/c/redis/) | axalloc, axdriver, axtask, axfs, axnet | alloc, paging, fp_simd, irq, multitask, fs, net, pipe, epoll | Porting of [Redis](https://redis.io/) |
+| [sqlite3](../apps/c/sqlite3/) | axalloc, ruxdriver, ruxfs | alloc, paging, fp_simd, fs | Porting of [SQLite3](https://sqlite.org/index.html) |
+| [iperf](../apps/c/iperf/) | axalloc, ruxdriver, ruxfs, axnet | alloc, paging, fp_simd, fs, net, select | Porting of [iPerf3](https://iperf.fr/) |
+| [redis](../apps/c/redis/) | axalloc, ruxdriver, axtask, ruxfs, axnet | alloc, paging, fp_simd, irq, multitask, fs, net, pipe, epoll | Porting of [Redis](https://redis.io/) |
 
 ## Dependencies
 
@@ -115,10 +115,10 @@ L[axhal]
 M[ruxconfig]
 N[axalloc]
 O[axtask]
-P[axdriver]
+P[ruxdriver]
 Q[axnet]
-Q1[axdisplay]
-M1[axfs]
+Q1[ruxdisplay]
+M1[ruxfs]
 end
 G --> I;
 H --> I;

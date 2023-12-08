@@ -75,10 +75,8 @@ name = "arceos_api"
 version = "0.1.0"
 dependencies = [
  "axalloc",
- "axdisplay",
  "axerrno",
  "axfeat",
- "axfs",
  "axhal",
  "axio",
  "axlog",
@@ -86,6 +84,8 @@ dependencies = [
  "axruntime",
  "axtask",
  "ruxconfig",
+ "ruxdisplay",
+ "ruxfs",
 ]
 
 [[package]]
@@ -130,35 +130,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "axdisplay"
-version = "0.1.0"
-dependencies = [
- "axdriver",
- "axsync",
- "driver_display",
- "lazy_init",
- "log",
-]
-
-[[package]]
-name = "axdriver"
-version = "0.1.0"
-dependencies = [
- "axalloc",
- "axhal",
- "cfg-if",
- "driver_9p",
- "driver_block",
- "driver_common",
- "driver_display",
- "driver_net",
- "driver_pci",
- "driver_virtio",
- "log",
- "ruxconfig",
-]
-
-[[package]]
 name = "axerrno"
 version = "0.1.0"
 dependencies = [
@@ -170,9 +141,6 @@ name = "axfeat"
 version = "0.1.0"
 dependencies = [
  "axalloc",
- "axdisplay",
- "axdriver",
- "axfs",
  "axhal",
  "axlog",
  "axnet",
@@ -180,28 +148,10 @@ dependencies = [
  "axsync",
  "axtask",
  "rux9p",
+ "ruxdisplay",
+ "ruxdriver",
+ "ruxfs",
  "spinlock",
-]
-
-[[package]]
-name = "axfs"
-version = "0.1.0"
-dependencies = [
- "axdriver",
- "axerrno",
- "axfs_devfs",
- "axfs_ramfs",
- "axfs_vfs",
- "axio",
- "axsync",
- "axtask",
- "capability",
- "cfg-if",
- "crate_interface",
- "driver_block",
- "fatfs",
- "lazy_init",
- "log",
 ]
 
 [[package]]
@@ -290,7 +240,6 @@ dependencies = [
 name = "axnet"
 version = "0.1.0"
 dependencies = [
- "axdriver",
  "axerrno",
  "axhal",
  "axio",
@@ -300,6 +249,7 @@ dependencies = [
  "driver_net",
  "lazy_init",
  "log",
+ "ruxdriver",
  "smoltcp",
  "spin 0.9.8",
 ]
@@ -309,9 +259,6 @@ name = "axruntime"
 version = "0.1.0"
 dependencies = [
  "axalloc",
- "axdisplay",
- "axdriver",
- "axfs",
  "axhal",
  "axlog",
  "axnet",
@@ -324,6 +271,9 @@ dependencies = [
  "percpu",
  "rux9p",
  "ruxconfig",
+ "ruxdisplay",
+ "ruxdriver",
+ "ruxfs",
 ]
 
 [[package]]
@@ -1553,7 +1503,6 @@ dependencies = [
  "axalloc",
  "axerrno",
  "axfeat",
- "axfs",
  "axhal",
  "axio",
  "axlog",
@@ -1566,6 +1515,7 @@ dependencies = [
  "lazy_static",
  "memory_addr",
  "ruxconfig",
+ "ruxfs",
  "spin 0.9.8",
  "static_assertions",
 ]
@@ -1617,13 +1567,13 @@ checksum = "7ffc183a10b4478d04cbbbfc96d0873219d962dd5accaff2ffbd4ceb7df837f4"
 name = "rux9p"
 version = "0.1.0"
 dependencies = [
- "axdriver",
- "axfs",
  "axfs_vfs",
  "axnet",
  "driver_9p",
  "driver_common",
  "log",
+ "ruxdriver",
+ "ruxfs",
  "spin 0.9.8",
 ]
 
@@ -1633,6 +1583,56 @@ version = "0.1.0"
 dependencies = [
  "serde",
  "toml_edit",
+]
+
+[[package]]
+name = "ruxdisplay"
+version = "0.1.0"
+dependencies = [
+ "axsync",
+ "driver_display",
+ "lazy_init",
+ "log",
+ "ruxdriver",
+]
+
+[[package]]
+name = "ruxdriver"
+version = "0.1.0"
+dependencies = [
+ "axalloc",
+ "axhal",
+ "cfg-if",
+ "driver_9p",
+ "driver_block",
+ "driver_common",
+ "driver_display",
+ "driver_net",
+ "driver_pci",
+ "driver_virtio",
+ "log",
+ "ruxconfig",
+]
+
+[[package]]
+name = "ruxfs"
+version = "0.1.0"
+dependencies = [
+ "axerrno",
+ "axfs_devfs",
+ "axfs_ramfs",
+ "axfs_vfs",
+ "axio",
+ "axsync",
+ "axtask",
+ "capability",
+ "cfg-if",
+ "crate_interface",
+ "driver_block",
+ "fatfs",
+ "lazy_init",
+ "log",
+ "ruxdriver",
 ]
 
 [[package]]

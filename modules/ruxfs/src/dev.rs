@@ -7,7 +7,7 @@
  *   See the Mulan PSL v2 for more details.
  */
 
-use axdriver::prelude::*;
+use ruxdriver::prelude::*;
 
 const BLOCK_SIZE: usize = 512;
 

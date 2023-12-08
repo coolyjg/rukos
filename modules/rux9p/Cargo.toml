@@ -9,8 +9,8 @@ homepage = "https://github.com/syswonder/rukos"
 repository = "https://github.com/syswonder/rukos/tree/main/modules/rux9p"
 
 [features]
-virtio-9p = ["axdriver/virtio-9p", "axdriver/virtio-9p"]
-net-9p = ["axnet", "driver_common", "axdriver/dyn" , "axdriver/_9p"]
+virtio-9p = ["ruxdriver/virtio-9p", "ruxdriver/virtio-9p"]
+net-9p = ["axnet", "driver_common", "ruxdriver/dyn" , "ruxdriver/_9p"]
 need_auth = []
 
 [dependencies]
@@ -20,6 +20,6 @@ driver_9p = { path = "../../crates/driver_9p"}
 axfs_vfs = { path = "../../crates/axfs_vfs"}
 driver_common = { path = "../../crates/driver_common", optional = true}
 
-axfs = { path = "../axfs"}
+ruxfs = { path = "../ruxfs"}
 axnet = { path = "../axnet", optional = true}
-axdriver = { path = "../axdriver"}
+ruxdriver = { path = "../ruxdriver"}

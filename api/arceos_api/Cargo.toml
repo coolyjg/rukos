@@ -16,9 +16,9 @@ irq = ["axfeat/irq"]
 rtc = ["axfeat/rtc"]
 alloc = ["dep:axalloc", "axfeat/alloc"]
 multitask = ["axtask/multitask", "axfeat/multitask"]
-fs = ["dep:axfs", "axfeat/fs"]
+fs = ["dep:ruxfs", "axfeat/fs"]
 net = ["dep:axnet", "axfeat/net"]
-display = ["dep:axdisplay", "axfeat/display"]
+display = ["dep:ruxdisplay", "axfeat/display"]
 
 myfs = ["axfeat/myfs"]
 
@@ -35,6 +35,6 @@ axerrno = { path = "../../crates/axerrno" }
 axhal = { path = "../../modules/axhal" }
 axalloc = { path = "../../modules/axalloc", optional = true }
 axtask = { path = "../../modules/axtask", optional = true }
-axfs = { path = "../../modules/axfs", optional = true }
+ruxfs = { path = "../../modules/ruxfs", optional = true }
 axnet = { path = "../../modules/axnet", optional = true }
-axdisplay = { path = "../../modules/axdisplay", optional = true }
+ruxdisplay = { path = "../../modules/ruxdisplay", optional = true }

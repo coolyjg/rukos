@@ -43,7 +43,7 @@ LOG ?= warn
 V ?=
 
 # App options
-A ?= apps/helloworld
+A ?= apps/c/helloworld
 APP ?= $(A)
 FEATURES ?=
 APP_FEATURES ?=

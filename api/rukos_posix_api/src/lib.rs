@@ -35,8 +35,8 @@ mod imp;
 
 /// Platform-specific constants and parameters.
 pub mod config {
-    pub use ruxconfig::*;
     pub use memory_addr::PAGE_SIZE_4K;
+    pub use ruxconfig::*;
 }
 
 /// POSIX C types.

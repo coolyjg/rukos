@@ -8,8 +8,8 @@
  */
 
 use alloc::sync::Arc;
-use ruxhal::time::current_time;
 use lazy_init::LazyInit;
+use ruxhal::time::current_time;
 use spinlock::SpinNoIrq;
 use timer_list::{TimeValue, TimerEvent, TimerList};
 

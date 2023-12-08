@@ -13,13 +13,13 @@ mod test_common;
 
 use std::sync::Arc;
 
-use ruxdriver::AxDeviceContainer;
-use ruxfs::api::{self as fs, File};
-use ruxfs::fops::{Disk, MyFileSystemIf};
 use axfs_ramfs::RamFileSystem;
 use axfs_vfs::VfsOps;
 use axio::{Result, Write};
 use driver_block::ramdisk::RamDisk;
+use ruxdriver::AxDeviceContainer;
+use ruxfs::api::{self as fs, File};
+use ruxfs::fops::{Disk, MyFileSystemIf};
 
 struct MyFileSystemIfImpl;
 
@@ -55,7 +55,7 @@ fn test_ramfs() {
     println!("Testing ramfs ...");
 
     ruxtask::init_scheduler(); // call this to use `axsync::Mutex`.
-                              // By default, mount_points[0] will be rootfs
+                               // By default, mount_points[0] will be rootfs
     let mut mount_points: Vec<ruxfs::MountPoint> = Vec::new();
     // setup and initialize blkfs as one mountpoint for rootfs
     mount_points.push(ruxfs::init_blkfs(AxDeviceContainer::from_one(

@@ -28,8 +28,8 @@ mod fs;
 mod netdev;
 
 use alloc::sync::Arc;
-use ruxfs::MountPoint;
 use log::*;
+use ruxfs::MountPoint;
 use spin::RwLock;
 
 #[cfg(feature = "virtio-9p")]

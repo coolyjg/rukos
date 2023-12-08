@@ -11,8 +11,8 @@
 
 mod test_common;
 
-use ruxdriver::AxDeviceContainer;
 use driver_block::ramdisk::RamDisk;
+use ruxdriver::AxDeviceContainer;
 
 const IMG_PATH: &str = "resources/fat16.img";
 
@@ -30,7 +30,7 @@ fn test_fatfs() {
 
     let disk = make_disk().expect("failed to load disk image");
     ruxtask::init_scheduler(); // call this to use `axsync::Mutex`.
-                              // By default, mount_points[0] will be rootfs
+                               // By default, mount_points[0] will be rootfs
     let mut mount_points: Vec<ruxfs::MountPoint> = Vec::new();
     // setup and initialize blkfs as one mountpoint for rootfs
     mount_points.push(ruxfs::init_blkfs(AxDeviceContainer::from_one(disk)));

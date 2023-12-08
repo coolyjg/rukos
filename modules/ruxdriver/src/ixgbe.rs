@@ -8,9 +8,9 @@
  */
 
 use axalloc::global_allocator;
-use ruxhal::mem::{phys_to_virt, virt_to_phys};
 use core::{alloc::Layout, ptr::NonNull};
 use driver_net::ixgbe::{IxgbeHal, PhysAddr as IxgbePhysAddr};
+use ruxhal::mem::{phys_to_virt, virt_to_phys};
 
 pub struct IxgbeHalImpl;
 

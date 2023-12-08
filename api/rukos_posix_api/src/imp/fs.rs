@@ -11,9 +11,9 @@ use alloc::sync::Arc;
 use core::ffi::{c_char, c_int};
 
 use axerrno::{LinuxError, LinuxResult};
-use ruxfs::fops::OpenOptions;
 use axio::{PollState, SeekFrom};
 use axsync::Mutex;
+use ruxfs::fops::OpenOptions;
 
 use super::fd_ops::{get_file_like, FileLike};
 use crate::{ctypes, utils::char_ptr_to_str};

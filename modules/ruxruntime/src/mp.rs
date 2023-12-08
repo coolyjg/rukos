@@ -7,9 +7,9 @@
  *   See the Mulan PSL v2 for more details.
  */
 
+use core::sync::atomic::{AtomicUsize, Ordering};
 use ruxconfig::{SMP, TASK_STACK_SIZE};
 use ruxhal::mem::{virt_to_phys, VirtAddr};
-use core::sync::atomic::{AtomicUsize, Ordering};
 
 #[link_section = ".bss.stack"]
 static mut SECONDARY_BOOT_STACK: [[u8; TASK_STACK_SIZE]; SMP - 1] = [[0; TASK_STACK_SIZE]; SMP - 1];

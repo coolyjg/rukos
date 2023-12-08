@@ -8,10 +8,10 @@
  */
 
 use crate::{prelude::*, AllDevices};
-use ruxhal::mem::phys_to_virt;
 use driver_pci::{
     BarInfo, Cam, Command, DeviceFunction, HeaderType, MemoryBarType, PciRangeAllocator, PciRoot,
 };
+use ruxhal::mem::phys_to_virt;
 
 const PCI_BAR_NUM: u8 = 6;
 

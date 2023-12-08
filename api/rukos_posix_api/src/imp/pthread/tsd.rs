@@ -9,8 +9,8 @@
 
 use crate::ctypes;
 use axerrno::LinuxError;
-use ruxtask::tsd::DestrFunction;
 use core::ffi::{c_int, c_void};
+use ruxtask::tsd::DestrFunction;
 
 /// Allocate a specific key for a process shared by all threads.
 pub unsafe fn sys_pthread_key_create(

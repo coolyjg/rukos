@@ -8,9 +8,9 @@
  */
 extern crate alloc;
 use alloc::vec::Vec;
-use ruxhal::mem::PAGE_SIZE_4K;
 use core::ffi::c_char;
 use core::{ptr, usize};
+use ruxhal::mem::PAGE_SIZE_4K;
 
 pub const AT_PAGESIZE: usize = 6;
 

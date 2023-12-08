@@ -10,8 +10,8 @@
 #![allow(dead_code)]
 
 use alloc::{string::String, string::ToString, sync::Arc, vec, vec::Vec};
-use ruxdriver::prelude::*;
 use log::*;
+use ruxdriver::prelude::*;
 use spin::RwLock;
 
 const EIO: u8 = 5;

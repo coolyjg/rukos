@@ -46,6 +46,6 @@ pub use self::mem::*;
 pub use self::stdio::*;
 pub use self::task::*;
 
+pub use axio::PollState as AxPollState;
 pub use ruxhal::misc::terminate as ax_terminate;
 pub use ruxhal::time::{current_time as ax_current_time, TimeValue as AxTimeValue};
-pub use axio::PollState as AxPollState;

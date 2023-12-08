@@ -18,11 +18,11 @@ use alloc::vec;
 use core::cell::RefCell;
 use core::ops::DerefMut;
 
-use ruxdriver::prelude::*;
-use ruxhal::time::{current_time_nanos, NANOS_PER_MICROS};
 use axsync::Mutex;
 use driver_net::{DevError, NetBufPtr};
 use lazy_init::LazyInit;
+use ruxdriver::prelude::*;
+use ruxhal::time::{current_time_nanos, NANOS_PER_MICROS};
 use smoltcp::iface::{Config, Interface, SocketHandle, SocketSet};
 use smoltcp::phy::{Device, DeviceCapabilities, Medium, RxToken, TxToken};
 use smoltcp::socket::{self, AnySocket};

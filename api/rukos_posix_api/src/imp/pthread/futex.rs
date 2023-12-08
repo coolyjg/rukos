@@ -12,8 +12,8 @@ use core::{ffi::c_int, time::Duration};
 
 use axerrno::LinuxError;
 use axsync::Mutex;
-use ruxtask::{current, AxTaskRef, TaskState, WaitQueue};
 use memory_addr::VirtAddr;
+use ruxtask::{current, AxTaskRef, TaskState, WaitQueue};
 
 use crate::ctypes;
 

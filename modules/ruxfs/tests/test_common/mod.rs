@@ -7,8 +7,8 @@
  *   See the Mulan PSL v2 for more details.
  */
 
-use ruxfs::api as fs;
 use axio as io;
+use ruxfs::api as fs;
 
 use fs::{File, FileType, OpenOptions};
 use io::{prelude::*, Error, Result};

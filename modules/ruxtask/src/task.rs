@@ -18,8 +18,8 @@ use core::sync::atomic::AtomicUsize;
 #[cfg(feature = "tls")]
 use ruxhal::tls::TlsArea;
 
-use ruxhal::arch::TaskContext;
 use memory_addr::{align_up_4k, VirtAddr};
+use ruxhal::arch::TaskContext;
 
 #[cfg(not(feature = "musl"))]
 use crate::tsd::{DestrFunction, KEYS, TSD};

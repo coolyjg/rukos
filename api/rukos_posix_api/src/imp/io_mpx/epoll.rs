@@ -17,8 +17,8 @@ use alloc::sync::Arc;
 use core::{ffi::c_int, time::Duration};
 
 use axerrno::{LinuxError, LinuxResult};
-use ruxhal::time::current_time;
 use axsync::Mutex;
+use ruxhal::time::current_time;
 
 use crate::ctypes;
 use crate::imp::fd_ops::{add_file_like, get_file_like, FileLike};

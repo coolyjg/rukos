@@ -386,9 +386,9 @@ fn init_allocator() {
 
 #[cfg(feature = "paging")]
 fn remap_kernel_memory() -> Result<(), ruxhal::paging::PagingError> {
+    use lazy_init::LazyInit;
     use ruxhal::mem::{memory_regions, phys_to_virt};
     use ruxhal::paging::PageTable;
-    use lazy_init::LazyInit;
 
     static KERNEL_PAGE_TABLE: LazyInit<PageTable> = LazyInit::new();
 

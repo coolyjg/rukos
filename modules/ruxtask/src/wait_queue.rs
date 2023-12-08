@@ -18,15 +18,15 @@ use crate::{AxRunQueue, AxTaskRef, CurrentTask, RUN_QUEUE};
 /// # Examples
 ///
 /// ```
-/// use axtask::WaitQueue;
+/// use ruxtask::WaitQueue;
 /// use core::sync::atomic::{AtomicU32, Ordering};
 ///
 /// static VALUE: AtomicU32 = AtomicU32::new(0);
 /// static WQ: WaitQueue = WaitQueue::new();
 ///
-/// axtask::init_scheduler();
+/// ruxtask::init_scheduler();
 /// // spawn a new task that updates `VALUE` and notifies the main task
-/// axtask::spawn(|| {
+/// ruxtask::spawn(|| {
 ///     assert_eq!(VALUE.load(Ordering::Relaxed), 0);
 ///     VALUE.fetch_add(1, Ordering::Relaxed);
 ///     WQ.notify_one(true); // wake up the main task
@@ -107,7 +107,7 @@ impl WaitQueue {
     /// notify it, or the given duration has elapsed.
     #[cfg(feature = "irq")]
     pub fn wait_timeout(&self, dur: core::time::Duration) -> bool {
-        let deadline = dur + axhal::time::current_time();
+        let deadline = dur + ruxhal::time::current_time();
         self.wait_timeout_absolutely(deadline)
     }
     /// Blocks the current task and put it into the wait queue, until other tasks
@@ -142,7 +142,7 @@ impl WaitQueue {
         F: Fn() -> bool,
     {
         let curr = crate::current();
-        let deadline = axhal::time::current_time() + dur;
+        let deadline = ruxhal::time::current_time() + dur;
         debug!(
             "task wait_timeout: {}, deadline={:?}",
             curr.id_name(),
@@ -151,7 +151,7 @@ impl WaitQueue {
         crate::timers::set_alarm_wakeup(deadline, curr.clone());
 
         let mut timeout = true;
-        while axhal::time::current_time() < deadline {
+        while ruxhal::time::current_time() < deadline {
             let mut rq = RUN_QUEUE.lock();
             if condition() {
                 timeout = false;

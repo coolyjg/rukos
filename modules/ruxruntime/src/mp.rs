@@ -8,7 +8,7 @@
  */
 
 use ruxconfig::{SMP, TASK_STACK_SIZE};
-use axhal::mem::{virt_to_phys, VirtAddr};
+use ruxhal::mem::{virt_to_phys, VirtAddr};
 use core::sync::atomic::{AtomicUsize, Ordering};
 
 #[link_section = ".bss.stack"]
@@ -25,7 +25,7 @@ pub fn start_secondary_cpus(primary_cpu_id: usize) {
             }));
 
             debug!("starting CPU {}...", i);
-            axhal::mp::start_secondary_cpu(i, stack_top);
+            ruxhal::mp::start_secondary_cpu(i, stack_top);
             logic_cpu_id += 1;
 
             while ENTERED_CPUS.load(Ordering::Acquire) <= logic_cpu_id {
@@ -37,7 +37,7 @@ pub fn start_secondary_cpus(primary_cpu_id: usize) {
 
 /// The main entry point of the Rukos runtime for secondary CPUs.
 ///
-/// It is called from the bootstrapping code in [axhal].
+/// It is called from the bootstrapping code in [ruxhal].
 #[no_mangle]
 pub extern "C" fn rust_main_secondary(cpu_id: usize) -> ! {
     ENTERED_CPUS.fetch_add(1, Ordering::Relaxed);
@@ -46,10 +46,10 @@ pub extern "C" fn rust_main_secondary(cpu_id: usize) -> ! {
     #[cfg(feature = "paging")]
     super::remap_kernel_memory().unwrap();
 
-    axhal::platform_init_secondary();
+    ruxhal::platform_init_secondary();
 
     #[cfg(feature = "multitask")]
-    axtask::init_scheduler_secondary();
+    ruxtask::init_scheduler_secondary();
 
     info!("Secondary CPU {:x} init OK.", cpu_id);
     super::INITED_CPUS.fetch_add(1, Ordering::Relaxed);
@@ -59,15 +59,15 @@ pub extern "C" fn rust_main_secondary(cpu_id: usize) -> ! {
     }
 
     #[cfg(feature = "irq")]
-    axhal::arch::enable_irqs();
+    ruxhal::arch::enable_irqs();
 
     #[cfg(all(feature = "tls", not(feature = "multitask")))]
     super::init_tls();
 
     #[cfg(feature = "multitask")]
-    axtask::run_idle();
+    ruxtask::run_idle();
     #[cfg(not(feature = "multitask"))]
     loop {
-        axhal::arch::wait_for_irqs();
+        ruxhal::arch::wait_for_irqs();
     }
 }

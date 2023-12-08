@@ -20,13 +20,13 @@
 
 #[macro_use]
 extern crate axlog;
-extern crate axruntime;
+extern crate ruxruntime;
 
 #[cfg(feature = "alloc")]
 extern crate alloc;
 
 #[cfg(feature = "alloc")]
-pub use axruntime::{environ, environ_iter, RX_ENVIRON};
+pub use ruxruntime::{environ, environ_iter, RX_ENVIRON};
 
 #[macro_use]
 mod utils;

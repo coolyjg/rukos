@@ -52,7 +52,7 @@ sched_rr = ["irq", "axfeat/sched_rr"]
 axfeat = { path = "../../api/axfeat" }
 rukos_posix_api = { path = "../../api/rukos_posix_api" }
 num_enum = { version = "0.5.11", default-features = false }
-axhal = { path = "../../modules/axhal" }
+ruxhal = { path = "../../modules/ruxhal" }
 axlog = { path = "../../modules/axlog" }
 kernel_guard = { path = "../../crates/kernel_guard" }
 crate_interface = { path = "../../crates/crate_interface" }

@@ -14,7 +14,7 @@ use crate::ctypes;
 use crate::ctypes::k_sigaction;
 
 use axerrno::LinuxError;
-use axruntime::{rx_sigaction, Signal};
+use ruxruntime::{rx_sigaction, Signal};
 
 /// Set signal handler
 pub fn sys_sigaction(
@@ -37,7 +37,7 @@ pub unsafe fn sys_setitimer(which: c_int, new: *const ctypes::itimerval) -> c_in
         Signal::timer_interval(which, Some(new_interval));
 
         let new_ddl =
-            axhal::time::current_time_nanos() + Duration::from((*new).it_value).as_nanos() as u64;
+            ruxhal::time::current_time_nanos() + Duration::from((*new).it_value).as_nanos() as u64;
         Signal::timer_deadline(which, Some(new_ddl));
         Ok(0)
     })

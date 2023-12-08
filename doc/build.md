@@ -18,11 +18,11 @@ What happens when "make A=apps/net/httpserver ARCH=aarch64 LOG=info NET=y SMP=1 
     - `_cargo_build`: The `_cargo_build` method is defined in cargo.mk. Different compilation methods are selected based on the language. For example, for Rust, when `cargo_build,--manifest-path $(APP)/Cargo.toml` is called, where $(APP) represents the current application to be run.
     - Taking httpserver as an example, let's see how Rukos are conditionally compiled. First, in the `Cargo.toml` file of httpserver, the dependency is specified as: `axstd = { path = "../../../ulib/axstd", features = ["alloc", "multitask", "net"], optional = true }`. This indicates that axstd needs to be compiled and has the three features mentioned above.
     - After checking axstd and arceos-api, the following three features were found:
-        - `paging = ["axruntime/paging"]`
-        - `multitask = ["axruntime/multitask", "axtask/multitask", "axsync/multitask"]`
-        - `net = ["axruntime/net", "dep:axnet"]`
+        - `paging = ["ruxruntime/paging"]`
+        - `multitask = ["ruxruntime/multitask", "ruxtask/multitask", "axsync/multitask"]`
+        - `net = ["ruxruntime/net", "dep:axnet"]`
 
-        This involves modules such as axruntime, axtask, axsync, etc., and conditional compilation is performed on these modules.
+        This involves modules such as ruxruntime, ruxtask, axsync, etc., and conditional compilation is performed on these modules.
     - The above are some modules required for compilation, next we will look at how to perform conditional compilation. The `cargo.mk` file describes how to use the cargo method for conditional compilation, with the following build parameters:
     ```
     build_args := \
@@ -86,6 +86,6 @@ What happens when "make A=apps/net/httpserver ARCH=aarch64 LOG=info NET=y SMP=1 
         )
     }
     ```
-    - Later, it jumps to `rust_main` in `axruntime` to run. After some conditional initialization, `rust_main` executes `main()`. Since this main is defined by the application, symbol linkage should be established and jumped to (no context switch is needed since it's a single address space).
+    - Later, it jumps to `rust_main` in `ruxruntime` to run. After some conditional initialization, `rust_main` executes `main()`. Since this main is defined by the application, symbol linkage should be established and jumped to (no context switch is needed since it's a single address space).
 
     -  Then, the user program begins executing through `axstd`'s API. The application runs in kernel mode, without the need for syscall and context switching, resulting in higher efficiency.

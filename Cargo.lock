@@ -77,15 +77,15 @@ dependencies = [
  "axalloc",
  "axerrno",
  "axfeat",
- "axhal",
  "axio",
  "axlog",
  "axnet",
- "axruntime",
- "axtask",
  "ruxconfig",
  "ruxdisplay",
  "ruxfs",
+ "ruxhal",
+ "ruxruntime",
+ "ruxtask",
 ]
 
 [[package]]
@@ -141,16 +141,16 @@ name = "axfeat"
 version = "0.1.0"
 dependencies = [
  "axalloc",
- "axhal",
  "axlog",
  "axnet",
- "axruntime",
  "axsync",
- "axtask",
  "rux9p",
  "ruxdisplay",
  "ruxdriver",
  "ruxfs",
+ "ruxhal",
+ "ruxruntime",
+ "ruxtask",
  "spinlock",
 ]
 
@@ -182,42 +182,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "axhal"
-version = "0.1.0"
-dependencies = [
- "aarch64-cpu",
- "arm_gic",
- "arm_pl011",
- "axalloc",
- "axlog",
- "bitflags 2.4.0",
- "cfg-if",
- "crate_interface",
- "dtb",
- "dw_apb_uart",
- "embedded-hal",
- "handler_table",
- "kernel_guard",
- "lazy_init",
- "log",
- "memory_addr",
- "page_table",
- "page_table_entry",
- "percpu",
- "ratio",
- "raw-cpuid 11.0.1",
- "riscv",
- "ruxconfig",
- "sbi-rt",
- "spinlock",
- "static_assertions",
- "tock-registers",
- "x2apic",
- "x86",
- "x86_64",
-]
-
-[[package]]
 name = "axio"
 version = "0.1.0"
 dependencies = [
@@ -241,39 +205,17 @@ name = "axnet"
 version = "0.1.0"
 dependencies = [
  "axerrno",
- "axhal",
  "axio",
  "axsync",
- "axtask",
  "cfg-if",
  "driver_net",
  "lazy_init",
  "log",
  "ruxdriver",
+ "ruxhal",
+ "ruxtask",
  "smoltcp",
  "spin 0.9.8",
-]
-
-[[package]]
-name = "axruntime"
-version = "0.1.0"
-dependencies = [
- "axalloc",
- "axhal",
- "axlog",
- "axnet",
- "axtask",
- "cfg-if",
- "crate_interface",
- "dtb",
- "kernel_guard",
- "lazy_init",
- "percpu",
- "rux9p",
- "ruxconfig",
- "ruxdisplay",
- "ruxdriver",
- "ruxfs",
 ]
 
 [[package]]
@@ -292,29 +234,9 @@ name = "axsync"
 version = "0.1.0"
 dependencies = [
  "axsync",
- "axtask",
  "rand",
+ "ruxtask",
  "spinlock",
-]
-
-[[package]]
-name = "axtask"
-version = "0.1.0"
-dependencies = [
- "axhal",
- "axtask",
- "cfg-if",
- "crate_interface",
- "kernel_guard",
- "lazy_init",
- "log",
- "memory_addr",
- "percpu",
- "rand",
- "ruxconfig",
- "scheduler",
- "spinlock",
- "timer_list",
 ]
 
 [[package]]
@@ -1503,19 +1425,19 @@ dependencies = [
  "axalloc",
  "axerrno",
  "axfeat",
- "axhal",
  "axio",
  "axlog",
  "axnet",
- "axruntime",
  "axsync",
- "axtask",
  "bindgen",
  "flatten_objects",
  "lazy_static",
  "memory_addr",
  "ruxconfig",
  "ruxfs",
+ "ruxhal",
+ "ruxruntime",
+ "ruxtask",
  "spin 0.9.8",
  "static_assertions",
 ]
@@ -1601,7 +1523,6 @@ name = "ruxdriver"
 version = "0.1.0"
 dependencies = [
  "axalloc",
- "axhal",
  "cfg-if",
  "driver_9p",
  "driver_block",
@@ -1612,6 +1533,7 @@ dependencies = [
  "driver_virtio",
  "log",
  "ruxconfig",
+ "ruxhal",
 ]
 
 [[package]]
@@ -1624,7 +1546,6 @@ dependencies = [
  "axfs_vfs",
  "axio",
  "axsync",
- "axtask",
  "capability",
  "cfg-if",
  "crate_interface",
@@ -1633,6 +1554,43 @@ dependencies = [
  "lazy_init",
  "log",
  "ruxdriver",
+ "ruxtask",
+]
+
+[[package]]
+name = "ruxhal"
+version = "0.1.0"
+dependencies = [
+ "aarch64-cpu",
+ "arm_gic",
+ "arm_pl011",
+ "axalloc",
+ "axlog",
+ "bitflags 2.4.0",
+ "cfg-if",
+ "crate_interface",
+ "dtb",
+ "dw_apb_uart",
+ "embedded-hal",
+ "handler_table",
+ "kernel_guard",
+ "lazy_init",
+ "log",
+ "memory_addr",
+ "page_table",
+ "page_table_entry",
+ "percpu",
+ "ratio",
+ "raw-cpuid 11.0.1",
+ "riscv",
+ "ruxconfig",
+ "sbi-rt",
+ "spinlock",
+ "static_assertions",
+ "tock-registers",
+ "x2apic",
+ "x86",
+ "x86_64",
 ]
 
 [[package]]
@@ -1651,12 +1609,54 @@ name = "ruxmusl"
 version = "0.1.0"
 dependencies = [
  "axfeat",
- "axhal",
  "axlog",
  "crate_interface",
  "kernel_guard",
  "num_enum",
  "rukos_posix_api",
+ "ruxhal",
+]
+
+[[package]]
+name = "ruxruntime"
+version = "0.1.0"
+dependencies = [
+ "axalloc",
+ "axlog",
+ "axnet",
+ "cfg-if",
+ "crate_interface",
+ "dtb",
+ "kernel_guard",
+ "lazy_init",
+ "percpu",
+ "rux9p",
+ "ruxconfig",
+ "ruxdisplay",
+ "ruxdriver",
+ "ruxfs",
+ "ruxhal",
+ "ruxtask",
+]
+
+[[package]]
+name = "ruxtask"
+version = "0.1.0"
+dependencies = [
+ "cfg-if",
+ "crate_interface",
+ "kernel_guard",
+ "lazy_init",
+ "log",
+ "memory_addr",
+ "percpu",
+ "rand",
+ "ruxconfig",
+ "ruxhal",
+ "ruxtask",
+ "scheduler",
+ "spinlock",
+ "timer_list",
 ]
 
 [[package]]

@@ -9,7 +9,7 @@
 
 use crate::ctypes;
 use axerrno::LinuxError;
-use axtask::tsd::DestrFunction;
+use ruxtask::tsd::DestrFunction;
 use core::ffi::{c_int, c_void};
 
 /// Allocate a specific key for a process shared by all threads.
@@ -19,7 +19,7 @@ pub unsafe fn sys_pthread_key_create(
 ) -> c_int {
     debug!("sys_pthread_key_create <= {:#x}", key as usize);
     syscall_body!(sys_pthread_key_create, {
-        if let Some(k) = axtask::current().alloc_key(destr_function) {
+        if let Some(k) = ruxtask::current().alloc_key(destr_function) {
             unsafe {
                 *key = k as ctypes::pthread_key_t;
             }
@@ -34,7 +34,7 @@ pub unsafe fn sys_pthread_key_create(
 pub fn sys_pthread_key_delete(key: ctypes::pthread_key_t) -> c_int {
     debug!("sys_pthread_key_delete <= {}", key);
     syscall_body!(sys_pthread_key_delete, {
-        if let Some(_) = axtask::current().free_key(key as usize) {
+        if let Some(_) = ruxtask::current().free_key(key as usize) {
             Ok(0)
         } else {
             Err(LinuxError::EINVAL)
@@ -46,7 +46,7 @@ pub fn sys_pthread_key_delete(key: ctypes::pthread_key_t) -> c_int {
 pub fn sys_pthread_setspecific(key: ctypes::pthread_key_t, value: *const c_void) -> c_int {
     debug!("sys_pthread_setspecific <= {}, {:#x}", key, value as usize);
     syscall_body!(sys_pthread_setspecific, {
-        if let Some(_) = axtask::current().set_tsd(key as usize, value as *mut c_void) {
+        if let Some(_) = ruxtask::current().set_tsd(key as usize, value as *mut c_void) {
             Ok(0)
         } else {
             Err(LinuxError::EINVAL)
@@ -58,7 +58,7 @@ pub fn sys_pthread_setspecific(key: ctypes::pthread_key_t, value: *const c_void)
 pub fn sys_pthread_getspecific(key: ctypes::pthread_key_t) -> *mut c_void {
     debug!("sys_pthread_getspecific <= {}", key);
     syscall_body!(sys_pthread_getspecific, {
-        if let Some(tsd) = axtask::current().get_tsd(key as usize) {
+        if let Some(tsd) = ruxtask::current().get_tsd(key as usize) {
             Ok(tsd)
         } else {
             // return null

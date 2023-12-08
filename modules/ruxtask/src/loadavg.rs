@@ -16,7 +16,7 @@ const FSHIFT: u64 = 16;
 /// fixed point
 const FIXED_1: u64 = 1 << FSHIFT;
 /// update AVENRUN per 5 seconds
-const LOAD_FREQ: u64 = 5 * axhal::time::NANOS_PER_SEC + 1;
+const LOAD_FREQ: u64 = 5 * ruxhal::time::NANOS_PER_SEC + 1;
 
 /* 1/exp(5sec/1min) as fixed-point */
 /* 1/exp(5sec/5min) */
@@ -56,7 +56,7 @@ pub(crate) fn calc_load_tick(is_idle: bool) {
         ALL_CNT.fetch_add(1, Ordering::Relaxed);
     }
 
-    let curr = axhal::time::current_time_nanos();
+    let curr = ruxhal::time::current_time_nanos();
 
     if curr - unsafe { LAST_UPDATE.load(Ordering::Relaxed) } < LOAD_FREQ {
         return;

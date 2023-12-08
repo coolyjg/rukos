@@ -28,8 +28,8 @@ RukOS was inspired by [Unikraft](https://github.com/unikraft/unikraft) and [Arce
 
 Example applications can be found in the [apps/](apps/) directory. All applications must at least depend on the following modules, while other modules are optional:
 
-* [axruntime](modules/axruntime/): Bootstrapping from the bare-metal environment, and initialization.
-* [axhal](modules/axhal/): Hardware abstraction layer, provides unified APIs for cross-platform.
+* [ruxruntime](modules/ruxruntime/): Bootstrapping from the bare-metal environment, and initialization.
+* [ruxhal](modules/ruxhal/): Hardware abstraction layer, provides unified APIs for cross-platform.
 * [ruxconfig](modules/ruxconfig/): Platform constants and kernel parameters, such as physical memory base, kernel load addresses, stack size, etc.
 * [axlog](modules/axlog/): Multi-level formatted logging.
 
@@ -43,13 +43,13 @@ The currently supported applications (Rust), as well as their dependent modules 
 | [exception](apps/exception/) | | paging | Exception handling test |
 | [memtest](apps/memtest/) | axalloc | alloc, paging | Dynamic memory allocation test |
 | [display](apps/display/) | axalloc, ruxdisplay | alloc, paging, display | Graphic/GUI test |
-| [yield](apps/task/yield/) | axalloc, axtask | alloc, paging, multitask, sched_fifo | Multi-threaded yielding test |
-| [parallel](apps/task/parallel/) | axalloc, axtask | alloc, paging, multitask, sched_fifo | Parallel computing test (to test synchronization & mutex) |
-| [sleep](apps/task/sleep/) | axalloc, axtask | alloc, paging, multitask, sched_fifo | Thread sleeping test |
+| [yield](apps/task/yield/) | axalloc, ruxtask | alloc, paging, multitask, sched_fifo | Multi-threaded yielding test |
+| [parallel](apps/task/parallel/) | axalloc, ruxtask | alloc, paging, multitask, sched_fifo | Parallel computing test (to test synchronization & mutex) |
+| [sleep](apps/task/sleep/) | axalloc, ruxtask | alloc, paging, multitask, sched_fifo | Thread sleeping test |
 | [shell](apps/fs/shell/) | axalloc, ruxdriver, ruxfs | alloc, paging, fs | A simple shell that responds to filesystem operations |
 | [httpclient](apps/net/httpclient/) | axalloc, ruxdriver, axnet | alloc, paging, net | A simple client that sends an HTTP request and then prints the response |
-| [echoserver](apps/net/echoserver/) | axalloc, ruxdriver, axnet, axtask | alloc, paging, net, multitask | A multi-threaded TCP server that reverses messages sent by the client  |
-| [httpserver](apps/net/httpserver/) | axalloc, ruxdriver, axnet, axtask | alloc, paging, net, multitask | A multi-threaded HTTP server that serves a static web page |
+| [echoserver](apps/net/echoserver/) | axalloc, ruxdriver, axnet, ruxtask | alloc, paging, net, multitask | A multi-threaded TCP server that reverses messages sent by the client  |
+| [httpserver](apps/net/httpserver/) | axalloc, ruxdriver, axnet, ruxtask | alloc, paging, net, multitask | A multi-threaded HTTP server that serves a static web page |
 
 ### C
 

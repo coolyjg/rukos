@@ -99,7 +99,7 @@ impl AxRunQueue {
         assert!(!curr.is_idle());
         if curr.is_init() {
             EXITED_TASKS.lock().clear();
-            axhal::misc::terminate();
+            ruxhal::misc::terminate();
         } else {
             curr.set_state(TaskState::Exited);
             curr.notify_exit(exit_code, self);
@@ -141,13 +141,13 @@ impl AxRunQueue {
     }
 
     #[cfg(feature = "irq")]
-    pub fn sleep_until(&mut self, deadline: axhal::time::TimeValue) {
+    pub fn sleep_until(&mut self, deadline: ruxhal::time::TimeValue) {
         let curr = crate::current();
         debug!("task sleep: {}, deadline={:?}", curr.id_name(), deadline);
         assert!(curr.is_running());
         assert!(!curr.is_idle());
 
-        let now = axhal::time::current_time();
+        let now = ruxhal::time::current_time();
         if now < deadline {
             crate::timers::set_alarm_wakeup(deadline, curr.clone());
             curr.set_state(TaskState::Blocked);

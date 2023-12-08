@@ -19,12 +19,12 @@ pub unsafe extern "C" fn sys_sysinfo(info: *mut ctypes::sysinfo) -> c_int {
         let info_mut = info.as_mut().unwrap();
 
         // If the kernel booted less than 1 second, it will be 0.
-        info_mut.uptime = axhal::time::current_time().as_secs() as c_long;
+        info_mut.uptime = ruxhal::time::current_time().as_secs() as c_long;
 
         info_mut.loads = [0; 3];
-        #[cfg(feature = "axtask")]
+        #[cfg(feature = "multitask")]
         {
-            axtask::get_avenrun(&mut info_mut.loads);
+            ruxtask::get_avenrun(&mut info_mut.loads);
         }
 
         info_mut.sharedram = 0;

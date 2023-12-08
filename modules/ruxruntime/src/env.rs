@@ -8,7 +8,7 @@
  */
 extern crate alloc;
 use alloc::vec::Vec;
-use axhal::mem::PAGE_SIZE_4K;
+use ruxhal::mem::PAGE_SIZE_4K;
 use core::ffi::c_char;
 use core::{ptr, usize};
 

@@ -53,4 +53,4 @@ features = [ # no std
 ruxdriver = { path = "../ruxdriver", features = ["block", "ramdisk"] }
 driver_block = { path = "../../crates/driver_block", features = ["ramdisk"] }
 axsync = { path = "../axsync", features = ["multitask"] }
-axtask = { path = "../axtask", features = ["test"] }
+ruxtask = { path = "../ruxtask", features = ["test"] }

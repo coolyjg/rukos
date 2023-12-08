@@ -15,14 +15,14 @@ repository = "https://github.com/syswonder/rukos/tree/main/modules/ruxdriver"
 [features]
 dyn = []
 bus-mmio = []
-bus-pci = ["dep:driver_pci", "dep:axhal", "dep:ruxconfig"]
+bus-pci = ["dep:driver_pci", "dep:ruxhal", "dep:ruxconfig"]
 net = ["driver_net"]
 block = ["driver_block"]
 display = ["driver_display"]
 _9p = ["driver_9p"]
 
 # Enabled by features `virtio-*`
-virtio = ["driver_virtio", "dep:axalloc", "dep:axhal", "dep:ruxconfig"]
+virtio = ["driver_virtio", "dep:axalloc", "dep:ruxhal", "dep:ruxconfig"]
 
 # various types of drivers
 virtio-blk = ["block", "virtio", "driver_virtio/block"]
@@ -31,7 +31,7 @@ virtio-gpu = ["display", "virtio", "driver_virtio/gpu"]
 virtio-9p = ["_9p","virtio", "driver_virtio/v9p"]
 ramdisk = ["block", "driver_block/ramdisk"]
 bcm2835-sdhci = ["block", "driver_block/bcm2835-sdhci"]
-ixgbe = ["net", "driver_net/ixgbe", "dep:axalloc", "dep:axhal"]
+ixgbe = ["net", "driver_net/ixgbe", "dep:axalloc", "dep:ruxhal"]
 # more devices example: e1000 = ["net", "driver_net/e1000"]
 
 default = ["bus-mmio"]
@@ -47,5 +47,5 @@ driver_9p = { path = "../../crates/driver_9p", optional = true }
 driver_pci = { path = "../../crates/driver_pci", optional = true }
 driver_virtio = { path = "../../crates/driver_virtio", optional = true }
 axalloc = { path = "../axalloc", optional = true }
-axhal = { path = "../axhal", optional = true }
+ruxhal = { path = "../ruxhal", optional = true }
 ruxconfig = { path = "../ruxconfig", optional = true }

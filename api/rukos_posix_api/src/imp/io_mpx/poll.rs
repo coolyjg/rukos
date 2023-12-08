@@ -9,7 +9,7 @@
 
 use crate::{ctypes, imp::fd_ops::get_file_like};
 use axerrno::{LinuxError, LinuxResult};
-use axhal::time::current_time;
+use ruxhal::time::current_time;
 
 use core::{ffi::c_int, time::Duration};
 

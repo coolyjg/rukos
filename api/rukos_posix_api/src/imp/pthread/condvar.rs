@@ -12,7 +12,7 @@ use core::mem::size_of;
 
 use crate::{ctypes, sys_pthread_mutex_lock, sys_pthread_mutex_unlock};
 use axerrno::LinuxResult;
-use axtask::WaitQueue;
+use ruxtask::WaitQueue;
 
 static_assertions::const_assert_eq!(size_of::<Condvar>(), size_of::<ctypes::pthread_cond_t>());
 

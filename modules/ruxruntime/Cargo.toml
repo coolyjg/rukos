@@ -1,24 +1,29 @@
 [package]
-name = "axruntime"
+name = "ruxruntime"
 version = "0.1.0"
 edition = "2021"
-authors = ["Yuekai Jia <equation618@gmail.com>"]
+authors = [
+    "Yuekai Jia <equation618@gmail.com>",
+    "yanjuguang <coolyanjg@163.com>",
+    "Zheng Wu <hello_weekday@163.com>",
+    "AuYang261 <xu_jyang@163.com>",
+]
 description = "Runtime library of Rukos"
 license = "GPL-3.0-or-later OR Apache-2.0"
 homepage = "https://github.com/syswonder/rukos"
-repository = "https://github.com/syswonder/rukos/tree/main/modules/axruntime"
+repository = "https://github.com/syswonder/rukos/tree/main/modules/ruxruntime"
 
 [features]
 default = []
 
-smp = ["axhal/smp"]
-irq = ["axhal/irq", "axtask?/irq", "percpu", "kernel_guard"]
-tls = ["axhal/tls", "axtask?/tls"]
+smp = ["ruxhal/smp"]
+irq = ["ruxhal/irq", "ruxtask?/irq", "percpu", "kernel_guard"]
+tls = ["ruxhal/tls", "ruxtask?/tls"]
 alloc = ["axalloc", "dtb"]
-paging = ["axhal/paging", "lazy_init"]
-rtc = ["axhal/rtc"]
+paging = ["ruxhal/paging", "lazy_init"]
+rtc = ["ruxhal/rtc"]
 
-multitask = ["axtask/multitask"]
+multitask = ["ruxtask/multitask"]
 fs = ["ruxdriver", "ruxfs"]
 blkfs = ["fs"]
 virtio-9p = ["fs", "rux9p"]
@@ -31,7 +36,7 @@ musl = []
 
 [dependencies]
 cfg-if = "1.0"
-axhal = { path = "../axhal" }
+ruxhal = { path = "../ruxhal" }
 axlog = { path = "../axlog" }
 ruxconfig = { path = "../ruxconfig" }
 axalloc = { path = "../axalloc", optional = true }
@@ -40,7 +45,7 @@ ruxfs = { path = "../ruxfs", optional = true }
 rux9p = { path = "../rux9p", optional = true }
 axnet = { path = "../axnet", optional = true }
 ruxdisplay = { path = "../ruxdisplay", optional = true }
-axtask = { path = "../axtask", optional = true }
+ruxtask = { path = "../ruxtask", optional = true }
 
 crate_interface = { path = "../../crates/crate_interface" }
 percpu = { path = "../../crates/percpu", optional = true }

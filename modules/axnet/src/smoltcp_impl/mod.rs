@@ -19,7 +19,7 @@ use core::cell::RefCell;
 use core::ops::DerefMut;
 
 use ruxdriver::prelude::*;
-use axhal::time::{current_time_nanos, NANOS_PER_MICROS};
+use ruxhal::time::{current_time_nanos, NANOS_PER_MICROS};
 use axsync::Mutex;
 use driver_net::{DevError, NetBufPtr};
 use lazy_init::LazyInit;

@@ -8,7 +8,7 @@
  */
 
 use crate::{prelude::*, AllDevices};
-use axhal::mem::phys_to_virt;
+use ruxhal::mem::phys_to_virt;
 use driver_pci::{
     BarInfo, Cam, Command, DeviceFunction, HeaderType, MemoryBarType, PciRangeAllocator, PciRoot,
 };

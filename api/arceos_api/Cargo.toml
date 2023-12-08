@@ -15,7 +15,7 @@ default = []
 irq = ["axfeat/irq"]
 rtc = ["axfeat/rtc"]
 alloc = ["dep:axalloc", "axfeat/alloc"]
-multitask = ["axtask/multitask", "axfeat/multitask"]
+multitask = ["ruxtask/multitask", "axfeat/multitask"]
 fs = ["dep:ruxfs", "axfeat/fs"]
 net = ["dep:axnet", "axfeat/net"]
 display = ["dep:ruxdisplay", "axfeat/display"]
@@ -27,14 +27,14 @@ dummy-if-not-enabled = []
 
 [dependencies]
 axfeat = { path = "../axfeat" }
-axruntime = { path = "../../modules/axruntime" }
+ruxruntime = { path = "../../modules/ruxruntime" }
 ruxconfig = { path = "../../modules/ruxconfig" }
 axlog = { path = "../../modules/axlog" }
 axio = { path = "../../crates/axio" }
 axerrno = { path = "../../crates/axerrno" }
-axhal = { path = "../../modules/axhal" }
+ruxhal = { path = "../../modules/ruxhal" }
 axalloc = { path = "../../modules/axalloc", optional = true }
-axtask = { path = "../../modules/axtask", optional = true }
+ruxtask = { path = "../../modules/ruxtask", optional = true }
 ruxfs = { path = "../../modules/ruxfs", optional = true }
 axnet = { path = "../../modules/axnet", optional = true }
 ruxdisplay = { path = "../../modules/ruxdisplay", optional = true }

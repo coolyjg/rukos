@@ -12,7 +12,7 @@ use core::{ffi::c_int, time::Duration};
 
 use axerrno::LinuxError;
 use axsync::Mutex;
-use axtask::{current, AxTaskRef, TaskState, WaitQueue};
+use ruxtask::{current, AxTaskRef, TaskState, WaitQueue};
 use memory_addr::VirtAddr;
 
 use crate::ctypes;
@@ -89,7 +89,7 @@ pub fn sys_futex(
 
                 // TODO: check signals
                 if timeout == 0 {
-                    axtask::yield_now();
+                    ruxtask::yield_now();
                 } else {
                     #[cfg(feature = "irq")]
                     {
@@ -128,7 +128,7 @@ pub fn sys_futex(
                 } else {
                     drop(futex_wait_task);
                 }
-                axtask::yield_now();
+                ruxtask::yield_now();
                 Ok(val)
             }
             FutexFlags::Requeue => {

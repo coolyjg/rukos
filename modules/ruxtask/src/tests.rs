@@ -10,7 +10,7 @@
 use core::sync::atomic::{AtomicUsize, Ordering};
 use std::sync::{Mutex, Once};
 
-use crate::{self as axtask, current, WaitQueue};
+use crate::{self as ruxtask, current, WaitQueue};
 
 static INIT: Once = Once::new();
 static SERIAL: Mutex<()> = Mutex::new(());
@@ -18,16 +18,16 @@ static SERIAL: Mutex<()> = Mutex::new(());
 #[test]
 fn test_sched_fifo() {
     let _lock = SERIAL.lock();
-    INIT.call_once(axtask::init_scheduler);
+    INIT.call_once(ruxtask::init_scheduler);
 
     const NUM_TASKS: usize = 10;
     static FINISHED_TASKS: AtomicUsize = AtomicUsize::new(0);
 
     for i in 0..NUM_TASKS {
-        axtask::spawn_raw(
+        ruxtask::spawn_raw(
             move || {
                 println!("sched_fifo: Hello, task {}! ({})", i, current().id_name());
-                axtask::yield_now();
+                ruxtask::yield_now();
                 let order = FINISHED_TASKS.fetch_add(1, Ordering::Relaxed);
                 assert_eq!(order, i); // FIFO scheduler
             },
@@ -37,14 +37,14 @@ fn test_sched_fifo() {
     }
 
     while FINISHED_TASKS.load(Ordering::Relaxed) < NUM_TASKS {
-        axtask::yield_now();
+        ruxtask::yield_now();
     }
 }
 
 #[test]
 fn test_fp_state_switch() {
     let _lock = SERIAL.lock();
-    INIT.call_once(axtask::init_scheduler);
+    INIT.call_once(ruxtask::init_scheduler);
 
     const NUM_TASKS: usize = 5;
     const FLOATS: [f64; NUM_TASKS] = [
@@ -57,9 +57,9 @@ fn test_fp_state_switch() {
     static FINISHED_TASKS: AtomicUsize = AtomicUsize::new(0);
 
     for (i, float) in FLOATS.iter().enumerate() {
-        axtask::spawn(move || {
+        ruxtask::spawn(move || {
             let mut value = float + i as f64;
-            axtask::yield_now();
+            ruxtask::yield_now();
             value -= i as f64;
 
             println!("fp_state_switch: Float {} = {}", i, value);
@@ -68,14 +68,14 @@ fn test_fp_state_switch() {
         });
     }
     while FINISHED_TASKS.load(Ordering::Relaxed) < NUM_TASKS {
-        axtask::yield_now();
+        ruxtask::yield_now();
     }
 }
 
 #[test]
 fn test_wait_queue() {
     let _lock = SERIAL.lock();
-    INIT.call_once(axtask::init_scheduler);
+    INIT.call_once(ruxtask::init_scheduler);
 
     const NUM_TASKS: usize = 10;
 
@@ -84,7 +84,7 @@ fn test_wait_queue() {
     static COUNTER: AtomicUsize = AtomicUsize::new(0);
 
     for _ in 0..NUM_TASKS {
-        axtask::spawn(move || {
+        ruxtask::spawn(move || {
             COUNTER.fetch_add(1, Ordering::Relaxed);
             println!("wait_queue: task {:?} started", current().id());
             WQ1.notify_one(true); // WQ1.wait_until()
@@ -116,17 +116,17 @@ fn test_wait_queue() {
 #[test]
 fn test_task_join() {
     let _lock = SERIAL.lock();
-    INIT.call_once(axtask::init_scheduler);
+    INIT.call_once(ruxtask::init_scheduler);
 
     const NUM_TASKS: usize = 10;
     let mut tasks = Vec::with_capacity(NUM_TASKS);
 
     for i in 0..NUM_TASKS {
-        tasks.push(axtask::spawn_raw(
+        tasks.push(ruxtask::spawn_raw(
             move || {
                 println!("task_join: task {}! ({})", i, current().id_name());
-                axtask::yield_now();
-                axtask::exit(i as _);
+                ruxtask::yield_now();
+                ruxtask::exit(i as _);
             },
             format!("T{}", i),
             0x1000,

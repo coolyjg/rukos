@@ -1,12 +1,15 @@
 [package]
-name = "axhal"
+name = "ruxhal"
 version = "0.1.0"
 edition = "2021"
-authors = ["Yuekai Jia <equation618@gmail.com>"]
+authors = [
+    "Yuekai Jia <equation618@gmail.com>",
+    "yanjuguang <coolyanjg@163.com>",
+]
 description = "Rukos hardware abstraction layer, provides unified APIs for platform-specific operations"
 license = "GPL-3.0-or-later OR Apache-2.0"
 homepage = "https://github.com/syswonder/rukos"
-repository = "https://github.com/syswonder/rukos/tree/main/modules/axhal"
+repository = "https://github.com/syswonder/rukos/tree/main/modules/ruxhal"
 
 [features]
 smp = []

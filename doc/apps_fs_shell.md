@@ -35,8 +35,8 @@ make A=apps/fs/shell ARCH=aarch64 LOG=debug BLK=y run
 [  0.026510 0 ruxfs::fs::fatfs:122] create Dir at fatfs: /dev
 [  0.043112 0 ruxfs::fs::fatfs:102] lookup at fatfs: /dev
 [  0.049562 0 fatfs::dir:140] Is a directory
-[  0.057550 0 axruntime:137] Initialize interrupt handlers...
-[  0.057870 0 axruntime:143] Primary CPU 0 init OK.
+[  0.057550 0 ruxruntime:137] Initialize interrupt handlers...
+[  0.057870 0 ruxruntime:143] Primary CPU 0 init OK.
 Available commands:
   cat
   cd

@@ -16,9 +16,9 @@ use core::{alloc::Layout, cell::UnsafeCell, fmt, ptr::NonNull};
 use core::sync::atomic::AtomicUsize;
 
 #[cfg(feature = "tls")]
-use axhal::tls::TlsArea;
+use ruxhal::tls::TlsArea;
 
-use axhal::arch::TaskContext;
+use ruxhal::arch::TaskContext;
 use memory_addr::{align_up_4k, VirtAddr};
 
 #[cfg(not(feature = "musl"))]
@@ -483,7 +483,7 @@ pub struct CurrentTask(ManuallyDrop<AxTaskRef>);
 
 impl CurrentTask {
     pub(crate) fn try_get() -> Option<Self> {
-        let ptr: *const super::AxTask = axhal::cpu::current_task_ptr();
+        let ptr: *const super::AxTask = ruxhal::cpu::current_task_ptr();
         if !ptr.is_null() {
             Some(Self(unsafe { ManuallyDrop::new(AxTaskRef::from_raw(ptr)) }))
         } else {
@@ -510,16 +510,16 @@ impl CurrentTask {
 
     pub(crate) unsafe fn init_current(init_task: AxTaskRef) {
         #[cfg(feature = "tls")]
-        axhal::arch::write_thread_pointer(init_task.tls.tls_ptr() as usize);
+        ruxhal::arch::write_thread_pointer(init_task.tls.tls_ptr() as usize);
         let ptr = Arc::into_raw(init_task);
-        axhal::cpu::set_current_task_ptr(ptr);
+        ruxhal::cpu::set_current_task_ptr(ptr);
     }
 
     pub(crate) unsafe fn set_current(prev: Self, next: AxTaskRef) {
         let Self(arc) = prev;
         ManuallyDrop::into_inner(arc); // `call Arc::drop()` to decrease prev task reference count.
         let ptr = Arc::into_raw(next);
-        axhal::cpu::set_current_task_ptr(ptr);
+        ruxhal::cpu::set_current_task_ptr(ptr);
     }
 }
 
@@ -534,7 +534,7 @@ extern "C" fn task_entry() -> ! {
     // release the lock that was implicitly held across the reschedule
     unsafe { crate::RUN_QUEUE.force_unlock() };
     #[cfg(feature = "irq")]
-    axhal::arch::enable_irqs();
+    ruxhal::arch::enable_irqs();
     let task = crate::current();
     if let Some(entry) = task.entry {
         unsafe { Box::from_raw(entry)() };

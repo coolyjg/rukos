@@ -54,7 +54,7 @@ fn create_init_files() -> Result<()> {
 fn test_ramfs() {
     println!("Testing ramfs ...");
 
-    axtask::init_scheduler(); // call this to use `axsync::Mutex`.
+    ruxtask::init_scheduler(); // call this to use `axsync::Mutex`.
                               // By default, mount_points[0] will be rootfs
     let mut mount_points: Vec<ruxfs::MountPoint> = Vec::new();
     // setup and initialize blkfs as one mountpoint for rootfs

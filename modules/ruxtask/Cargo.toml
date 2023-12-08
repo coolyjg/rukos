@@ -1,12 +1,15 @@
 [package]
-name = "axtask"
+name = "ruxtask"
 version = "0.1.0"
 edition = "2021"
-authors = ["Yuekai Jia <equation618@gmail.com>"]
+authors = [
+    "Yuekai Jia <equation618@gmail.com>",
+    "AuYang261 <xu_jyang@163.com>",
+]
 description = "Rukos task management module"
 license = "GPL-3.0-or-later OR Apache-2.0"
 homepage = "https://github.com/syswonder/rukos"
-repository = "https://github.com/syswonder/rukos/tree/main/modules/axtask"
+repository = "https://github.com/syswonder/rukos/tree/main/modules/ruxtask"
 
 [features]
 default = []
@@ -16,7 +19,7 @@ multitask = [
     "dep:scheduler", "dep:timer_list", "kernel_guard", "dep:crate_interface",
 ]
 irq = []
-tls = ["axhal/tls"]
+tls = ["ruxhal/tls"]
 musl = []
 preempt = ["irq", "percpu?/preempt", "kernel_guard/preempt"]
 
@@ -29,7 +32,7 @@ test = ["percpu?/sp-naive"]
 [dependencies]
 cfg-if = "1.0"
 log = "0.4"
-axhal = { path = "../axhal" }
+ruxhal = { path = "../ruxhal" }
 ruxconfig = { path = "../ruxconfig", optional = true }
 percpu = { path = "../../crates/percpu", optional = true }
 spinlock = { path = "../../crates/spinlock", optional = true }
@@ -42,5 +45,5 @@ crate_interface = { path = "../../crates/crate_interface", optional = true }
 
 [dev-dependencies]
 rand = "0.8"
-axhal = { path = "../axhal", features = ["fp_simd"] }
-axtask = { path = ".", features = ["test"] }
+ruxhal = { path = "../ruxhal", features = ["fp_simd"] }
+ruxtask = { path = ".", features = ["test"] }

@@ -19,11 +19,11 @@ default = []
 
 smp = ["axfeat/smp"]
 alloc = ["dep:axalloc", "axfeat/alloc"]
-multitask = ["axfeat/multitask", "axtask/multitask"]
+multitask = ["axfeat/multitask", "ruxtask/multitask"]
 fd = ["alloc"]
 fs = ["dep:ruxfs", "axfeat/fs", "fd"]
 net = ["dep:axnet", "axfeat/net", "fd"]
-signal = ["axruntime/signal"]
+signal = ["ruxruntime/signal"]
 pipe = ["fd"]
 select = ["fd"]
 epoll = ["fd"]
@@ -31,18 +31,18 @@ poll = ["fd"]
 tls = ["axfeat/tls"]
 irq = ["axfeat/irq"]
 
-musl = ["axhal/musl", "axruntime/musl", "axalloc/slab", "axtask/musl"]
+musl = ["ruxhal/musl", "ruxruntime/musl", "axalloc/slab", "ruxtask/musl"]
 
 [dependencies]
 # Rukos modules
 axfeat = { path = "../axfeat" }
-axruntime = { path = "../../modules/axruntime" }
+ruxruntime = { path = "../../modules/ruxruntime" }
 ruxconfig = { path = "../../modules/ruxconfig" }
 axlog = { path = "../../modules/axlog" }
-axhal = { path = "../../modules/axhal" }
+ruxhal = { path = "../../modules/ruxhal" }
 axsync = { path = "../../modules/axsync" }
 axalloc = { path = "../../modules/axalloc", optional = true }
-axtask = { path = "../../modules/axtask", optional = true }
+ruxtask = { path = "../../modules/ruxtask", optional = true }
 ruxfs = { path = "../../modules/ruxfs", optional = true }
 axnet = { path = "../../modules/axnet", optional = true }
 

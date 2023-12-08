@@ -8,7 +8,7 @@
  */
 
 use axalloc::global_allocator;
-use axhal::mem::{phys_to_virt, virt_to_phys};
+use ruxhal::mem::{phys_to_virt, virt_to_phys};
 use core::{alloc::Layout, ptr::NonNull};
 use driver_net::ixgbe::{IxgbeHal, PhysAddr as IxgbePhysAddr};
 
@@ -41,7 +41,7 @@ unsafe impl IxgbeHal for IxgbeHalImpl {
     }
 
     fn wait_until(duration: core::time::Duration) -> Result<(), &'static str> {
-        axhal::time::busy_wait_until(duration);
+        ruxhal::time::busy_wait_until(duration);
         Ok(())
     }
 }

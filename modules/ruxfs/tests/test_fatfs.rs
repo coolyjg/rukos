@@ -29,7 +29,7 @@ fn test_fatfs() {
     println!("Testing fatfs with ramdisk ...");
 
     let disk = make_disk().expect("failed to load disk image");
-    axtask::init_scheduler(); // call this to use `axsync::Mutex`.
+    ruxtask::init_scheduler(); // call this to use `axsync::Mutex`.
                               // By default, mount_points[0] will be rootfs
     let mut mount_points: Vec<ruxfs::MountPoint> = Vec::new();
     // setup and initialize blkfs as one mountpoint for rootfs

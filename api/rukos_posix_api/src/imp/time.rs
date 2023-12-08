@@ -50,7 +50,7 @@ pub unsafe fn sys_clock_gettime(_clk: ctypes::clockid_t, ts: *mut ctypes::timesp
         if ts.is_null() {
             return Err(LinuxError::EFAULT);
         }
-        let now = axhal::time::current_time().into();
+        let now = ruxhal::time::current_time().into();
         unsafe { *ts = now };
         debug!("sys_clock_gettime: {}.{:09}s", now.tv_sec, now.tv_nsec);
         Ok(0)
@@ -69,7 +69,7 @@ pub unsafe fn sys_clock_settime(_clk: ctypes::clockid_t, ts: *mut ctypes::timesp
             new_tv.as_secs(),
             new_tv.as_nanos()
         );
-        axhal::time::set_current_time(new_tv);
+        ruxhal::time::set_current_time(new_tv);
         Ok(0)
     })
 }
@@ -90,14 +90,14 @@ pub unsafe fn sys_nanosleep(req: *const ctypes::timespec, rem: *mut ctypes::time
             Duration::from(*req)
         };
 
-        let now = axhal::time::current_time();
+        let now = ruxhal::time::current_time();
 
         #[cfg(feature = "multitask")]
-        axtask::sleep(dur);
+        ruxtask::sleep(dur);
         #[cfg(not(feature = "multitask"))]
-        axhal::time::busy_wait(dur);
+        ruxhal::time::busy_wait(dur);
 
-        let after = axhal::time::current_time();
+        let after = ruxhal::time::current_time();
         let actual = after - now;
 
         if let Some(diff) = dur.checked_sub(actual) {

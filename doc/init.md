@@ -1,18 +1,18 @@
 ```mermaid
 graph TD;
-    A[axhal::platform::qemu_virt_riscv::boot.rs::_boot] --> init_boot_page_table;
+    A[ruxhal::platform::qemu_virt_riscv::boot.rs::_boot] --> init_boot_page_table;
     A --> init_mmu;
     A --> P[platform_init];
-    A --> B[axruntime::rust_main];
-    P --> P1["axhal::mem::clear_bss()"];
-    P --> P2["axhal::arch::riscv::set_trap_vector_base()"];
-    P --> P3["axhal::cpu::init_percpu()"];
-    P --> P4["axhal::platform::qemu_virt_riscv::irq.rs::init()"];
-    P --> P5["axhal::platform::qemu_virt_riscv::time.rs::init()"];
+    A --> B[ruxruntime::rust_main];
+    P --> P1["ruxhal::mem::clear_bss()"];
+    P --> P2["ruxhal::arch::riscv::set_trap_vector_base()"];
+    P --> P3["ruxhal::cpu::init_percpu()"];
+    P --> P4["ruxhal::platform::qemu_virt_riscv::irq.rs::init()"];
+    P --> P5["ruxhal::platform::qemu_virt_riscv::time.rs::init()"];
     B --> axlog::init;
     B --> D[init_allocator];
     B --> remap_kernel_memory;
-    B --> axtask::init_scheduler;
+    B --> ruxtask::init_scheduler;
     B --> ruxdriver::init_drivers;
     B --> Q[ruxfs::init_filesystems];
     B --> axnet::init_network;

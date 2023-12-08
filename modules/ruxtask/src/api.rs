@@ -185,17 +185,17 @@ pub fn yield_now() {
 ///
 /// If the feature `irq` is not enabled, it uses busy-wait instead.
 pub fn sleep(dur: core::time::Duration) {
-    sleep_until(axhal::time::current_time() + dur);
+    sleep_until(ruxhal::time::current_time() + dur);
 }
 
 /// Current task is going to sleep, it will be woken up at the given deadline.
 ///
 /// If the feature `irq` is not enabled, it uses busy-wait instead.
-pub fn sleep_until(deadline: axhal::time::TimeValue) {
+pub fn sleep_until(deadline: ruxhal::time::TimeValue) {
     #[cfg(feature = "irq")]
     RUN_QUEUE.lock().sleep_until(deadline);
     #[cfg(not(feature = "irq"))]
-    axhal::time::busy_wait_until(deadline);
+    ruxhal::time::busy_wait_until(deadline);
 }
 
 /// Exits the current task.
@@ -216,6 +216,6 @@ pub fn run_idle() -> ! {
             current().id().as_u64()
         );
         #[cfg(feature = "irq")]
-        axhal::arch::wait_for_irqs();
+        ruxhal::arch::wait_for_irqs();
     }
 }

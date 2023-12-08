@@ -12,7 +12,7 @@ use core::cell::UnsafeCell;
 use core::ffi::{c_int, c_void};
 
 use axerrno::{LinuxError, LinuxResult};
-use axtask::AxTaskRef;
+use ruxtask::AxTaskRef;
 use spin::RwLock;
 
 use crate::ctypes;
@@ -39,7 +39,7 @@ pub use tsd::{
 lazy_static::lazy_static! {
     static ref TID_TO_PTHREAD: RwLock<BTreeMap<u64, ForceSendSync<ctypes::pthread_t>>> = {
         let mut map = BTreeMap::new();
-        let main_task = axtask::current();
+        let main_task = ruxtask::current();
         let main_tid = main_task.id().as_u64();
         let main_thread = Pthread {
             inner: main_task.as_task_ref().clone(),
@@ -85,7 +85,7 @@ impl Pthread {
             drop(their_packet);
         };
 
-        let task_inner = axtask::spawn(main);
+        let task_inner = ruxtask::spawn(main);
         let tid = task_inner.id().as_u64();
         let thread = Pthread {
             inner: task_inner,
@@ -117,7 +117,7 @@ impl Pthread {
             start_routine(arg.0);
         };
 
-        let task_inner = axtask::pspawn(main, tls as usize, set_tid, tl);
+        let task_inner = ruxtask::pspawn(main, tls as usize, set_tid, tl);
 
         let tid = task_inner.id().as_u64();
         let thread = Pthread {
@@ -130,7 +130,7 @@ impl Pthread {
     }
 
     fn current_ptr() -> *mut Pthread {
-        let tid = axtask::current().id().as_u64();
+        let tid = ruxtask::current().id().as_u64();
         match TID_TO_PTHREAD.read().get(&tid) {
             None => core::ptr::null_mut(),
             Some(ptr) => ptr.0 as *mut Pthread,
@@ -153,14 +153,14 @@ impl Pthread {
         TID_TO_PTHREAD.write().remove(&tid);
         debug!("Exit_musl, tid: {}", tid);
         drop(thread);
-        axtask::exit(0)
+        ruxtask::exit(0)
     }
 
     #[cfg(not(feature = "musl"))]
     fn exit_current(retval: *mut c_void) -> ! {
         let thread = Self::current().expect("fail to get current thread");
         unsafe { *thread.retval.result.get() = retval };
-        axtask::exit(0);
+        ruxtask::exit(0);
     }
 
     fn join(ptr: ctypes::pthread_t) -> LinuxResult<*mut c_void> {
@@ -209,9 +209,9 @@ pub fn sys_pthread_exit(retval: *mut c_void) -> ! {
     debug!("sys_pthread_exit <= {:#x}", retval as usize);
     #[cfg(feature = "musl")]
     {
-        let id = axtask::current().as_task_ref().id().as_u64();
+        let id = ruxtask::current().as_task_ref().id().as_u64();
         if id != 2u64 {
-            axtask::current().as_task_ref().free_thread_list_lock();
+            ruxtask::current().as_task_ref().free_thread_list_lock();
         }
         // retval is exit code for musl
         Pthread::exit_musl(retval as usize);
@@ -285,7 +285,7 @@ pub unsafe fn sys_clone(
             unsafe { *ptid = tid as c_int };
         }
 
-        axtask::put_task(task_inner);
+        ruxtask::put_task(task_inner);
 
         Ok(tid)
     })
@@ -296,8 +296,8 @@ pub unsafe fn sys_clone(
 pub fn sys_set_tid_address(tid: usize) -> c_int {
     syscall_body!(sys_set_tid_address, {
         debug!("set_tid_address <= addr: {:#x}", tid);
-        let id = axtask::current().id().as_u64() as c_int;
-        axtask::current().as_task_ref().set_child_tid(tid);
+        let id = ruxtask::current().id().as_u64() as c_int;
+        ruxtask::current().as_task_ref().set_child_tid(tid);
         Ok(id)
     })
 }

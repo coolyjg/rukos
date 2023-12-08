@@ -101,17 +101,17 @@ struct LogIfImpl;
 #[crate_interface::impl_interface]
 impl axlog::LogIf for LogIfImpl {
     fn console_write_str(s: &str) {
-        axhal::console::write_bytes(s.as_bytes());
+        ruxhal::console::write_bytes(s.as_bytes());
     }
 
     fn current_time() -> core::time::Duration {
-        axhal::time::current_time()
+        ruxhal::time::current_time()
     }
 
     fn current_cpu_id() -> Option<usize> {
         #[cfg(feature = "smp")]
         if is_init_ok() {
-            Some(axhal::cpu::this_cpu_id())
+            Some(ruxhal::cpu::this_cpu_id())
         } else {
             None
         }
@@ -123,7 +123,7 @@ impl axlog::LogIf for LogIfImpl {
         if is_init_ok() {
             #[cfg(feature = "multitask")]
             {
-                axtask::current_may_uninit().map(|curr| curr.id().as_u64())
+                ruxtask::current_may_uninit().map(|curr| curr.id().as_u64())
             }
             #[cfg(not(feature = "multitask"))]
             None
@@ -143,7 +143,7 @@ fn is_init_ok() -> bool {
 
 /// The main entry point of the Rukos runtime.
 ///
-/// It is called from the bootstrapping code in [axhal]. `cpu_id` is the ID of
+/// It is called from the bootstrapping code in [ruxhal]. `cpu_id` is the ID of
 /// the current CPU, and `dtb` is the address of the device tree blob. It
 /// finally calls the application's `main` function after all initialization
 /// work is done.
@@ -176,7 +176,7 @@ pub extern "C" fn rust_main(cpu_id: usize, dtb: usize) -> ! {
     info!("Primary CPU {} started, dtb = {:#x}.", cpu_id, dtb);
 
     info!("Found physcial memory regions:");
-    for r in axhal::mem::memory_regions() {
+    for r in ruxhal::mem::memory_regions() {
         info!(
             "  [{:x?}, {:x?}) {} ({:?})",
             r.paddr,
@@ -196,10 +196,10 @@ pub extern "C" fn rust_main(cpu_id: usize, dtb: usize) -> ! {
     }
 
     info!("Initialize platform devices...");
-    axhal::platform_init();
+    ruxhal::platform_init();
 
     #[cfg(feature = "multitask")]
-    axtask::init_scheduler();
+    ruxtask::init_scheduler();
 
     #[cfg(any(feature = "fs", feature = "net", feature = "display"))]
     {
@@ -298,11 +298,11 @@ pub extern "C" fn rust_main(cpu_id: usize, dtb: usize) -> ! {
     };
 
     #[cfg(feature = "multitask")]
-    axtask::exit(0);
+    ruxtask::exit(0);
     #[cfg(not(feature = "multitask"))]
     {
         debug!("main task exited: exit_code={}", 0);
-        axhal::misc::terminate();
+        ruxhal::misc::terminate();
     }
 }
 
@@ -310,7 +310,7 @@ pub extern "C" fn rust_main(cpu_id: usize, dtb: usize) -> ! {
 cfg_if::cfg_if! {
     if #[cfg(any(target_arch = "x86", target_arch = "x86_64"))] {
         fn get_boot_str() -> &'static str {
-            let cmdline_buf: &[u8] = unsafe { &axhal::COMLINE_BUF };
+            let cmdline_buf: &[u8] = unsafe { &ruxhal::COMLINE_BUF };
             let mut len = 0;
             for c in cmdline_buf.iter() {
                 if *c == 0 {
@@ -357,7 +357,7 @@ fn init_cmdline(argc: &mut c_int) {
 
 #[cfg(feature = "alloc")]
 fn init_allocator() {
-    use axhal::mem::{memory_regions, phys_to_virt, MemRegionFlags};
+    use ruxhal::mem::{memory_regions, phys_to_virt, MemRegionFlags};
 
     info!("Initialize global memory allocator...");
     info!("  use {} allocator.", axalloc::global_allocator().name());
@@ -385,14 +385,14 @@ fn init_allocator() {
 }
 
 #[cfg(feature = "paging")]
-fn remap_kernel_memory() -> Result<(), axhal::paging::PagingError> {
-    use axhal::mem::{memory_regions, phys_to_virt};
-    use axhal::paging::PageTable;
+fn remap_kernel_memory() -> Result<(), ruxhal::paging::PagingError> {
+    use ruxhal::mem::{memory_regions, phys_to_virt};
+    use ruxhal::paging::PageTable;
     use lazy_init::LazyInit;
 
     static KERNEL_PAGE_TABLE: LazyInit<PageTable> = LazyInit::new();
 
-    if axhal::cpu::this_cpu_is_bsp() {
+    if ruxhal::cpu::this_cpu_is_bsp() {
         let mut kernel_page_table = PageTable::try_new()?;
         for r in memory_regions() {
             kernel_page_table.map_region(
@@ -406,35 +406,35 @@ fn remap_kernel_memory() -> Result<(), axhal::paging::PagingError> {
         KERNEL_PAGE_TABLE.init_by(kernel_page_table);
     }
 
-    unsafe { axhal::arch::write_page_table_root(KERNEL_PAGE_TABLE.root_paddr()) };
+    unsafe { ruxhal::arch::write_page_table_root(KERNEL_PAGE_TABLE.root_paddr()) };
     Ok(())
 }
 
 #[cfg(feature = "irq")]
 fn init_interrupt() {
-    use axhal::time::TIMER_IRQ_NUM;
+    use ruxhal::time::TIMER_IRQ_NUM;
 
     // Setup timer interrupt handler
     const PERIODIC_INTERVAL_NANOS: u64 =
-        axhal::time::NANOS_PER_SEC / ruxconfig::TICKS_PER_SEC as u64;
+        ruxhal::time::NANOS_PER_SEC / ruxconfig::TICKS_PER_SEC as u64;
 
     #[percpu::def_percpu]
     static NEXT_DEADLINE: u64 = 0;
 
     fn update_timer() {
-        let now_ns = axhal::time::current_time_nanos();
+        let now_ns = ruxhal::time::current_time_nanos();
         // Safety: we have disabled preemption in IRQ handler.
         let mut deadline = unsafe { NEXT_DEADLINE.read_current_raw() };
         if now_ns >= deadline {
             deadline = now_ns + PERIODIC_INTERVAL_NANOS;
         }
         unsafe { NEXT_DEADLINE.write_current_raw(deadline + PERIODIC_INTERVAL_NANOS) };
-        axhal::time::set_oneshot_timer(deadline);
+        ruxhal::time::set_oneshot_timer(deadline);
     }
 
     #[cfg(feature = "signal")]
     fn do_signal() {
-        let now_ns = axhal::time::current_time_nanos();
+        let now_ns = ruxhal::time::current_time_nanos();
         // timer signal num
         let timers = [14, 26, 27];
         for (which, timer) in timers.iter().enumerate() {
@@ -461,23 +461,23 @@ fn init_interrupt() {
         }
     }
 
-    axhal::irq::register_handler(TIMER_IRQ_NUM, || {
+    ruxhal::irq::register_handler(TIMER_IRQ_NUM, || {
         update_timer();
         #[cfg(feature = "signal")]
-        if axhal::cpu::this_cpu_is_bsp() {
+        if ruxhal::cpu::this_cpu_is_bsp() {
             do_signal();
         }
         #[cfg(feature = "multitask")]
-        axtask::on_timer_tick();
+        ruxtask::on_timer_tick();
     });
 
     // Enable IRQs before starting app
-    axhal::arch::enable_irqs();
+    ruxhal::arch::enable_irqs();
 }
 
 #[cfg(all(feature = "tls", not(feature = "multitask")))]
 fn init_tls() {
-    let main_tls = axhal::tls::TlsArea::alloc();
-    unsafe { axhal::arch::write_thread_pointer(main_tls.tls_ptr() as usize) };
+    let main_tls = ruxhal::tls::TlsArea::alloc();
+    unsafe { ruxhal::arch::write_thread_pointer(main_tls.tls_ptr() as usize) };
     core::mem::forget(main_tls);
 }

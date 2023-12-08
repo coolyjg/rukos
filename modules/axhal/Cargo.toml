@@ -26,7 +26,7 @@ bitflags = "2.2"
 static_assertions = "1.1.0"
 embedded-hal = "0.2.7"
 axlog = { path = "../axlog" }
-axconfig = { path = "../axconfig" }
+ruxconfig = { path = "../ruxconfig" }
 axalloc = { path = "../axalloc", optional = true }
 kernel_guard = { path = "../../crates/kernel_guard" }
 spinlock = { path = "../../crates/spinlock" }
@@ -59,4 +59,4 @@ dw_apb_uart = { path = "../../crates/dw_apb_uart" }
 dtb = {path = "../../crates/dtb" }
 
 [build-dependencies]
-axconfig = { path = "../axconfig" }
+ruxconfig = { path = "../ruxconfig" }

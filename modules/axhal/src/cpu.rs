@@ -84,7 +84,7 @@ pub unsafe fn set_current_task_ptr<T>(ptr: *const T) {
 
 #[allow(dead_code)]
 pub(crate) fn init_primary(cpu_id: usize) {
-    percpu::init(axconfig::SMP);
+    percpu::init(ruxconfig::SMP);
     percpu::set_local_thread_pointer(cpu_id);
     unsafe {
         CPU_ID.write_current_raw(cpu_id);

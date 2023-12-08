@@ -1,12 +1,12 @@
 [package]
-name = "ax9p"
+name = "rux9p"
 version = "0.1.0"
 edition = "2021"
 authors = ["Zheng Wu <hello_weekday@163.com>"]
 description = "RukOS Plan-9 filesystem module"
 license = "GPL-3.0-or-later OR Apache-2.0"
 homepage = "https://github.com/syswonder/rukos"
-repository = "https://github.com/syswonder/rukos/tree/main/modules/ax9p"
+repository = "https://github.com/syswonder/rukos/tree/main/modules/rux9p"
 
 [features]
 virtio-9p = ["axdriver/virtio-9p", "axdriver/virtio-9p"]

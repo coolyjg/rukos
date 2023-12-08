@@ -172,7 +172,7 @@ impl TaskInner {
             #[cfg(feature = "tls")]
             tls: TlsArea::alloc(),
             #[cfg(not(feature = "musl"))]
-            tsd: spinlock::SpinNoIrq::new([core::ptr::null_mut(); axconfig::PTHREAD_KEY_MAX]),
+            tsd: spinlock::SpinNoIrq::new([core::ptr::null_mut(); ruxconfig::PTHREAD_KEY_MAX]),
             #[cfg(feature = "musl")]
             set_tid: AtomicU64::new(0),
             #[cfg(feature = "musl")]

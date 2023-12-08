@@ -15,7 +15,7 @@ static RTC_LR: u32 = 0x008; //Load Register
 static RTC_CR: u32 = 0x00c; //Control Register
 static RTC_IMSC: u32 = 0x010; //Interrupt Mask Set or Clear register
 
-const PHYS_RTC: usize = axconfig::PHYS_VIRT_OFFSET + 0x09010000;
+const PHYS_RTC: usize = ruxconfig::PHYS_VIRT_OFFSET + 0x09010000;
 
 static PL031_RTC: Pl031rtc = Pl031rtc { address: PHYS_RTC };
 

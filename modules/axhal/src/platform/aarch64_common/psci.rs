@@ -88,10 +88,10 @@ fn psci_hvc_call(func: u32, arg0: usize, arg1: usize, arg2: usize) -> usize {
 }
 
 fn psci_call(func: u32, arg0: usize, arg1: usize, arg2: usize) -> Result<(), PsciError> {
-    let ret = match axconfig::PSCI_METHOD {
+    let ret = match ruxconfig::PSCI_METHOD {
         "smc" => arm_smccc_smc(func, arg0, arg1, arg2),
         "hvc" => psci_hvc_call(func, arg0, arg1, arg2),
-        _ => panic!("Unknown PSCI method: {}", axconfig::PSCI_METHOD),
+        _ => panic!("Unknown PSCI method: {}", ruxconfig::PSCI_METHOD),
     };
     if ret == 0 {
         Ok(())

@@ -209,7 +209,7 @@ fmt:
 	cargo fmt --all
 
 fmt_c:
-	@clang-format --style=file -i $(shell find ulib/axlibc -iname '*.c' -o -iname '*.h')
+	@clang-format --style=file -i $(shell find ulib/ruxlibc -iname '*.c' -o -iname '*.h')
 
 test:
 	$(call app_test)
@@ -232,11 +232,11 @@ clean: clean_c clean_musl
 	cargo clean
 
 clean_c::
-	rm -rf ulib/axlibc/build_*
+	rm -rf ulib/ruxlibc/build_*
 	rm -rf $(app-objs)
 
 clean_musl:
-	rm -rf ulib/axmusl/build_*
-	rm -rf ulib/axmusl/install
+	rm -rf ulib/ruxmusl/build_*
+	rm -rf ulib/ruxmusl/install
 
 .PHONY: all build disasm run justrun debug clippy fmt fmt_c test test_no_fail_fast clean clean_c clean_musl doc disk_image

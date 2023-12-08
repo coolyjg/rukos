@@ -6,9 +6,9 @@
 
 ## Rukos Modules
 
-* [ax9p](../modules/ax9p/): 9pfs integration for Rukos.
+* [rux9p](../modules/rux9p/): 9pfs integration for Rukos.
 * [axalloc](../modules/axalloc): Rukos global memory allocator.
-* [axconfig](../modules/axconfig): Platform-specific constants and parameters for Rukos.
+* [ruxconfig](../modules/ruxconfig): Platform-specific constants and parameters for Rukos.
 * [axdisplay](../modules/axdisplay): Rukos graphics module.
 * [axdriver](../modules/axdriver): Rukos device drivers.
 * [axfs](../modules/axfs): Rukos filesystem module.
@@ -112,7 +112,7 @@ I[axruntime]
 J[axlog]
 K[axsync]
 L[axhal]
-M[axconfig]
+M[ruxconfig]
 N[axalloc]
 O[axtask]
 P[axdriver]

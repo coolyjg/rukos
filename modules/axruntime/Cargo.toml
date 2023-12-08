@@ -21,8 +21,8 @@ rtc = ["axhal/rtc"]
 multitask = ["axtask/multitask"]
 fs = ["axdriver", "axfs"]
 blkfs = ["fs"]
-virtio-9p = ["fs", "ax9p"]
-net-9p = ["fs", "ax9p"]
+virtio-9p = ["fs", "rux9p"]
+net-9p = ["fs", "rux9p"]
 net = ["axdriver", "axnet"]
 display = ["axdriver", "axdisplay"]
 signal = []
@@ -33,11 +33,11 @@ musl = []
 cfg-if = "1.0"
 axhal = { path = "../axhal" }
 axlog = { path = "../axlog" }
-axconfig = { path = "../axconfig" }
+ruxconfig = { path = "../ruxconfig" }
 axalloc = { path = "../axalloc", optional = true }
 axdriver = { path = "../axdriver", optional = true }
 axfs = { path = "../axfs", optional = true }
-ax9p = { path = "../ax9p", optional = true }
+rux9p = { path = "../rux9p", optional = true }
 axnet = { path = "../axnet", optional = true }
 axdisplay = { path = "../axdisplay", optional = true }
 axtask = { path = "../axtask", optional = true }

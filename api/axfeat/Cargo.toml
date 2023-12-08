@@ -53,8 +53,8 @@ net = ["alloc", "paging", "axdriver/virtio-net", "dep:axnet", "axruntime/net"]
 display = ["alloc", "paging", "axdriver/virtio-gpu", "dep:axdisplay", "axruntime/display"]
 
 # 9P
-virtio-9p = ["9pfs", "axdriver/virtio-9p", "ax9p/virtio-9p", "axruntime/virtio-9p"]
-net-9p = ["9pfs", "net", "ax9p/net-9p", "axruntime/net-9p"]
+virtio-9p = ["9pfs", "axdriver/virtio-9p", "rux9p/virtio-9p", "axruntime/virtio-9p"]
+net-9p = ["9pfs", "net", "rux9p/net-9p", "axruntime/net-9p"]
 
 # Device drivers
 bus-mmio = ["axdriver?/bus-mmio"]
@@ -78,7 +78,7 @@ axlog = { path = "../../modules/axlog" }
 axalloc = { path = "../../modules/axalloc", optional = true }
 axdriver = { path = "../../modules/axdriver", optional = true }
 axfs = { path = "../../modules/axfs", optional = true }
-ax9p = { path = "../../modules/ax9p", optional = true }
+rux9p = { path = "../../modules/rux9p", optional = true }
 axnet = { path = "../../modules/axnet", optional = true }
 axdisplay = { path = "../../modules/axdisplay", optional = true }
 axsync = { path = "../../modules/axsync", optional = true }

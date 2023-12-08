@@ -1,9 +1,9 @@
-rust_lib_name := axmusl
+rust_lib_name := ruxmusl
 rust_lib := target/$(TARGET)/$(MODE)/lib$(rust_lib_name).a
 
 musl_version := 1.2.3
 
-muslibc_dir := ulib/axmusl
+muslibc_dir := ulib/ruxmusl
 build_dir := $(muslibc_dir)/build_musl_$(ARCH)
 musl_dir := $(muslibc_dir)/musl-$(musl_version)
 inc_dir := $(muslibc_dir)/install/include

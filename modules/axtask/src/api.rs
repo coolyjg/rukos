@@ -131,14 +131,14 @@ where
 /// Spawns a new task with the default parameters.
 ///
 /// The default task name is an empty string. The default task stack size is
-/// [`axconfig::TASK_STACK_SIZE`].
+/// [`ruxconfig::TASK_STACK_SIZE`].
 ///
 /// Returns the task reference.
 pub fn spawn<F>(f: F) -> AxTaskRef
 where
     F: FnOnce() + Send + 'static,
 {
-    spawn_raw(f, "".into(), axconfig::TASK_STACK_SIZE)
+    spawn_raw(f, "".into(), ruxconfig::TASK_STACK_SIZE)
 }
 
 /// Used by musl
@@ -152,7 +152,7 @@ pub fn pspawn<F>(
 where
     F: FnOnce() + Send + 'static,
 {
-    pspawn_raw(f, "".into(), axconfig::TASK_STACK_SIZE, tls, set_tid, tl)
+    pspawn_raw(f, "".into(), ruxconfig::TASK_STACK_SIZE, tls, set_tid, tl)
 }
 
 /// Used by musl

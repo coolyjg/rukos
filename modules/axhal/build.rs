@@ -11,13 +11,13 @@ use std::io::Result;
 
 fn main() {
     let arch = std::env::var("CARGO_CFG_TARGET_ARCH").unwrap();
-    let platform = axconfig::PLATFORM;
+    let platform = ruxconfig::PLATFORM;
     if platform != "dummy" {
         gen_linker_script(&arch, platform).unwrap();
     }
 
     println!("cargo:rustc-cfg=platform=\"{}\"", platform);
-    println!("cargo:rustc-cfg=platform_family=\"{}\"", axconfig::FAMILY);
+    println!("cargo:rustc-cfg=platform_family=\"{}\"", ruxconfig::FAMILY);
 }
 
 fn gen_linker_script(arch: &str, platform: &str) -> Result<()> {
@@ -33,9 +33,9 @@ fn gen_linker_script(arch: &str, platform: &str) -> Result<()> {
     let ld_content = ld_content.replace("%ARCH%", output_arch);
     let ld_content = ld_content.replace(
         "%KERNEL_BASE%",
-        &format!("{:#x}", axconfig::KERNEL_BASE_VADDR),
+        &format!("{:#x}", ruxconfig::KERNEL_BASE_VADDR),
     );
-    let ld_content = ld_content.replace("%SMP%", &format!("{}", axconfig::SMP));
+    let ld_content = ld_content.replace("%SMP%", &format!("{}", ruxconfig::SMP));
 
     std::fs::write(fname, ld_content)?;
     Ok(())

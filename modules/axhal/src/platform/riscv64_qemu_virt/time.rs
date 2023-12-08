@@ -9,7 +9,7 @@
 
 use riscv::register::time;
 
-const NANOS_PER_TICK: u64 = crate::time::NANOS_PER_SEC / axconfig::TIMER_FREQUENCY as u64;
+const NANOS_PER_TICK: u64 = crate::time::NANOS_PER_SEC / ruxconfig::TIMER_FREQUENCY as u64;
 
 /// Returns the current clock time in hardware ticks.
 #[inline]

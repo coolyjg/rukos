@@ -18,7 +18,7 @@ use spinlock::SpinNoIrq;
 /// Destroy a specific key when a thread exits.
 pub type DestrFunction = unsafe extern "C" fn(*mut c_void);
 /// Thread-specific data set.
-pub(crate) type TSD = SpinNoIrq<[*mut c_void; axconfig::PTHREAD_KEY_MAX]>;
+pub(crate) type TSD = SpinNoIrq<[*mut c_void; ruxconfig::PTHREAD_KEY_MAX]>;
 
 /// A key for a process.
 #[derive(Default)]
@@ -41,20 +41,20 @@ impl PthreadKey {
 
 /// A set of keys for a process.
 pub(crate) struct PthreadKeys {
-    keys: [PthreadKey; axconfig::PTHREAD_KEY_MAX],
+    keys: [PthreadKey; ruxconfig::PTHREAD_KEY_MAX],
 }
 
 impl PthreadKeys {
     /// Create a new key set.
     pub fn new() -> Self {
-        let mut arr: [MaybeUninit<PthreadKey>; axconfig::PTHREAD_KEY_MAX] =
+        let mut arr: [MaybeUninit<PthreadKey>; ruxconfig::PTHREAD_KEY_MAX] =
             unsafe { MaybeUninit::uninit().assume_init() };
         for a in arr.iter_mut() {
             *a = MaybeUninit::new(PthreadKey::new());
         }
         Self {
             keys: unsafe {
-                core::mem::transmute::<_, [PthreadKey; axconfig::PTHREAD_KEY_MAX]>(arr)
+                core::mem::transmute::<_, [PthreadKey; ruxconfig::PTHREAD_KEY_MAX]>(arr)
             },
         }
     }

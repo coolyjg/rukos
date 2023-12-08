@@ -20,10 +20,10 @@ pub const MAX_IRQ_COUNT: usize = 1024;
 pub const TIMER_IRQ_NUM: usize = translate_irq(14, InterruptType::PPI).unwrap();
 
 /// The UART IRQ number.
-pub const UART_IRQ_NUM: usize = translate_irq(axconfig::UART_IRQ, InterruptType::SPI).unwrap();
+pub const UART_IRQ_NUM: usize = translate_irq(ruxconfig::UART_IRQ, InterruptType::SPI).unwrap();
 
-const GICD_BASE: PhysAddr = PhysAddr::from(axconfig::GICD_PADDR);
-const GICC_BASE: PhysAddr = PhysAddr::from(axconfig::GICC_PADDR);
+const GICD_BASE: PhysAddr = PhysAddr::from(ruxconfig::GICD_PADDR);
+const GICC_BASE: PhysAddr = PhysAddr::from(ruxconfig::GICC_PADDR);
 
 static GICD: SpinNoIrq<GicDistributor> =
     SpinNoIrq::new(GicDistributor::new(phys_to_virt(GICD_BASE).as_mut_ptr()));

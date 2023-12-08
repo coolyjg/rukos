@@ -3,20 +3,20 @@
 # Inputs:
 #   - `FEATURES`: a list of features to be enabled split by spaces or commas.
 #     The features can be selected from the crate `axfeat` or the user library
-#     (crate `axstd` or `axlibc`).
+#     (crate `axstd` or `ruxlibc`).
 #   - `APP_FEATURES`: a list of features to be enabled for the Rust app.
 #
 # Outputs:
 #   - `AX_FEAT`: features to be enabled for Rukos modules (crate `axfeat`).
-#   - `LIB_FEAT`: features to be enabled for the user library (crate `axstd`, `axlibc`, `axmusl`).
+#   - `LIB_FEAT`: features to be enabled for the user library (crate `axstd`, `ruxlibc`, `ruxmusl`).
 #   - `APP_FEAT`: features to be enabled for the Rust app.
 
 ifeq ($(APP_TYPE),c)
   ax_feat_prefix := axfeat/
   ifeq ($(MUSL), y)
-    lib_feat_prefix := axmusl/
+    lib_feat_prefix := ruxmusl/
   else
-    lib_feat_prefix := axlibc/
+    lib_feat_prefix := ruxlibc/
   endif
   lib_features := fp_simd alloc multitask fs net fd pipe select poll epoll random-hw signal
 else

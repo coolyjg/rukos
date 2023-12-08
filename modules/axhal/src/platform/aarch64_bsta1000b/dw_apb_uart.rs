@@ -14,7 +14,7 @@ use dw_apb_uart::DW8250;
 use memory_addr::PhysAddr;
 use spinlock::SpinNoIrq;
 
-const UART_BASE: PhysAddr = PhysAddr::from(axconfig::UART_PADDR);
+const UART_BASE: PhysAddr = PhysAddr::from(ruxconfig::UART_PADDR);
 
 static UART: SpinNoIrq<DW8250> = SpinNoIrq::new(DW8250::new(phys_to_virt(UART_BASE).as_usize()));
 

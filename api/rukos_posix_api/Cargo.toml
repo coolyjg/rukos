@@ -37,7 +37,7 @@ musl = ["axhal/musl", "axruntime/musl", "axalloc/slab", "axtask/musl"]
 # Rukos modules
 axfeat = { path = "../axfeat" }
 axruntime = { path = "../../modules/axruntime" }
-axconfig = { path = "../../modules/axconfig" }
+ruxconfig = { path = "../../modules/ruxconfig" }
 axlog = { path = "../../modules/axlog" }
 axhal = { path = "../../modules/axhal" }
 axsync = { path = "../../modules/axsync" }

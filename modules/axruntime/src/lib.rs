@@ -138,7 +138,7 @@ use core::sync::atomic::{AtomicUsize, Ordering};
 static INITED_CPUS: AtomicUsize = AtomicUsize::new(0);
 
 fn is_init_ok() -> bool {
-    INITED_CPUS.load(Ordering::Acquire) == axconfig::SMP
+    INITED_CPUS.load(Ordering::Acquire) == ruxconfig::SMP
 }
 
 /// The main entry point of the Rukos runtime.
@@ -226,13 +226,13 @@ pub extern "C" fn rust_main(cpu_id: usize, dtb: usize) -> ! {
 
             // setup and initialize 9pfs as mountpoint
             #[cfg(feature = "virtio-9p")]
-            mount_points.push(ax9p::init_virtio_9pfs(
+            mount_points.push(rux9p::init_virtio_9pfs(
                 all_devices._9p,
                 option_env!("AX_ANAME_9P").unwrap_or(""),
                 option_env!("AX_PROTOCOL_9P").unwrap_or(""),
             ));
             #[cfg(feature = "net-9p")]
-            mount_points.push(ax9p::init_net_9pfs(
+            mount_points.push(rux9p::init_net_9pfs(
                 option_env!("AX_9P_ADDR").unwrap_or(""),
                 option_env!("AX_ANAME_9P").unwrap_or(""),
                 option_env!("AX_PROTOCOL_9P").unwrap_or(""),
@@ -416,7 +416,7 @@ fn init_interrupt() {
 
     // Setup timer interrupt handler
     const PERIODIC_INTERVAL_NANOS: u64 =
-        axhal::time::NANOS_PER_SEC / axconfig::TICKS_PER_SEC as u64;
+        axhal::time::NANOS_PER_SEC / ruxconfig::TICKS_PER_SEC as u64;
 
     #[percpu::def_percpu]
     static NEXT_DEADLINE: u64 = 0;

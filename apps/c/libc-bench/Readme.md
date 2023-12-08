@@ -150,6 +150,6 @@ b_regex_search ("a{25}b")
 
 - Memory is expanded to 4G (two files are changed, `platforms/aarch64-qemu-virt.toml`, `scripts/make/qemu.mk`), so CI fails (mostly because RISC-V cannot support such a large memory space).
 
-- It is recommended to know how musl-libc is integrated in `ulib/axmusl`.
+- It is recommended to know how musl-libc is integrated in `ulib/ruxmusl`.
 
-- Since `/etc/hosts` is not complemented, `getaddrinfo` uses previous implementation. See `ulib/axmusl/src/net.rs`.
+- Since `/etc/hosts` is not complemented, `getaddrinfo` uses previous implementation. See `ulib/ruxmusl/src/net.rs`.

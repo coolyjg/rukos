@@ -38,7 +38,6 @@ members = [
     "crates/tuple_for_each",
 
     "modules/axalloc",
-    "modules/axconfig",
     "modules/axdisplay",
     "modules/axdriver",
     "modules/axfs",
@@ -48,14 +47,16 @@ members = [
     "modules/axruntime",
     "modules/axsync",
     "modules/axtask",
+    "modules/rux9p",
+    "modules/ruxconfig",
 
     "api/axfeat",
     "api/arceos_api",
     "api/rukos_posix_api",
 
     "ulib/axstd",
-    "ulib/axlibc",
-    "ulib/axmusl",
+    "ulib/ruxlibc",
+    "ulib/ruxmusl",
 
     "apps/display/basic_painting",
     "apps/display/draw_map",

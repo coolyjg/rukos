@@ -12,7 +12,7 @@ repository = "https://github.com/syswonder/rukos/tree/main/modules/axtask"
 default = []
 
 multitask = [
-    "dep:axconfig", "dep:percpu", "dep:spinlock", "dep:lazy_init", "dep:memory_addr",
+    "dep:ruxconfig", "dep:percpu", "dep:spinlock", "dep:lazy_init", "dep:memory_addr",
     "dep:scheduler", "dep:timer_list", "kernel_guard", "dep:crate_interface",
 ]
 irq = []
@@ -30,7 +30,7 @@ test = ["percpu?/sp-naive"]
 cfg-if = "1.0"
 log = "0.4"
 axhal = { path = "../axhal" }
-axconfig = { path = "../axconfig", optional = true }
+ruxconfig = { path = "../ruxconfig", optional = true }
 percpu = { path = "../../crates/percpu", optional = true }
 spinlock = { path = "../../crates/spinlock", optional = true }
 lazy_init = { path = "../../crates/lazy_init", optional = true }

@@ -42,9 +42,9 @@ ifeq ($(APP_TYPE), rust)
 	@cp $(rust_elf) $(OUT_ELF)
 else ifeq ($(APP_TYPE), c)
   ifeq ($(MUSL), y)
-		$(call cargo_build,-p axmusl,$(AX_FEAT) $(LIB_FEAT))
+		$(call cargo_build,-p ruxmusl,$(AX_FEAT) $(LIB_FEAT))
   else
-		$(call cargo_build,-p axlibc,$(AX_FEAT) $(LIB_FEAT))
+		$(call cargo_build,-p ruxlibc,$(AX_FEAT) $(LIB_FEAT))
   endif
 endif
 

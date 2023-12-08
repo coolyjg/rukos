@@ -19,7 +19,7 @@ static mut NANOS_TO_LAPIC_TICKS_RATIO: ratio::Ratio = ratio::Ratio::zero();
 pub use crate::platform::x86_pc::rtc::*;
 
 static mut INIT_TICK: u64 = 0;
-static mut CPU_FREQ_MHZ: u64 = axconfig::TIMER_FREQUENCY as u64 / 1_000_000;
+static mut CPU_FREQ_MHZ: u64 = ruxconfig::TIMER_FREQUENCY as u64 / 1_000_000;
 
 /// Returns the current clock time in hardware ticks.
 pub fn current_ticks() -> u64 {

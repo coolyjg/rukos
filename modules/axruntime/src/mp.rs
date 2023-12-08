@@ -7,7 +7,7 @@
  *   See the Mulan PSL v2 for more details.
  */
 
-use axconfig::{SMP, TASK_STACK_SIZE};
+use ruxconfig::{SMP, TASK_STACK_SIZE};
 use axhal::mem::{virt_to_phys, VirtAddr};
 use core::sync::atomic::{AtomicUsize, Ordering};
 

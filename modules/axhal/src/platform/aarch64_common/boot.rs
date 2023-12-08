@@ -12,7 +12,7 @@ use memory_addr::PhysAddr;
 use page_table_entry::aarch64::{MemAttr, A64PTE};
 use tock_registers::interfaces::{ReadWriteable, Readable, Writeable};
 
-use axconfig::TASK_STACK_SIZE;
+use ruxconfig::TASK_STACK_SIZE;
 
 #[link_section = ".bss.stack"]
 static mut BOOT_STACK: [u8; TASK_STACK_SIZE] = [0; TASK_STACK_SIZE];
@@ -144,7 +144,7 @@ unsafe extern "C" fn _start() -> ! {
         enable_fp = sym enable_fp,
         boot_stack = sym BOOT_STACK,
         boot_stack_size = const TASK_STACK_SIZE,
-        phys_virt_offset = const axconfig::PHYS_VIRT_OFFSET,
+        phys_virt_offset = const ruxconfig::PHYS_VIRT_OFFSET,
         entry = sym crate::platform::rust_entry,
         options(noreturn),
     )
@@ -175,7 +175,7 @@ unsafe extern "C" fn _start_secondary() -> ! {
         switch_to_el1 = sym switch_to_el1,
         init_mmu = sym init_mmu,
         enable_fp = sym enable_fp,
-        phys_virt_offset = const axconfig::PHYS_VIRT_OFFSET,
+        phys_virt_offset = const ruxconfig::PHYS_VIRT_OFFSET,
         entry = sym crate::platform::rust_entry_secondary,
         options(noreturn),
     )

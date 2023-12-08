@@ -45,8 +45,8 @@ pub unsafe fn sys_getrlimit(resource: c_int, rlimits: *mut ctypes::rlimit) -> c_
             ctypes::RLIMIT_FSIZE => {}
             ctypes::RLIMIT_DATA => {}
             ctypes::RLIMIT_STACK => unsafe {
-                (*rlimits).rlim_cur = axconfig::TASK_STACK_SIZE as _;
-                (*rlimits).rlim_max = axconfig::TASK_STACK_SIZE as _;
+                (*rlimits).rlim_cur = ruxconfig::TASK_STACK_SIZE as _;
+                (*rlimits).rlim_max = ruxconfig::TASK_STACK_SIZE as _;
             },
             ctypes::RLIMIT_CORE => {}
             ctypes::RLIMIT_RSS => {}

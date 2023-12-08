@@ -15,14 +15,14 @@ repository = "https://github.com/syswonder/rukos/tree/main/modules/axdriver"
 [features]
 dyn = []
 bus-mmio = []
-bus-pci = ["dep:driver_pci", "dep:axhal", "dep:axconfig"]
+bus-pci = ["dep:driver_pci", "dep:axhal", "dep:ruxconfig"]
 net = ["driver_net"]
 block = ["driver_block"]
 display = ["driver_display"]
 _9p = ["driver_9p"]
 
 # Enabled by features `virtio-*`
-virtio = ["driver_virtio", "dep:axalloc", "dep:axhal", "dep:axconfig"]
+virtio = ["driver_virtio", "dep:axalloc", "dep:axhal", "dep:ruxconfig"]
 
 # various types of drivers
 virtio-blk = ["block", "virtio", "driver_virtio/block"]
@@ -48,4 +48,4 @@ driver_pci = { path = "../../crates/driver_pci", optional = true }
 driver_virtio = { path = "../../crates/driver_virtio", optional = true }
 axalloc = { path = "../axalloc", optional = true }
 axhal = { path = "../axhal", optional = true }
-axconfig = { path = "../axconfig", optional = true }
+ruxconfig = { path = "../ruxconfig", optional = true }

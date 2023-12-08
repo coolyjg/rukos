@@ -99,7 +99,7 @@ graph TD;
 ```mermaid
 graph TD;
     T["axtask::task::spawn(closure fn)"]
-    T-->A["axtask::task::TaskInner::new(entry, name, axconfig::TASK_STACK_SIZE)"]
+    T-->A["axtask::task::TaskInner::new(entry, name, ruxconfig::TASK_STACK_SIZE)"]
     A-->B["axtask::task::TaskInner::new_common(axtask::task::TaskId, name)"]
     A-->C["axtask::task::TaskStack::alloc(size)"]
 ```

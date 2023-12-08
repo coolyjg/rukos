@@ -35,7 +35,7 @@ pub use axerrno::{AxError, AxResult};
 
 /// Platform-specific constants and parameters.
 pub mod config {
-    pub use axconfig::*;
+    pub use ruxconfig::*;
 }
 
 /// System operations.

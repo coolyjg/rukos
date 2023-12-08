@@ -28,7 +28,7 @@ dummy-if-not-enabled = []
 [dependencies]
 axfeat = { path = "../axfeat" }
 axruntime = { path = "../../modules/axruntime" }
-axconfig = { path = "../../modules/axconfig" }
+ruxconfig = { path = "../../modules/ruxconfig" }
 axlog = { path = "../../modules/axlog" }
 axio = { path = "../../crates/axio" }
 axerrno = { path = "../../crates/axerrno" }

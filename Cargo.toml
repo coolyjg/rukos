@@ -13,6 +13,7 @@ members = [
     "crates/axio",
     "crates/capability",
     "crates/crate_interface",
+    "crates/driver_9p",
     "crates/driver_block",
     "crates/driver_common",
     "crates/driver_display",

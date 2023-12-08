@@ -204,4 +204,4 @@ make PLATFORM=x86_64-pc-oslab A=apps/c/redis FEATURES=driver-ixgbe,driver-ramdis
 
 ## Design
 
-![](doc/figures/rukos.svg)
+![](doc/figures/ruxos.svg)

@@ -61,72 +61,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "3a30da5c5f2d5e72842e00bcb57657162cdabef0931f40e2deb9b4140440cecd"
 
 [[package]]
-name = "arceos-bwbench"
-version = "0.1.0"
-dependencies = [
- "axnet",
- "axstd",
-]
-
-[[package]]
-name = "arceos-echoserver"
-version = "0.1.0"
-dependencies = [
- "axstd",
-]
-
-[[package]]
-name = "arceos-exception"
-version = "0.1.0"
-dependencies = [
- "axstd",
-]
-
-[[package]]
-name = "arceos-helloworld"
-version = "0.1.0"
-dependencies = [
- "axstd",
-]
-
-[[package]]
-name = "arceos-httpclient"
-version = "0.1.0"
-dependencies = [
- "axstd",
-]
-
-[[package]]
-name = "arceos-httpserver"
-version = "0.1.0"
-dependencies = [
- "axstd",
-]
-
-[[package]]
-name = "arceos-memtest"
-version = "0.1.0"
-dependencies = [
- "axstd",
- "rand",
-]
-
-[[package]]
-name = "arceos-parallel"
-version = "0.1.0"
-dependencies = [
- "axstd",
- "rand",
-]
-
-[[package]]
-name = "arceos-priority"
-version = "0.1.0"
-dependencies = [
- "axstd",
-]
-
-[[package]]
 name = "arceos-shell"
 version = "0.1.0"
 dependencies = [
@@ -134,34 +68,6 @@ dependencies = [
  "axfs_vfs",
  "axstd",
  "crate_interface",
-]
-
-[[package]]
-name = "arceos-sleep"
-version = "0.1.0"
-dependencies = [
- "axstd",
-]
-
-[[package]]
-name = "arceos-tls"
-version = "0.1.0"
-dependencies = [
- "axstd",
-]
-
-[[package]]
-name = "arceos-udpserver"
-version = "0.1.0"
-dependencies = [
- "axstd",
-]
-
-[[package]]
-name = "arceos-yield"
-version = "0.1.0"
-dependencies = [
- "axstd",
 ]
 
 [[package]]

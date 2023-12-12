@@ -5,8 +5,8 @@ edition = "2021"
 authors = ["Zheng Wu <hello_weekday@163.com>"]
 description = "RukOS Plan-9 filesystem module"
 license = "GPL-3.0-or-later OR Apache-2.0"
-homepage = "https://github.com/syswonder/rukos"
-repository = "https://github.com/syswonder/rukos/tree/main/modules/rux9p"
+homepage = "https://github.com/syswonder/ruxos"
+repository = "https://github.com/syswonder/ruxos/tree/main/modules/rux9p"
 
 [features]
 virtio-9p = ["ruxdriver/virtio-9p", "ruxdriver/virtio-9p"]

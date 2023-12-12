@@ -1,37 +1,37 @@
-# Rukos Architecture Overview
+# Ruxos Architecture Overview
 
 ## Rustdoc
 
-* https://github.com/syswonder/rukos
+* https://github.com/syswonder/ruxos
 
-## Rukos Modules
+## Ruxos Modules
 
-* [rux9p](../modules/rux9p/): 9pfs integration for Rukos.
-* [axalloc](../modules/axalloc): Rukos global memory allocator.
-* [ruxconfig](../modules/ruxconfig): Platform-specific constants and parameters for Rukos.
-* [ruxdisplay](../modules/ruxdisplay): Rukos graphics module.
-* [ruxdriver](../modules/ruxdriver): Rukos device drivers.
-* [ruxfs](../modules/ruxfs): Rukos filesystem module.
-* [ruxhal](../modules/ruxhal): Rukos hardware abstraction layer, provides unified APIs for platform-specific operations.
-* [axlog](../modules/axlog): Macros for multi-level formatted logging used by Rukos.
-* [axnet](../modules/axnet): Rukos network module.
-* [ruxruntime](../modules/ruxruntime): Runtime library of Rukos.
-* [axsync](../modules/axsync): Rukos synchronization primitives.
-* [ruxtask](../modules/ruxtask): Rukos task management module.
+* [rux9p](../modules/rux9p/): 9pfs integration for Ruxos.
+* [axalloc](../modules/axalloc): Ruxos global memory allocator.
+* [ruxconfig](../modules/ruxconfig): Platform-specific constants and parameters for Ruxos.
+* [ruxdisplay](../modules/ruxdisplay): Ruxos graphics module.
+* [ruxdriver](../modules/ruxdriver): Ruxos device drivers.
+* [ruxfs](../modules/ruxfs): Ruxos filesystem module.
+* [ruxhal](../modules/ruxhal): Ruxos hardware abstraction layer, provides unified APIs for platform-specific operations.
+* [axlog](../modules/axlog): Macros for multi-level formatted logging used by Ruxos.
+* [axnet](../modules/axnet): Ruxos network module.
+* [ruxruntime](../modules/ruxruntime): Runtime library of Ruxos.
+* [axsync](../modules/axsync): Ruxos synchronization primitives.
+* [ruxtask](../modules/ruxtask): Ruxos task management module.
 
 ## Crates
 
 * [allocator](../crates/allocator): Various allocator algorithms in a unified interface.
 * [arm_gic](../crates/arm_gic): ARM Generic Interrupt Controller (GIC) register definitions and basic operations.
-* [axerrno](../crates/axerrno): Error code definition used by Rukos.
-* [axfs_devfs](../crates/axfs_devfs): Device filesystem used by Rukos.
-* [axfs_vfs](../crates/axfs_vfs): Virtual filesystem interfaces used by Rukos.
+* [axerrno](../crates/axerrno): Error code definition used by Ruxos.
+* [axfs_devfs](../crates/axfs_devfs): Device filesystem used by Ruxos.
+* [axfs_vfs](../crates/axfs_vfs): Virtual filesystem interfaces used by Ruxos.
 * [axio](../crates/axio): `std::io`-like I/O traits for `no_std` environment.
 * [capability](../crates/capability): Provide basic capability-based security.
 * [crate_interface](../crates/crate_interface): Provides a way to define an interface (trait) in a crate, but can implement or use it in any crate. [![Crates.io](https://img.shields.io/crates/v/crate_interface)](https://crates.io/crates/crate_interface)
 * [driver_9p](../crates/driver_9p/): Basic 9pfs operation traits for 9p protocol drivers.
 * [driver_block](../crates/driver_block): Common traits and types for block storage drivers.
-* [driver_common](../crates/driver_common): Device driver interfaces used by Rukos.
+* [driver_common](../crates/driver_common): Device driver interfaces used by Ruxos.
 * [driver_display](../crates/driver_display): Common traits and types for graphics device drivers.
 * [driver_net](../crates/driver_net): Common traits and types for network device (NIC) drivers.
 * [driver_pci](../crates/driver_pci): Structures and functions for PCI bus operations.
@@ -88,7 +88,7 @@ subgraph "User Apps"
 A["Rust App"]
 C["C App"]
 end
-subgraph "Rukos ulib"
+subgraph "Ruxos ulib"
 B["rust_libax"]
 D["c_libax"]
 E("rust_std")
@@ -107,7 +107,7 @@ H("linux")
 end
 B --> G;
 F --> H;
-subgraph "Rukos modules"
+subgraph "Ruxos modules"
 I[ruxruntime]
 J[axlog]
 K[axsync]
@@ -196,7 +196,7 @@ M1 --> F1;
 M1 --> F2;
 M1 --> P;
 M1 --> K;
-subgraph "Rukos crates"
+subgraph "Ruxos crates"
 R[allocator]
 IN12[arm_gic]
 IN13[axerrno]

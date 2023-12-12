@@ -1,7 +1,7 @@
 # RukOS
 
-[![CI](https://github.com/syswonder/rukos/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/syswonder/rukos/actions/workflows/build.yml)
-[![CI](https://github.com/syswonder/rukos/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/syswonder/rukos/actions/workflows/test.yml)
+[![CI](https://github.com/syswonder/ruxos/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/syswonder/ruxos/actions/workflows/build.yml)
+[![CI](https://github.com/syswonder/ruxos/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/syswonder/ruxos/actions/workflows/test.yml)
 
 An experimental modular operating system (or unikernel) written in Rust.
 
@@ -70,7 +70,7 @@ The currently supported applications (Rust), as well as their dependent modules 
 | [tsd](apps/c/pthread/tsd/) | alloc, paging, multitask, irq | A test for pthread-key related API |
 | [libc-bench](apps/c/libc-bench/) | alloc, multitask, fs, musl | A standard libc test for musl libc integration |
 | [iperf](apps/c/iperf/) | alloc, paging, net, fs, blkfs, select, fp_simd | A network performance test tool |
-| [redis](apps/c/redis/) | alloc, paging, fp_simd, irq, multitask, fs, blkfs, net, pipe, epoll, poll, virtio-9p, rtc | A Redis server on Rukos |
+| [redis](apps/c/redis/) | alloc, paging, fp_simd, irq, multitask, fs, blkfs, net, pipe, epoll, poll, virtio-9p, rtc | A Redis server on Ruxos |
 | [sqlite3](apps/c/sqlite3/) | alloc, paging, fs, fp_simd, blkfs | A simple test for Sqlite3 API |
 
 ## Build & Run
@@ -107,7 +107,7 @@ export PATH=`pwd`/x86_64-linux-musl-cross/bin:`pwd`/aarch64-linux-musl-cross/bin
 ### Example apps
 
 ```bash
-# in rukos directory
+# in ruxos directory
 make A=path/to/app ARCH=<arch> LOG=<log>
 ```
 
@@ -136,7 +136,7 @@ Note that the `NET=y` argument is required to enable the network device in QEMU.
 
     ```toml
     [dependencies]
-    axstd = { path = "/path/to/rukos/ulib/axstd", features = ["..."] }
+    axstd = { path = "/path/to/ruxos/ulib/axstd", features = ["..."] }
     ```
 
 3. Call library functions from `axstd` in your code, just like the Rust [std](https://doc.rust-lang.org/std/) library.
@@ -144,7 +144,7 @@ Note that the `NET=y` argument is required to enable the network device in QEMU.
 
     ```bash
     # in app directory
-    make -C /path/to/rukos A=$(pwd) ARCH=<arch> run
+    make -C /path/to/ruxos A=$(pwd) ARCH=<arch> run
     # more args: LOG=<log> SMP=<smp> NET=[y|n] ...
     ```
 
@@ -180,7 +180,7 @@ Note that the `NET=y` argument is required to enable the network device in QEMU.
 
     ```bash
     # in app directory
-    make -C /path/to/rukos A=$(pwd) ARCH=<arch> run
+    make -C /path/to/ruxos A=$(pwd) ARCH=<arch> run
     # more args: LOG=<log> SMP=<smp> NET=[y|n] ...
     ```
 

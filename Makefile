@@ -10,7 +10,7 @@
 #	    - `ENVS`: Environment variables, separated by comma between key value pairs. Only available when feature `alloc` is enabled.
 # * App options:
 #     - `A` or `APP`: Path to the application
-#     - `FEATURES`: Features of Rukos modules to be enabled.
+#     - `FEATURES`: Features of Ruxos modules to be enabled.
 #     - `APP_FEATURES`: Features of (rust) apps to be enabled.
 # * QEMU options:
 #     - `BLK`: Enable storage devices (virtio-blk)
@@ -29,7 +29,7 @@
 #     - `ANAME_9P`: Path for root of 9pfs(parameter of TATTACH for root)
 #     - `PROTOCOL_9P`: Default protocol version selected for 9P
 # * Network options:
-#     - `IP`: Rukos IPv4 address (default is 10.0.2.15 for QEMU user netdev)
+#     - `IP`: Ruxos IPv4 address (default is 10.0.2.15 for QEMU user netdev)
 #     - `GW`: Gateway IPv4 address (default is 10.0.2.2 for QEMU user netdev)
 # * Libc options:
 #     - `MUSL`: Link C app with musl libc

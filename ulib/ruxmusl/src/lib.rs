@@ -1,6 +1,6 @@
 //! Syscall dispatch crate
 //!
-//! Dispatch musl syscall instruction to Rukos posix-api
+//! Dispatch musl syscall instruction to Ruxos posix-api
 //!
 //! Only support AARCH64 right now
 

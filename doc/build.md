@@ -1,12 +1,12 @@
-# Rukos Build Flow
+# Ruxos Build Flow
 
-We will provide an example to illustrate the process of building and running Rukos:
+We will provide an example to illustrate the process of building and running Ruxos:
 
 **Examples:**
 
 What happens when "make A=apps/net/httpserver ARCH=aarch64 LOG=info NET=y SMP=1 run" is executed?
 
-- How Rukos build?
+- How Ruxos build?
     - Firstly check Makefile: Based on different parameters, select whether FS/NET/GRAPHIC param is yes or not. If it is y, it will be compiled in conditional compilation.
     - `cargo.mk` determines whether to add the corresponding feature based on whether FS/NET/GRAPHIC is set to y.
     ```
@@ -16,7 +16,7 @@ What happens when "make A=apps/net/httpserver ARCH=aarch64 LOG=info NET=y SMP=1 
     ```
 
     - `_cargo_build`: The `_cargo_build` method is defined in cargo.mk. Different compilation methods are selected based on the language. For example, for Rust, when `cargo_build,--manifest-path $(APP)/Cargo.toml` is called, where $(APP) represents the current application to be run.
-    - Taking httpserver as an example, let's see how Rukos are conditionally compiled. First, in the `Cargo.toml` file of httpserver, the dependency is specified as: `axstd = { path = "../../../ulib/axstd", features = ["alloc", "multitask", "net"], optional = true }`. This indicates that axstd needs to be compiled and has the three features mentioned above.
+    - Taking httpserver as an example, let's see how Ruxos are conditionally compiled. First, in the `Cargo.toml` file of httpserver, the dependency is specified as: `axstd = { path = "../../../ulib/axstd", features = ["alloc", "multitask", "net"], optional = true }`. This indicates that axstd needs to be compiled and has the three features mentioned above.
     - After checking axstd and arceos-api, the following three features were found:
         - `paging = ["ruxruntime/paging"]`
         - `multitask = ["ruxruntime/multitask", "ruxtask/multitask", "axsync/multitask"]`
@@ -32,13 +32,13 @@ What happens when "make A=apps/net/httpserver ARCH=aarch64 LOG=info NET=y SMP=1 
     --target-dir $(CURDIR)/target \
     --features "$(features-y)" \
     ```
-    Note that the -Zbuild-std option is mentioned here, indicating the replacement of the standard library for the application and the use of libraries provided by Rukos.
+    Note that the -Zbuild-std option is mentioned here, indicating the replacement of the standard library for the application and the use of libraries provided by Ruxos.
 
     - Therefore, to summarize: choose conditions in Makefile and select the corresponding app directory for conditional compilation in `cargo.mk`.
-- Next, describe how Rukos run:
+- Next, describe how Ruxos run:
     - Firstly, examining the Makefile reveals that in addition to building, running an application also requires `justrun`.
     - Following this, it was found that the `qemu.mk` file would call run_qemu. Similar to the build process, the execution process would also use conditional selection and run.
-    - At runtime, Rukos first performs some boot operations, such as executing in the riscv64 environment:
+    - At runtime, Ruxos first performs some boot operations, such as executing in the riscv64 environment:
     ```rust
     #[naked]
     #[no_mangle]

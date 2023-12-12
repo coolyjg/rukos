@@ -7,7 +7,7 @@
 #   - `APP_FEATURES`: a list of features to be enabled for the Rust app.
 #
 # Outputs:
-#   - `AX_FEAT`: features to be enabled for Rukos modules (crate `ruxfeat`).
+#   - `AX_FEAT`: features to be enabled for Ruxos modules (crate `ruxfeat`).
 #   - `LIB_FEAT`: features to be enabled for the user library (crate `axstd`, `ruxlibc`, `ruxmusl`).
 #   - `APP_FEAT`: features to be enabled for the Rust app.
 

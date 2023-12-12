@@ -1,5 +1,5 @@
 /* Copyright (c) [2023] [Syswonder Community]
- *   [Rukos] is licensed under Mulan PSL v2.
+ *   [Ruxos] is licensed under Mulan PSL v2.
  *   You can use this software according to the terms and conditions of the Mulan PSL v2.
  *   You may obtain a copy of Mulan PSL v2 at:
  *               http://license.coscl.org.cn/MulanPSL2
@@ -11,7 +11,7 @@
 //!
 //! The normal malloc(size_t) and free(size_t) are provided by the library malloc.h, and
 //! sys_brk is used internally to apply for memory from the kernel. But in a unikernel like
-//! `Rukos`, we noticed that the heap of the Rust user program is shared with the kernel. In
+//! `Ruxos`, we noticed that the heap of the Rust user program is shared with the kernel. In
 //! order to maintain consistency, C user programs also choose to share the kernel heap,
 //! skipping the sys_brk step.
 

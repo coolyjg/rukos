@@ -8,7 +8,7 @@ authors = [
 ]
 description = "Device driver interfaces used by RuxOS"
 license = "GPL-3.0-or-later OR Apache-2.0"
-homepage = "https://github.com/syswonder/rukos"
-repository = "https://github.com/syswonder/rukos/tree/main/crates/driver_common"
+homepage = "https://github.com/syswonder/ruxos"
+repository = "https://github.com/syswonder/ruxos/tree/main/crates/driver_common"
 
 [dependencies]

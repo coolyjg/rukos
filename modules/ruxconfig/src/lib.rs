@@ -1,5 +1,5 @@
 /* Copyright (c) [2023] [Syswonder Community]
- *   [Rukos] is licensed under Mulan PSL v2.
+ *   [Ruxos] is licensed under Mulan PSL v2.
  *   You can use this software according to the terms and conditions of the Mulan PSL v2.
  *   You may obtain a copy of Mulan PSL v2 at:
  *               http://license.coscl.org.cn/MulanPSL2
@@ -7,13 +7,13 @@
  *   See the Mulan PSL v2 for more details.
  */
 
-//! Platform-specific constants and parameters for [Rukos].
+//! Platform-specific constants and parameters for [Ruxos].
 //!
 //! Currently supported platforms can be found in the [platforms] directory of
-//! the [Rukos] root.
+//! the [Ruxos] root.
 //!
-//! [Rukos]: https://github.com/syswonder/rukos
-//! [platforms]: https://github.com/syswonder/rukos/tree/main/platforms
+//! [Ruxos]: https://github.com/syswonder/ruxos
+//! [platforms]: https://github.com/syswonder/ruxos/tree/main/platforms
 
 #![no_std]
 

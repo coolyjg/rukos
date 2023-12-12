@@ -6,10 +6,10 @@ authors = [
     "Yuekai Jia <equation618@gmail.com>",
     "yanjuguang <coolyanjg@163.com>",
 ]
-description = "Rukos hardware abstraction layer, provides unified APIs for platform-specific operations"
+description = "Ruxos hardware abstraction layer, provides unified APIs for platform-specific operations"
 license = "GPL-3.0-or-later OR Apache-2.0"
-homepage = "https://github.com/syswonder/rukos"
-repository = "https://github.com/syswonder/rukos/tree/main/modules/ruxhal"
+homepage = "https://github.com/syswonder/ruxos"
+repository = "https://github.com/syswonder/ruxos/tree/main/modules/ruxhal"
 
 [features]
 smp = []

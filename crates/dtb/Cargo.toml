@@ -5,8 +5,8 @@ edition = "2021"
 authors = ["Leping Wang <xuehao14@126.com>"]
 description = "Device tree basic operations"
 license = "GPL-3.0-or-later OR Apache-2.0"
-homepage = "https://github.com/syswonder/rukos"
-repository = "https://github.com/syswonder/rukos/tree/main/crates/dtb"
+homepage = "https://github.com/syswonder/ruxos"
+repository = "https://github.com/syswonder/ruxos/tree/main/crates/dtb"
 
 [dependencies]
 fdt-rs = { version = "0.4.3", default-features = false }

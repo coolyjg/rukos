@@ -1,5 +1,5 @@
 /* Copyright (c) [2023] [Syswonder Community]
- *   [Rukos] is licensed under Mulan PSL v2.
+ *   [Ruxos] is licensed under Mulan PSL v2.
  *   You can use this software according to the terms and conditions of the Mulan PSL v2.
  *   You may obtain a copy of Mulan PSL v2 at:
  *               http://license.coscl.org.cn/MulanPSL2
@@ -7,9 +7,9 @@
  *   See the Mulan PSL v2 for more details.
  */
 
-//! Runtime library of [Rukos](https://github.com/syswonder/rukos).
+//! Runtime library of [Ruxos](https://github.com/syswonder/ruxos).
 //!
-//! Any application uses Rukos should link this library. It does some
+//! Any application uses Ruxos should link this library. It does some
 //! initialization work before entering the application's `main` function.
 //!
 //! # Cargo Features
@@ -141,7 +141,7 @@ fn is_init_ok() -> bool {
     INITED_CPUS.load(Ordering::Acquire) == ruxconfig::SMP
 }
 
-/// The main entry point of the Rukos runtime.
+/// The main entry point of the Ruxos runtime.
 ///
 /// It is called from the bootstrapping code in [ruxhal]. `cpu_id` is the ID of
 /// the current CPU, and `dtb` is the address of the device tree blob. It

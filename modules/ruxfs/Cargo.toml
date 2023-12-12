@@ -6,10 +6,10 @@ authors = [
     "Yuekai Jia <equation618@gmail.com>",
     "Zheng Wu <hello_weekday@163.com>",
 ]
-description = "Rukos filesystem module"
+description = "Ruxos filesystem module"
 license = "GPL-3.0-or-later OR Apache-2.0"
-homepage = "https://github.com/syswonder/rukos"
-repository = "https://github.com/syswonder/rukos/tree/main/modules/ruxfs"
+homepage = "https://github.com/syswonder/ruxos"
+repository = "https://github.com/syswonder/ruxos/tree/main/modules/ruxfs"
 
 [features]
 devfs = ["dep:axfs_devfs"]

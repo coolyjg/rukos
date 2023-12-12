@@ -8,10 +8,10 @@ authors = [
     "Zheng Wu <hello_weekday@163.com>",
     "AuYang261 <xu_jyang@163.com>",
 ]
-description = "Runtime library of Rukos"
+description = "Runtime library of Ruxos"
 license = "GPL-3.0-or-later OR Apache-2.0"
-homepage = "https://github.com/syswonder/rukos"
-repository = "https://github.com/syswonder/rukos/tree/main/modules/ruxruntime"
+homepage = "https://github.com/syswonder/ruxos"
+repository = "https://github.com/syswonder/ruxos/tree/main/modules/ruxruntime"
 
 [features]
 default = []

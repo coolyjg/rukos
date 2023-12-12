@@ -1,5 +1,5 @@
 /* Copyright (c) [2023] [Syswonder Community]
- *   [Rukos] is licensed under Mulan PSL v2.
+ *   [Ruxos] is licensed under Mulan PSL v2.
  *   You can use this software according to the terms and conditions of the Mulan PSL v2.
  *   You may obtain a copy of Mulan PSL v2 at:
  *               http://license.coscl.org.cn/MulanPSL2
@@ -7,7 +7,7 @@
  *   See the Mulan PSL v2 for more details.
  */
 
-//! [Rukos] hardware abstraction layer, provides unified APIs for
+//! [Ruxos] hardware abstraction layer, provides unified APIs for
 //! platform-specific operations.
 //!
 //! It does the bootstrapping and initialization process for the specified
@@ -30,7 +30,7 @@
 //! - `paging`: Enable page table manipulation.
 //! - `irq`: Enable interrupt handling support.
 //!
-//! [Rukos]: https://github.com/syswonder/rukos
+//! [Ruxos]: https://github.com/syswonder/ruxos
 //! [cargo test]: https://doc.rust-lang.org/cargo/guide/tests.html
 
 #![no_std]

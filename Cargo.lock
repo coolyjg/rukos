@@ -1384,23 +1384,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "rukos-display-basic-painting"
-version = "0.1.0"
-dependencies = [
- "axstd",
- "embedded-graphics",
-]
-
-[[package]]
-name = "rukos-display-draw-map"
-version = "0.1.0"
-dependencies = [
- "axstd",
- "embedded-graphics",
- "tinybmp",
-]
-
-[[package]]
 name = "rustc-hash"
 version = "1.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1591,6 +1574,23 @@ dependencies = [
  "ruxfeat",
  "ruxhal",
  "ruxos_posix_api",
+]
+
+[[package]]
+name = "ruxos-display-basic-painting"
+version = "0.1.0"
+dependencies = [
+ "axstd",
+ "embedded-graphics",
+]
+
+[[package]]
+name = "ruxos-display-draw-map"
+version = "0.1.0"
+dependencies = [
+ "axstd",
+ "embedded-graphics",
+ "tinybmp",
 ]
 
 [[package]]

@@ -48,7 +48,7 @@ Available commands:
   pwd
   rm
   uname
-Rukos:/$
+Ruxos:/$
 ```
 
 # STEPS
@@ -57,7 +57,7 @@ Rukos:/$
 
 [init](./init.md)
 
-After executed all initial actions, then Rukos calls `main` function in `shell` app.
+After executed all initial actions, then Ruxos calls `main` function in `shell` app.
 
 ## Step2
 

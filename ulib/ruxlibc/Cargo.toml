@@ -10,10 +10,10 @@ authors = [
     "scPointer <bhy18@mails.tsinghua.edu.cn>",
     "Shiping Yuan <robert_yuan@pku.edu.com>",
 ]
-description = "Rukos user program library for C apps"
+description = "Ruxos user program library for C apps"
 license = "GPL-3.0-or-later OR Apache-2.0"
-homepage = "https://github.com/syswonder/rukos"
-repository = "https://github.com/syswonder/rukos/tree/main/ulib/ruxlibc"
+homepage = "https://github.com/syswonder/ruxos"
+repository = "https://github.com/syswonder/ruxos/tree/main/ulib/ruxlibc"
 
 [lib]
 crate-type = ["staticlib"]

@@ -1,5 +1,5 @@
 /* Copyright (c) [2023] [Syswonder Community]
- *   [Rukos] is licensed under Mulan PSL v2.
+ *   [Ruxos] is licensed under Mulan PSL v2.
  *   You can use this software according to the terms and conditions of the Mulan PSL v2.
  *   You may obtain a copy of Mulan PSL v2 at:
  *               http://license.coscl.org.cn/MulanPSL2
@@ -7,7 +7,7 @@
  *   See the Mulan PSL v2 for more details.
  */
 
-//! 9P filesystem used by [Rukos](https://github.com/syswonder/rukos).
+//! 9P filesystem used by [Ruxos](https://github.com/syswonder/ruxos).
 //!
 //! The implementation is based on [`axfs_vfs`].
 use crate::drv::{self, Drv9pOps};
@@ -70,13 +70,13 @@ impl _9pFileSystem {
         // AUTH afid
         #[cfg(feature = "need_auth")]
         handle_result!(
-            dev.write().tauth(AFID, "rukos", "/"),
+            dev.write().tauth(AFID, "ruxos", "/"),
             "9pfs auth failed! error code: {}"
         );
 
         // attach dir to fid
         handle_result!(
-            dev.write().tattach(fid, AFID, "rukos", aname),
+            dev.write().tattach(fid, AFID, "ruxos", aname),
             "9pfs attach failed! error code: {}"
         );
 

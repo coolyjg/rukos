@@ -10,9 +10,9 @@ authors = [
     "scPointer <bhy18@mails.tsinghua.edu.cn>",
     "Shiping Yuan <robert_yuan@pku.edu.com>",
 ]
-description = "POSIX-compatible APIs for Rukos modules"
+description = "POSIX-compatible APIs for Ruxos modules"
 license = "GPL-3.0-or-later OR Apache-2.0"
-repository = "https://github.com/syswonder/rukos/tree/main/api/ruxos_posix_api"
+repository = "https://github.com/syswonder/ruxos/tree/main/api/ruxos_posix_api"
 
 [features]
 default = []
@@ -34,7 +34,7 @@ irq = ["ruxfeat/irq"]
 musl = ["ruxhal/musl", "ruxruntime/musl", "axalloc/slab", "ruxtask/musl"]
 
 [dependencies]
-# Rukos modules
+# Ruxos modules
 ruxfeat = { path = "../ruxfeat" }
 ruxruntime = { path = "../../modules/ruxruntime" }
 ruxconfig = { path = "../../modules/ruxconfig" }

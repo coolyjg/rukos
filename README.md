@@ -1,11 +1,11 @@
-# RukOS
+# RuxOS
 
 [![CI](https://github.com/syswonder/ruxos/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/syswonder/ruxos/actions/workflows/build.yml)
 [![CI](https://github.com/syswonder/ruxos/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/syswonder/ruxos/actions/workflows/test.yml)
 
 An experimental modular operating system (or unikernel) written in Rust.
 
-RukOS was inspired by [Unikraft](https://github.com/unikraft/unikraft) and [ArceOS](https://github.com/rcore-os/arceos)
+RuxOS was inspired by [Unikraft](https://github.com/unikraft/unikraft) and [ArceOS](https://github.com/rcore-os/arceos)
 
 🚧 Working In Progress.
 
@@ -140,7 +140,7 @@ Note that the `NET=y` argument is required to enable the network device in QEMU.
     ```
 
 3. Call library functions from `axstd` in your code, just like the Rust [std](https://doc.rust-lang.org/std/) library.
-4. Build your application with RukOS, by running the `make` command in the application directory:
+4. Build your application with RuxOS, by running the `make` command in the application directory:
 
     ```bash
     # in app directory
@@ -176,7 +176,7 @@ Note that the `NET=y` argument is required to enable the network device in QEMU.
     net
     ```
 
-3. Build your application with RukOS, by running the `make` command in the application directory:
+3. Build your application with RuxOS, by running the `make` command in the application directory:
 
     ```bash
     # in app directory
@@ -184,7 +184,7 @@ Note that the `NET=y` argument is required to enable the network device in QEMU.
     # more args: LOG=<log> SMP=<smp> NET=[y|n] ...
     ```
 
-### How to build RukOS for specific platforms and devices
+### How to build RuxOS for specific platforms and devices
 
 Set the `PLATFORM` variable when run `make`:
 

@@ -61,7 +61,7 @@ int usleep(unsigned useconds)
     return nanosleep(&tv, &tv);
 }
 
-#ifdef AX_CONFIG_FS
+#ifdef RUX_CONFIG_FS
 
 // TODO:
 int access(const char *pathname, int mode)
@@ -119,9 +119,9 @@ int truncate(const char *path, off_t length)
     return 0;
 }
 
-#endif // AX_CONFIG_FS
+#endif // RUX_CONFIG_FS
 
-#ifdef AX_CONFIG_PIPE
+#ifdef RUX_CONFIG_PIPE
 
 int pipe2(int fd[2], int flag)
 {
@@ -146,7 +146,7 @@ int pipe2(int fd[2], int flag)
     return 0;
 }
 
-#endif // AX_CONFIG_PIPE
+#endif // RUX_CONFIG_PIPE
 
 // TODO
 _Noreturn void _exit(int status)

@@ -107,7 +107,7 @@ fn gen_config_rs(config_path: &Path) -> Result<Vec<u8>> {
     add_config(
         &mut config,
         "smp",
-        toml_edit::value(std::env::var("AX_SMP").unwrap_or("1".into())),
+        toml_edit::value(std::env::var("RUX_SMP").unwrap_or("1".into())),
         Some("# Number of CPUs"),
     );
 
@@ -163,7 +163,7 @@ fn gen_config_rs(config_path: &Path) -> Result<Vec<u8>> {
 }
 
 fn main() -> Result<()> {
-    let platform = option_env!("AX_PLATFORM");
+    let platform = option_env!("RUX_PLATFORM");
     let config_path = resolve_config_path(platform)?;
 
     println!("Reading config file: {:?}", config_path);
@@ -175,7 +175,7 @@ fn main() -> Result<()> {
     std::fs::write(out_path, config_rs)?;
 
     println!("cargo:rerun-if-changed={}", config_path.display());
-    println!("cargo:rerun-if-env-changed=AX_PLATFORM");
-    println!("cargo:rerun-if-env-changed=AX_SMP");
+    println!("cargo:rerun-if-env-changed=RUX_PLATFORM");
+    println!("cargo:rerun-if-env-changed=RUX_SMP");
     Ok(())
 }

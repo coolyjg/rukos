@@ -185,7 +185,7 @@ int pthread_sigmask(int, const sigset_t *__restrict, sigset_t *__restrict);
 
 int kill(pid_t, int);
 
-#ifdef AX_CONFIG_MULTITASK
+#ifdef RUX_CONFIG_MULTITASK
 int pthread_kill(pthread_t t, int sig);
 #endif
 

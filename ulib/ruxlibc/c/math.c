@@ -7,7 +7,7 @@
  *   See the Mulan PSL v2 for more details.
  */
 
-#ifdef AX_CONFIG_FP_SIMD
+#ifdef RUX_CONFIG_FP_SIMD
 
 #include <float.h>
 #include <math.h>
@@ -577,4 +577,4 @@ long double fabsl(long double x)
 }
 #endif
 
-#endif // AX_CONFIG_FP_SIMD
+#endif // RUX_CONFIG_FP_SIMD

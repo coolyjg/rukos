@@ -129,18 +129,18 @@ else
   $(error "ARCH" must be one of "x86_64", "riscv64", or "aarch64")
 endif
 
-export AX_ARCH=$(ARCH)
-export AX_PLATFORM=$(PLATFORM_NAME)
-export AX_SMP=$(SMP)
-export AX_MODE=$(MODE)
-export AX_LOG=$(LOG)
-export AX_TARGET=$(TARGET)
-export AX_IP=$(IP)
-export AX_GW=$(GW)
-export AX_9P_ADDR = $(NET_9P_ADDR)
-export AX_ANAME_9P = $(ANAME_9P)
-export AX_PROTOCOL_9P = $(PROTOCOL_9P)
-export AX_MUSL=$(MUSL)
+export RUX_ARCH=$(ARCH)
+export RUX_PLATFORM=$(PLATFORM_NAME)
+export RUX_SMP=$(SMP)
+export RUX_MODE=$(MODE)
+export RUX_LOG=$(LOG)
+export RUX_TARGET=$(TARGET)
+export RUX_IP=$(IP)
+export RUX_GW=$(GW)
+export RUX_9P_ADDR = $(NET_9P_ADDR)
+export RUX_ANAME_9P = $(ANAME_9P)
+export RUX_PROTOCOL_9P = $(PROTOCOL_9P)
+export RUX_MUSL=$(MUSL)
 
 # Binutils
 CROSS_COMPILE ?= $(ARCH)-linux-musl-

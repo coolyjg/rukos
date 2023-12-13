@@ -7,7 +7,7 @@
  *   See the Mulan PSL v2 for more details.
  */
 
-#ifdef AX_CONFIG_NET
+#ifdef RUX_CONFIG_NET
 
 #include <errno.h>
 #include <fcntl.h>
@@ -77,4 +77,4 @@ ssize_t sendmsg(int fd, const struct msghdr *msg, int flags)
     return ax_sendmsg(fd, msg, flags);
 }
 
-#endif // AX_CONFIG_NET
+#endif // RUX_CONFIG_NET

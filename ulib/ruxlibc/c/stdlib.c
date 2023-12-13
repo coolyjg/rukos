@@ -26,7 +26,7 @@ void srandom(unsigned int s)
     srand(s);
 }
 
-#ifdef AX_CONFIG_ALLOC
+#ifdef RUX_CONFIG_ALLOC
 
 void *calloc(size_t m, size_t n)
 {
@@ -51,7 +51,7 @@ void *realloc(void *memblock, size_t size)
     return mem;
 }
 
-#endif // AX_CONFIG_ALLOC
+#endif // RUX_CONFIG_ALLOC
 
 long long llabs(long long a)
 {
@@ -353,7 +353,7 @@ exit:
     return acc;
 }
 
-#ifdef AX_CONFIG_FP_SIMD
+#ifdef RUX_CONFIG_FP_SIMD
 
 // TODO: precision may not be enough
 long double strtold(const char *restrict s, char **restrict p)
@@ -361,7 +361,7 @@ long double strtold(const char *restrict s, char **restrict p)
     return (long double)strtod(s, p);
 }
 
-#endif // AX_CONFIG_FP_SIMD
+#endif // RUX_CONFIG_FP_SIMD
 
 typedef int (*cmpfun_)(const void *, const void *);
 

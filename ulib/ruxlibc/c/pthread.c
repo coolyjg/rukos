@@ -7,7 +7,7 @@
  *   See the Mulan PSL v2 for more details.
  */
 
-#ifdef AX_CONFIG_MULTITASK
+#ifdef RUX_CONFIG_MULTITASK
 
 #include <errno.h>
 #include <limits.h>
@@ -77,4 +77,4 @@ int pthread_attr_setstacksize(pthread_attr_t *a, size_t size)
     return 0;
 }
 
-#endif // AX_CONFIG_MULTITASK
+#endif // RUX_CONFIG_MULTITASK

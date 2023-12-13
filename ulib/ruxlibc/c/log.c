@@ -7,7 +7,7 @@
  *   See the Mulan PSL v2 for more details.
  */
 
-#ifdef AX_CONFIG_FP_SIMD
+#ifdef RUX_CONFIG_FP_SIMD
 
 #include <math.h>
 #include <stddef.h>
@@ -401,4 +401,4 @@ double log(double x)
     return eval_as_double(y);
 }
 
-#endif // AX_CONFIG_FP_SIMD
+#endif // RUX_CONFIG_FP_SIMD

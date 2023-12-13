@@ -19,15 +19,15 @@ pub const AT_PAGESIZE: usize = 6;
 pub static mut argv: *mut *mut c_char = ptr::null_mut();
 
 /// Save cmdline argments
-static mut RX_ARGV: Vec<*mut c_char> = Vec::new();
+static mut RUX_ARGV: Vec<*mut c_char> = Vec::new();
 
-/// A pointer pointing to RX_ENVIRON
+/// A pointer pointing to RUX_ENVIRON
 #[allow(non_upper_case_globals)]
 #[no_mangle]
 pub static mut environ: *mut *mut c_char = ptr::null_mut();
 
 /// Save environment variables
-pub static mut RX_ENVIRON: Vec<*mut c_char> = Vec::new();
+pub static mut RUX_ENVIRON: Vec<*mut c_char> = Vec::new();
 
 pub(crate) unsafe fn init_argv(args: Vec<&str>) {
     for arg in args {
@@ -38,21 +38,21 @@ pub(crate) unsafe fn init_argv(args: Vec<&str>) {
             *buf.add(i) = *arg.add(i) as i8;
         }
         *buf.add(len) = 0;
-        RX_ARGV.push(buf);
+        RUX_ARGV.push(buf);
     }
     // end of argv
-    RX_ARGV.push(ptr::null_mut());
+    RUX_ARGV.push(ptr::null_mut());
 
-    for e in &RX_ENVIRON {
-        RX_ARGV.push(*e);
+    for e in &RUX_ENVIRON {
+        RUX_ARGV.push(*e);
     }
 
-    RX_ARGV.push(AT_PAGESIZE as *mut c_char);
-    RX_ARGV.push(PAGE_SIZE_4K as *mut c_char);
+    RUX_ARGV.push(AT_PAGESIZE as *mut c_char);
+    RUX_ARGV.push(PAGE_SIZE_4K as *mut c_char);
     // end of auxv
-    RX_ARGV.push(ptr::null_mut());
+    RUX_ARGV.push(ptr::null_mut());
 
-    argv = RX_ARGV.as_mut_ptr();
+    argv = RUX_ARGV.as_mut_ptr();
 }
 
 /// Generate an iterator for environment variables
@@ -98,6 +98,6 @@ pub(crate) fn boot_add_environ(env: &str) {
             core::ptr::write(buf.add(i), *ptr.add(i));
         }
         core::ptr::write(buf.add(size - 1), 0);
-        RX_ENVIRON.push(buf);
+        RUX_ENVIRON.push(buf);
     }
 }

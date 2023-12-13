@@ -50,7 +50,7 @@ typedef void *pthread_t;
 /* Keys for thread-specific data */
 typedef unsigned int pthread_key_t;
 
-#ifdef AX_CONFIG_MULTITASK
+#ifdef RUX_CONFIG_MULTITASK
 
 _Noreturn void pthread_exit(void *);
 pthread_t pthread_self(void);
@@ -104,6 +104,6 @@ void *pthread_getspecific(pthread_key_t __key);
 /* Store POINTER in the thread-specific data slot identified by KEY. */
 int pthread_setspecific(pthread_key_t __key, const void *__pointer);
 
-#endif // AX_CONFIG_MULTITASK
+#endif // RUX_CONFIG_MULTITASK
 
 #endif // _PTHREAD_H

@@ -7,7 +7,7 @@
  *   See the Mulan PSL v2 for more details.
  */
 use core::ffi::{c_char, c_int, c_void};
-use ruxos_posix_api::{environ, environ_iter, RX_ENVIRON};
+use ruxos_posix_api::{environ, environ_iter, RUX_ENVIRON};
 
 use crate::malloc::{free, malloc};
 use crate::string::strlen;
@@ -40,17 +40,17 @@ unsafe fn find_env(search: *const c_char) -> Option<(usize, *mut c_char)> {
 unsafe fn put_new_env(insert: *mut c_char) {
     // XXX: Another problem is that `environ` can be set to any pointer, which means there is a
     // chance of a memory leak. But we can check if it was the same as before, like musl does.
-    if environ == RX_ENVIRON.as_mut_ptr() {
-        *RX_ENVIRON.last_mut().unwrap() = insert;
-        RX_ENVIRON.push(core::ptr::null_mut());
+    if environ == RUX_ENVIRON.as_mut_ptr() {
+        *RUX_ENVIRON.last_mut().unwrap() = insert;
+        RUX_ENVIRON.push(core::ptr::null_mut());
         // Likely a no-op but is needed due to Stacked Borrows.
-        environ = RX_ENVIRON.as_mut_ptr();
+        environ = RUX_ENVIRON.as_mut_ptr();
     } else {
-        RX_ENVIRON.clear();
-        RX_ENVIRON.extend(environ_iter());
-        RX_ENVIRON.push(insert);
-        RX_ENVIRON.push(core::ptr::null_mut());
-        environ = RX_ENVIRON.as_mut_ptr();
+        RUX_ENVIRON.clear();
+        RUX_ENVIRON.extend(environ_iter());
+        RUX_ENVIRON.push(insert);
+        RUX_ENVIRON.push(core::ptr::null_mut());
+        environ = RUX_ENVIRON.as_mut_ptr();
     }
 }
 
@@ -105,27 +105,27 @@ pub unsafe extern "C" fn setenv(
 #[no_mangle]
 pub unsafe extern "C" fn unsetenv(key: *const c_char) -> c_int {
     if let Some((i, _)) = find_env(key) {
-        if environ == RX_ENVIRON.as_mut_ptr() {
+        if environ == RUX_ENVIRON.as_mut_ptr() {
             // No need to worry about updating the pointer, this does not
             // reallocate in any way. And the final null is already shifted back.
-            let rm = RX_ENVIRON.remove(i);
+            let rm = RUX_ENVIRON.remove(i);
             free(rm as *mut c_void);
             // My UB paranoia.
-            environ = RX_ENVIRON.as_mut_ptr();
+            environ = RUX_ENVIRON.as_mut_ptr();
         } else {
-            let len = RX_ENVIRON.len();
+            let len = RUX_ENVIRON.len();
             for _ in 0..len {
-                let rm = RX_ENVIRON.pop().unwrap();
+                let rm = RUX_ENVIRON.pop().unwrap();
                 free(rm as *mut c_void);
             }
-            RX_ENVIRON.extend(
+            RUX_ENVIRON.extend(
                 environ_iter()
                     .enumerate()
                     .filter(|&(j, _)| j != i)
                     .map(|(_, v)| v),
             );
-            RX_ENVIRON.push(core::ptr::null_mut());
-            environ = RX_ENVIRON.as_mut_ptr();
+            RUX_ENVIRON.push(core::ptr::null_mut());
+            environ = RUX_ENVIRON.as_mut_ptr();
         }
     }
     0

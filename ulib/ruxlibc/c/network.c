@@ -7,7 +7,7 @@
  *   See the Mulan PSL v2 for more details.
  */
 
-#ifdef AX_CONFIG_NET
+#ifdef RUX_CONFIG_NET
 
 #include <ctype.h>
 #include <errno.h>
@@ -232,4 +232,4 @@ const char *inet_ntop(int af, const void *__restrict a0, char *__restrict s, soc
     return 0;
 }
 
-#endif // AX_CONFIG_NET
+#endif // RUX_CONFIG_NET

@@ -7,7 +7,7 @@
  *   See the Mulan PSL v2 for more details.
  */
 
-#ifdef AX_CONFIG_SELECT
+#ifdef RUX_CONFIG_SELECT
 
 #include <errno.h>
 #include <stdint.h>
@@ -23,4 +23,4 @@ int pselect(int n, fd_set *restrict rfds, fd_set *restrict wfds, fd_set *restric
     return 0;
 }
 
-#endif // AX_CONFIG_SELECT
+#endif // RUX_CONFIG_SELECT

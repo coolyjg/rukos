@@ -59,7 +59,7 @@ extern crate alloc;
 #[cfg(feature = "alloc")]
 mod env;
 #[cfg(feature = "alloc")]
-pub use self::env::{argv, environ, environ_iter, RX_ENVIRON};
+pub use self::env::{argv, environ, environ_iter, RUX_ENVIRON};
 #[cfg(feature = "alloc")]
 use self::env::{boot_add_environ, init_argv};
 use core::ffi::{c_char, c_int};
@@ -162,16 +162,16 @@ pub extern "C" fn rust_main(cpu_id: usize, dtb: usize) -> ! {
         build_mode = {}\n\
         log_level = {}\n\
         ",
-        option_env!("AX_ARCH").unwrap_or(""),
-        option_env!("AX_PLATFORM").unwrap_or(""),
-        option_env!("AX_TARGET").unwrap_or(""),
-        option_env!("AX_SMP").unwrap_or(""),
-        option_env!("AX_MODE").unwrap_or(""),
-        option_env!("AX_LOG").unwrap_or(""),
+        option_env!("RUX_ARCH").unwrap_or(""),
+        option_env!("RUX_PLATFORM").unwrap_or(""),
+        option_env!("RUX_TARGET").unwrap_or(""),
+        option_env!("RUX_SMP").unwrap_or(""),
+        option_env!("RUX_MODE").unwrap_or(""),
+        option_env!("RUX_LOG").unwrap_or(""),
     );
 
     axlog::init();
-    axlog::set_max_level(option_env!("AX_LOG").unwrap_or("")); // no effect if set `log-level-*` features
+    axlog::set_max_level(option_env!("RUX_LOG").unwrap_or("")); // no effect if set `log-level-*` features
     info!("Logging is enabled.");
     info!("Primary CPU {} started, dtb = {:#x}.", cpu_id, dtb);
 
@@ -228,14 +228,14 @@ pub extern "C" fn rust_main(cpu_id: usize, dtb: usize) -> ! {
             #[cfg(feature = "virtio-9p")]
             mount_points.push(rux9p::init_virtio_9pfs(
                 all_devices._9p,
-                option_env!("AX_ANAME_9P").unwrap_or(""),
-                option_env!("AX_PROTOCOL_9P").unwrap_or(""),
+                option_env!("RUX_ANAME_9P").unwrap_or(""),
+                option_env!("RUX_PROTOCOL_9P").unwrap_or(""),
             ));
             #[cfg(feature = "net-9p")]
             mount_points.push(rux9p::init_net_9pfs(
-                option_env!("AX_9P_ADDR").unwrap_or(""),
-                option_env!("AX_ANAME_9P").unwrap_or(""),
-                option_env!("AX_PROTOCOL_9P").unwrap_or(""),
+                option_env!("RUX_9P_ADDR").unwrap_or(""),
+                option_env!("RUX_ANAME_9P").unwrap_or(""),
+                option_env!("RUX_PROTOCOL_9P").unwrap_or(""),
             ));
             ruxfs::prepare_commonfs(&mut mount_points);
 
@@ -347,8 +347,8 @@ fn init_cmdline(argc: &mut c_int) {
     }
     // set args
     unsafe {
-        RX_ENVIRON.push(core::ptr::null_mut());
-        environ = RX_ENVIRON.as_mut_ptr();
+        RUX_ENVIRON.push(core::ptr::null_mut());
+        environ = RUX_ENVIRON.as_mut_ptr();
         let args: Vec<&str> = args.split(',').filter(|i| !i.is_empty()).collect();
         *argc = args.len() as c_int;
         init_argv(args);

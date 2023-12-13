@@ -26,7 +26,7 @@ extern crate ruxruntime;
 extern crate alloc;
 
 #[cfg(feature = "alloc")]
-pub use ruxruntime::{environ, environ_iter, RX_ENVIRON};
+pub use ruxruntime::{environ, environ_iter, RUX_ENVIRON};
 
 #[macro_use]
 mod utils;

@@ -253,9 +253,9 @@ fn do_pwd(_args: &str) {
 }
 
 fn do_uname(_args: &str) {
-    let arch = option_env!("AX_ARCH").unwrap_or("");
-    let platform = option_env!("AX_PLATFORM").unwrap_or("");
-    let smp = match option_env!("AX_SMP") {
+    let arch = option_env!("RUX_ARCH").unwrap_or("");
+    let platform = option_env!("RUX_PLATFORM").unwrap_or("");
+    let smp = match option_env!("RUX_SMP") {
         None | Some("1") => "",
         _ => " SMP",
     };

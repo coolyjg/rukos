@@ -10,7 +10,7 @@
 #ifndef _MATH_H
 #define _MATH_H
 
-#ifdef AX_CONFIG_FP_SIMD
+#ifdef RUX_CONFIG_FP_SIMD
 
 typedef double double_t;
 
@@ -325,6 +325,6 @@ double trunc(double);
 float truncf(float);
 long double truncl(long double);
 
-#endif // AX_CONFIG_FP_SIMD
+#endif // RUX_CONFIG_FP_SIMD
 
 #endif // _MATH_H

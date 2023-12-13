@@ -7,7 +7,7 @@
  *   See the Mulan PSL v2 for more details.
  */
 
-#if defined(AX_CONFIG_FP_SIMD)
+#if defined(RUX_CONFIG_FP_SIMD)
 
 #include <float.h>
 #include <math.h>

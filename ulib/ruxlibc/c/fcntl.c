@@ -11,7 +11,7 @@
 #include <stdarg.h>
 #include <stdio.h>
 
-#ifdef AX_CONFIG_FD
+#ifdef RUX_CONFIG_FD
 
 // TODO: remove this function in future work
 int ax_fcntl(int fd, int cmd, size_t arg);
@@ -27,9 +27,9 @@ int fcntl(int fd, int cmd, ... /* arg */)
     return ax_fcntl(fd, cmd, arg);
 }
 
-#endif // AX_CONFIG_FD
+#endif // RUX_CONFIG_FD
 
-#ifdef AX_CONFIG_FS
+#ifdef RUX_CONFIG_FS
 
 // TODO: remove this function in future work
 int ax_open(const char *filename, int flags, mode_t mode);
@@ -62,4 +62,4 @@ int sync_file_range(int fd, off_t pos, off_t len, unsigned flags)
     return 0;
 }
 
-#endif // AX_CONFIG_FS
+#endif // RUX_CONFIG_FS

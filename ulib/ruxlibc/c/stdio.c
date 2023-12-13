@@ -21,7 +21,7 @@
 #include <stdlib.h>
 
 // LOCK used by `puts()`
-#ifdef AX_CONFIG_MULTITASK
+#ifdef RUX_CONFIG_MULTITASK
 #include <pthread.h>
 static pthread_mutex_t lock = PTHREAD_MUTEX_INITIALIZER;
 #endif
@@ -116,7 +116,7 @@ int putchar(int c)
 
 int puts(const char *s)
 {
-#ifdef AX_CONFIG_MULTITASK
+#ifdef RUX_CONFIG_MULTITASK
     pthread_mutex_lock(&lock);
 #endif
 
@@ -124,7 +124,7 @@ int puts(const char *s)
     char brk[1] = {'\n'};
     write(1, (const void *)brk, 1);
 
-#ifdef AX_CONFIG_MULTITASK
+#ifdef RUX_CONFIG_MULTITASK
     pthread_mutex_unlock(&lock);
 #endif
 
@@ -181,7 +181,7 @@ int sscanf(const char *restrict __s, const char *restrict __format, ...)
     return 0;
 }
 
-#ifdef AX_CONFIG_FS
+#ifdef RUX_CONFIG_FS
 
 int __fmodeflags(const char *mode)
 {
@@ -466,4 +466,4 @@ FILE *fdopen(int fd, const char *mode)
     return f;
 }
 
-#endif // AX_CONFIG_FS
+#endif // RUX_CONFIG_FS

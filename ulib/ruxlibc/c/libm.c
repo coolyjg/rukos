@@ -7,7 +7,7 @@
  *   See the Mulan PSL v2 for more details.
  */
 
-#ifdef AX_CONFIG_FP_SIMD
+#ifdef RUX_CONFIG_FP_SIMD
 
 #include <math.h>
 
@@ -23,4 +23,4 @@ double __math_invalid(double x)
     return (x - x) / (x - x);
 }
 
-#endif // AX_CONFIG_FP_SIMD
+#endif // RUX_CONFIG_FP_SIMD

@@ -37,7 +37,7 @@ extern FILE *const stderr;
 
 #define EOF (-1)
 
-#if defined(AX_LOG_WARN) || defined(AX_LOG_INFO) || defined(AX_LOG_DEBUG) || defined(AX_LOG_TRACE)
+#if defined(RUX_LOG_WARN) || defined(RUX_LOG_INFO) || defined(RUX_LOG_DEBUG) || defined(RUX_LOG_TRACE)
 
 #define unimplemented(fmt, ...)                                                                \
     printf("\x1b[33m%s%s:\x1b[0m " fmt "\n", "WARN: no ax_call implementation for ", __func__, \

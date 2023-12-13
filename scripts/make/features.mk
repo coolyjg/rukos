@@ -7,7 +7,7 @@
 #   - `APP_FEATURES`: a list of features to be enabled for the Rust app.
 #
 # Outputs:
-#   - `AX_FEAT`: features to be enabled for Ruxos modules (crate `ruxfeat`).
+#   - `RUX_FEAT`: features to be enabled for Ruxos modules (crate `ruxfeat`).
 #   - `LIB_FEAT`: features to be enabled for the user library (crate `axstd`, `ruxlibc`, `ruxmusl`).
 #   - `APP_FEAT`: features to be enabled for the Rust app.
 
@@ -40,7 +40,7 @@ ifeq ($(APP_TYPE), c)
   ifneq ($(filter fs net pipe select poll epoll,$(FEATURES)),)
     override FEATURES += fd
   endif
-  ifeq ($(AX_MUSL), y)
+  ifeq ($(RUX_MUSL), y)
     override FEATURES += musl
     override FEATURES += fp_simd
     override FEATURES += fd
@@ -70,6 +70,6 @@ endif
 ax_feat += $(filter-out $(lib_features),$(FEATURES))
 lib_feat += $(filter $(lib_features),$(FEATURES))
 
-AX_FEAT := $(strip $(addprefix $(ax_feat_prefix),$(ax_feat)))
+RUX_FEAT := $(strip $(addprefix $(ax_feat_prefix),$(ax_feat)))
 LIB_FEAT := $(strip $(addprefix $(lib_feat_prefix),$(lib_feat)))
 APP_FEAT := $(strip $(shell echo $(APP_FEATURES) | tr ',' ' '))

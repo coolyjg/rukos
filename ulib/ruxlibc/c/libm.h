@@ -10,7 +10,7 @@
 #ifndef _LIBM_H
 #define _LIBM_H
 
-#if AX_CONFIG_FP_SIMD
+#if RUX_CONFIG_FP_SIMD
 
 #include <endian.h>
 #include <float.h>
@@ -237,6 +237,6 @@ double __math_invalid(double);
 long double __math_invalidl(long double);
 #endif
 
-#endif // AX_CONFIG_FP_SIMD
+#endif // RUX_CONFIG_FP_SIMD
 
 #endif // _LIBM_H

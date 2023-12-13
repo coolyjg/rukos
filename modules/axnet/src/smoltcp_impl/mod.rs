@@ -44,8 +44,8 @@ macro_rules! env_or_default {
     };
 }
 
-const IP: &str = env_or_default!("AX_IP");
-const GATEWAY: &str = env_or_default!("AX_GW");
+const IP: &str = env_or_default!("RUX_IP");
+const GATEWAY: &str = env_or_default!("RUX_GW");
 const DNS_SEVER: &str = "8.8.8.8";
 const IP_PREFIX: u8 = 24;
 

@@ -7,7 +7,7 @@
  *   See the Mulan PSL v2 for more details.
  */
 
-#ifdef AX_CONFIG_FS
+#ifdef RUX_CONFIG_FS
 
 #include <dirent.h>
 #include <errno.h>
@@ -104,4 +104,4 @@ void rewinddir(DIR *dir)
     // UNLOCK(dir->lock);
 }
 
-#endif // AX_CONFIG_FS
+#endif // RUX_CONFIG_FS

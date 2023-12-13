@@ -38,7 +38,7 @@ void srand(unsigned);
 long random(void);
 void srandom(unsigned int);
 
-#ifdef AX_CONFIG_FP_SIMD
+#ifdef RUX_CONFIG_FP_SIMD
 float strtof(const char *__restrict, char **__restrict);
 double strtod(const char *__restrict, char **__restrict);
 long double strtold(const char *__restrict, char **__restrict);

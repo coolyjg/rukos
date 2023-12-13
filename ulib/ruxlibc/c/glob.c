@@ -7,7 +7,7 @@
  *   See the Mulan PSL v2 for more details.
  */
 
-#ifdef AX_CONFIG_FS
+#ifdef RUX_CONFIG_FS
 
 #include <dirent.h>
 #include <errno.h>
@@ -335,4 +335,4 @@ void globfree(glob_t *g)
     g->gl_pathv = NULL;
 }
 
-#endif // AX_CONFIG_FS
+#endif // RUX_CONFIG_FS

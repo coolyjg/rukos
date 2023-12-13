@@ -83,12 +83,12 @@ const char *hstrerror(int ecode);
 #define MAXSERVS 2
 #define MAXADDRS 48
 
-#ifdef AX_CONFIG_NET
+#ifdef RUX_CONFIG_NET
 
 int getaddrinfo(const char *, const char *, const struct addrinfo *, struct addrinfo **);
 void freeaddrinfo(struct addrinfo *);
 const char *gai_strerror(int __ecode);
 
-#endif // AX_CONFIG_NET
+#endif // RUX_CONFIG_NET
 
 #endif // _NETDB_H

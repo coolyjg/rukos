@@ -458,7 +458,7 @@ char *strstr(const char *h, const char *n)
     return twoway_strstr((void *)h, (void *)n);
 }
 
-#ifdef AX_CONFIG_ALLOC
+#ifdef RUX_CONFIG_ALLOC
 
 #include <stdlib.h>
 char *strdup(const char *s)
@@ -470,4 +470,4 @@ char *strdup(const char *s)
     return memcpy(d, s, l + 1);
 }
 
-#endif // AX_CONFIG_ALLOC
+#endif // RUX_CONFIG_ALLOC

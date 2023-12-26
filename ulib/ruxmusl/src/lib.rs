@@ -21,5 +21,8 @@ cfg_if::cfg_if! {
     } else if #[cfg(target_arch = "x86_64")]{
         mod x86_64;
         use x86_64::{syscall, syscall_id};
+    } else {
+        mod dummy;
+        use dummy::{syscall, syscall_id};
     }
 }

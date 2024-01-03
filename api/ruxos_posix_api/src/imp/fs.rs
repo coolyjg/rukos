@@ -548,7 +548,11 @@ fn convert_name_to_array(name: &[u8]) -> [i8; 256] {
 /// Read directory entries from a directory file descriptor.
 ///
 /// TODO: check errors, change 280 to a special value
-pub unsafe fn sys_getdents64(fd: c_uint, dirent: *mut LinuxDirent64, count: c_uint) -> c_long {
+pub unsafe fn sys_getdents64(
+    fd: c_int,
+    dirent: *mut LinuxDirent64,
+    count: ctypes::size_t,
+) -> c_long {
     debug!(
         "sys_getdents64 <= fd: {}, dirent: {:p}, count: {}",
         fd, dirent, count

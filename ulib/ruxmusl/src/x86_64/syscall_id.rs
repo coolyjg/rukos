@@ -67,7 +67,92 @@ pub enum SyscallId {
     #[cfg(feature = "alloc")]
     MREMAP = 25,
 
+    #[cfg(feature = "alloc")]
+    MADVISE = 28,
+
+    #[cfg(feature = "fd")]
+    DUP = 32,
+
+    #[cfg(feature = "fd")]
+    DUP2 = 33,
+
+    NANO_SLEEP = 35,
+
+    #[cfg(feature = "multitask")]
+    GETPID = 39,
+
+    #[cfg(feature = "net")]
+    SOCKET = 41,
+
+    #[cfg(feature = "net")]
+    CONNECT = 42,
+
+    #[cfg(feature = "net")]
+    ACCEPT = 43,
+
+    #[cfg(feature = "net")]
+    SENDTO = 44,
+
+    #[cfg(feature = "net")]
+    RECVFROM = 45,
+
+    #[cfg(feature = "net")]
+    SENDMSG = 46,
+
+    #[cfg(feature = "net")]
+    SHUTDOWN = 48,
+
+    #[cfg(feature = "net")]
+    BIND = 49,
+
+    #[cfg(feature = "net")]
+    LISTEN = 50,
+
+    #[cfg(feature = "net")]
+    GETSOCKNAME = 51,
+
+    #[cfg(feature = "net")]
+    GETPEERNAME = 52,
+
+    #[cfg(feature = "net")]
+    SETSOCKOPT = 54,
+
+    // TODO: check clone
+    #[cfg(feature = "multitask")]
+    CLONE = 56,
+
     EXIT = 60,
+
+    UNAME = 63,
+
+    #[cfg(feature = "fd")]
+    FCNTL = 72,
+
+    #[cfg(feature = "fs")]
+    FSYNC = 74,
+
+    #[cfg(feature = "fs")]
+    FDATASYNC = 75,
+
+    #[cfg(feature = "fs")]
+    GETDENTS = 78,
+
+    #[cfg(feature = "fs")]
+    GETCWD = 79,
+
+    #[cfg(feature = "fs")]
+    RENAME = 82,
+
+    #[cfg(feature = "fs")]
+    MKDIR = 83,
+
+    #[cfg(feature = "fs")]
+    UNLINK = 87,
+
+    #[cfg(feature = "fs")]
+    READLINK = 89,
+
+    UMASK = 95,
 
     ARCH_PRCTL = 158,
 

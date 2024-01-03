@@ -143,12 +143,179 @@ pub fn syscall(syscall_id: SyscallId, args: [usize; 6]) -> isize {
                 args[4] as *mut core::ffi::c_void,
             ) as _,
 
+            #[cfg(feature = "alloc")]
+            SyscallId::MADVISE => {
+                ruxos_posix_api::sys_madvise(args[0] as *mut c_void, args[1], args[2] as c_int) as _
+            }
+
+            #[cfg(feature = "fd")]
+            SyscallId::DUP => ruxos_posix_api::sys_dup(args[0] as c_int) as _,
+
+            #[cfg(feature = "fd")]
+            SyscallId::DUP2 => ruxos_posix_api::sys_dup2(args[0] as c_int, args[1] as c_int) as _,
+
+            SyscallId::NANO_SLEEP => ruxos_posix_api::sys_nanosleep(
+                args[0] as *const ctypes::timespec,
+                args[1] as *mut ctypes::timespec,
+            ) as _,
+
+            #[cfg(feature = "multitask")]
+            SyscallId::GETPID => ruxos_posix_api::sys_getpid() as _,
+
+            #[cfg(feature = "net")]
+            SyscallId::SOCKET => {
+                ruxos_posix_api::sys_socket(args[0] as c_int, args[1] as c_int, args[2] as c_int)
+                    as _
+            }
+
+            #[cfg(feature = "net")]
+            SyscallId::CONNECT => ruxos_posix_api::sys_connect(
+                args[0] as c_int,
+                args[1] as *const ctypes::sockaddr,
+                args[2] as ctypes::socklen_t,
+            ) as _,
+
+            #[cfg(feature = "net")]
+            SyscallId::ACCEPT => ruxos_posix_api::sys_accept(
+                args[0] as c_int,
+                args[1] as *mut ctypes::sockaddr,
+                args[2] as *mut ctypes::socklen_t,
+            ) as _,
+
+            #[cfg(feature = "net")]
+            SyscallId::SENDTO => ruxos_posix_api::sys_sendto(
+                args[0] as c_int,
+                args[1] as *const core::ffi::c_void,
+                args[2] as ctypes::size_t,
+                args[3] as c_int,
+                args[4] as *const ctypes::sockaddr,
+                args[5] as ctypes::socklen_t,
+            ) as _,
+
+            #[cfg(feature = "net")]
+            SyscallId::RECVFROM => ruxos_posix_api::sys_recvfrom(
+                args[0] as c_int,
+                args[1] as *mut core::ffi::c_void,
+                args[2] as ctypes::size_t,
+                args[3] as c_int,
+                args[4] as *mut ctypes::sockaddr,
+                args[5] as *mut ctypes::socklen_t,
+            ) as _,
+
+            #[cfg(feature = "net")]
+            SyscallId::SENDMSG => ruxos_posix_api::sys_sendmsg(
+                args[0] as c_int,
+                args[1] as *const ctypes::msghdr,
+                args[2] as c_int,
+            ) as _,
+
+            #[cfg(feature = "net")]
+            SyscallId::SHUTDOWN => {
+                ruxos_posix_api::sys_shutdown(args[0] as c_int, args[1] as c_int) as _
+            }
+
+            #[cfg(feature = "net")]
+            SyscallId::BIND => ruxos_posix_api::sys_bind(
+                args[0] as c_int,
+                args[1] as *const ctypes::sockaddr,
+                args[2] as ctypes::socklen_t,
+            ) as _,
+
+            #[cfg(feature = "net")]
+            SyscallId::LISTEN => {
+                ruxos_posix_api::sys_listen(args[0] as c_int, args[1] as c_int) as _
+            }
+
+            #[cfg(feature = "net")]
+            SyscallId::GETSOCKNAME => ruxos_posix_api::sys_getsockname(
+                args[0] as c_int,
+                args[1] as *mut ctypes::sockaddr,
+                args[2] as *mut ctypes::socklen_t,
+            ) as _,
+
+            #[cfg(feature = "net")]
+            SyscallId::GETPEERNAME => ruxos_posix_api::sys_getpeername(
+                args[0] as c_int,
+                args[1] as *mut ctypes::sockaddr,
+                args[2] as *mut ctypes::socklen_t,
+            ) as _,
+
+            #[cfg(feature = "net")]
+            SyscallId::SETSOCKOPT => ruxos_posix_api::sys_setsockopt(
+                args[0] as c_int,
+                args[1] as c_int,
+                args[2] as c_int,
+                args[3] as *const c_void,
+                args[4] as ctypes::socklen_t,
+            ) as _,
+
+            #[cfg(feature = "multitask")]
+            SyscallId::CLONE => ruxos_posix_api::sys_clone(
+                args[0] as c_int,
+                args[1] as *mut c_void,
+                args[2] as *mut ctypes::pid_t,
+                args[3] as *mut c_void,
+                args[4] as *mut ctypes::pid_t,
+            ) as _,
+
             #[cfg(not(feature = "multitask"))]
             SyscallId::EXIT => ruxos_posix_api::sys_exit(args[0] as c_int) as _,
 
             #[allow(unreachable_code)]
             #[cfg(feature = "multitask")]
             SyscallId::EXIT => ruxos_posix_api::sys_pthread_exit(args[0] as *mut c_void) as _,
+
+            SyscallId::UNAME => ruxos_posix_api::sys_uname(args[0] as *mut c_void) as _,
+
+            #[cfg(feature = "fd")]
+            SyscallId::FCNTL => {
+                ruxos_posix_api::sys_fcntl(args[0] as c_int, args[1] as c_int, args[2]) as _
+            }
+
+            #[cfg(feature = "fs")]
+            SyscallId::FSYNC => ruxos_posix_api::sys_fsync(args[0] as c_int) as _,
+
+            #[cfg(feature = "fs")]
+            SyscallId::FDATASYNC => ruxos_posix_api::sys_fdatasync(args[0] as c_int) as _,
+
+            #[cfg(feature = "fs")]
+            SyscallId::GETDENTS => ruxos_posix_api::sys_getdents64(
+                args[0] as core::ffi::c_int,
+                args[1] as *mut ctypes::dirent,
+                args[2] as ctypes::size_t,
+            ) as _,
+
+            #[cfg(feature = "fs")]
+            SyscallId::GETCWD => {
+                ruxos_posix_api::sys_getcwd(args[0] as *mut core::ffi::c_char, args[1]) as _
+            }
+
+            #[cfg(feature = "fs")]
+            SyscallId::RENAME => ruxos_posix_api::sys_rename(
+                args[0] as *const core::ffi::c_char,
+                args[1] as *const core::ffi::c_char,
+            ) as _,
+
+            #[cfg(feature = "fs")]
+            SyscallId::MKDIR => ruxos_posix_api::sys_mkdir(
+                args[0] as *const core::ffi::c_char,
+                args[1] as ctypes::mode_t,
+            ) as _,
+
+            #[cfg(feature = "fs")]
+            SyscallId::UNLINK => {
+                ruxos_posix_api::sys_unlink(args[0] as *const core::ffi::c_char) as _
+            }
+
+            #[cfg(feature = "fs")]
+            SyscallId::READLINK => ruxos_posix_api::sys_readlinkat(
+                ctypes::AT_FDCWD as c_int,
+                args[0] as *const core::ffi::c_char,
+                args[1] as *mut core::ffi::c_char,
+                args[2],
+            ) as _,
+
+            SyscallId::UMASK => ruxos_posix_api::sys_umask(args[0] as ctypes::mode_t) as _,
 
             SyscallId::ARCH_PRCTL => {
                 ruxos_posix_api::sys_arch_prctl(args[0] as c_int, args[1] as c_ulong) as _

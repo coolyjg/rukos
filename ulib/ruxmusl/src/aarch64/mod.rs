@@ -331,7 +331,7 @@ pub fn syscall(syscall_id: SyscallId, args: [usize; 6]) -> isize {
                 args[5] as ctypes::off_t,
             ) as _,
             #[cfg(feature = "alloc")]
-            SyscallId::MADVICE => ruxos_posix_api::sys_madvice(
+            SyscallId::MADVISE => ruxos_posix_api::sys_madvise(
                 args[0] as *mut core::ffi::c_void,
                 args[1] as ctypes::size_t,
                 args[2] as c_int,

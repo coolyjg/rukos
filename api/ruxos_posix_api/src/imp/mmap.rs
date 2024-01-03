@@ -98,10 +98,10 @@ pub fn sys_mremap(
 /// if success return 0, if error return -1
 ///
 /// TODO: implement this
-pub fn sys_madvice(addr: *mut c_void, len: ctypes::size_t, advice: c_int) -> c_int {
+pub fn sys_madvise(addr: *mut c_void, len: ctypes::size_t, advice: c_int) -> c_int {
     debug!(
-        "sys_madvice <= addr: {:p}, len: {}, advice: {}",
+        "sys_madvise <= addr: {:p}, len: {}, advice: {}",
         addr, len, advice
     );
-    syscall_body!(sys_madvice, Ok(0))
+    syscall_body!(sys_madvise, Ok(0))
 }

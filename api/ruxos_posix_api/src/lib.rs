@@ -46,6 +46,7 @@ pub mod config {
 pub mod ctypes;
 
 pub use imp::io::{sys_read, sys_readv, sys_write, sys_writev};
+pub use imp::prctl::sys_arch_prctl;
 pub use imp::resources::{sys_getrlimit, sys_prlimit64, sys_setrlimit};
 pub use imp::rt_sig::{sys_rt_sigaction, sys_rt_sigprocmask};
 pub use imp::stat::{sys_geteuid, sys_umask};

@@ -17,8 +17,28 @@ const IRQ_VECTOR_START: u8 = 0x20;
 const IRQ_VECTOR_END: u8 = 0xff;
 
 #[no_mangle]
-fn x86_trap_handler(tf: &TrapFrame) {
+fn x86_trap_handler(tf: &mut TrapFrame) {
     match tf.vector as u8 {
+        #[cfg(feature = "musl")]
+        INVALID_OPCODE_VECTOR => {
+            debug!(
+                "rax: {}, rdi: {}, rsi: {}, rdx:{}, \nr10: {}, r8: {}, r9: {}",
+                tf.rax, tf.rdi, tf.rsi, tf.rdx, tf.r10, tf.r8, tf.r9,
+            );
+            let ret = crate::trap::handle_syscall(
+                tf.rax as usize,
+                [
+                    tf.rdi as _,
+                    tf.rsi as _,
+                    tf.rdx as _,
+                    tf.r10 as _,
+                    tf.r8 as _,
+                    tf.r9 as _,
+                ],
+            );
+            tf.rax = ret as _;
+            tf.rip += 2; // `syscall` instruction
+        }
         PAGE_FAULT_VECTOR => {
             if tf.is_user() {
                 warn!(

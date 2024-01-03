@@ -232,7 +232,26 @@ pub unsafe fn sys_fdatasync(fd: c_int) -> c_int {
 /// Get the file metadata by `path` and write into `buf`.
 ///
 /// Return 0 if success.
-pub unsafe fn sys_stat(path: *const c_char, buf: *mut ctypes::stat) -> c_int {
+// pub unsafe fn sys_stat(path: *const c_char, buf: *mut ctypes::stat) -> c_int {
+//     let path = char_ptr_to_str(path);
+//     debug!("sys_stat <= {:?} {:#x}", path, buf as usize);
+//     syscall_body!(sys_stat, {
+//         if buf.is_null() {
+//             return Err(LinuxError::EFAULT);
+//         }
+//         let mut options = OpenOptions::new();
+//         options.read(true);
+//         let file = ruxfs::fops::File::open(path?, &options)?;
+//         let st = File::new(file).stat()?;
+//         unsafe { *buf = st };
+//         Ok(0)
+//     })
+// }
+
+/// Get the file metadata by `path` and write into `buf`.
+///
+/// Return 0 if success.
+pub unsafe fn sys_stat(path: *const c_char, buf: *mut core::ffi::c_void) -> c_int {
     let path = char_ptr_to_str(path);
     debug!("sys_stat <= {:?} {:#x}", path, buf as usize);
     syscall_body!(sys_stat, {
@@ -243,8 +262,29 @@ pub unsafe fn sys_stat(path: *const c_char, buf: *mut ctypes::stat) -> c_int {
         options.read(true);
         let file = ruxfs::fops::File::open(path?, &options)?;
         let st = File::new(file).stat()?;
-        unsafe { *buf = st };
-        Ok(0)
+
+        #[cfg(not(feature = "musl"))]
+        {
+            unsafe { *buf = st };
+            Ok(0)
+        }
+
+        #[cfg(feature = "musl")]
+        {
+            let kst = buf as *mut ctypes::kstat;
+            unsafe {
+                (*kst).st_dev = st.st_dev;
+                (*kst).st_ino = st.st_dev;
+                (*kst).st_mode = st.st_mode;
+                (*kst).st_nlink = st.st_nlink;
+                (*kst).st_uid = st.st_uid;
+                (*kst).st_gid = st.st_gid;
+                (*kst).st_size = st.st_size;
+                (*kst).st_blocks = st.st_blocks;
+                (*kst).st_blksize = st.st_blksize;
+            }
+            Ok(0)
+        }
     })
 }
 

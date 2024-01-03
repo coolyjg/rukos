@@ -26,7 +26,9 @@ cfg_if::cfg_if! {
         mod aarch64_qemu_virt;
         pub use self::aarch64_qemu_virt::*;
     } else {
-        mod dummy;
-        pub use self::dummy::*;
+        // mod dummy;
+        // pub use self::dummy::*;
+        mod x86_pc;
+        pub use self::x86_pc::*;
     }
 }

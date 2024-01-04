@@ -8,7 +8,7 @@
  */
 
 use alloc::sync::Arc;
-use core::ffi::{c_char, c_int, c_long, c_uint};
+use core::ffi::{c_char, c_int, c_long};
 
 use axerrno::{LinuxError, LinuxResult};
 use axio::{PollState, SeekFrom};
@@ -232,25 +232,6 @@ pub unsafe fn sys_fdatasync(fd: c_int) -> c_int {
 /// Get the file metadata by `path` and write into `buf`.
 ///
 /// Return 0 if success.
-// pub unsafe fn sys_stat(path: *const c_char, buf: *mut ctypes::stat) -> c_int {
-//     let path = char_ptr_to_str(path);
-//     debug!("sys_stat <= {:?} {:#x}", path, buf as usize);
-//     syscall_body!(sys_stat, {
-//         if buf.is_null() {
-//             return Err(LinuxError::EFAULT);
-//         }
-//         let mut options = OpenOptions::new();
-//         options.read(true);
-//         let file = ruxfs::fops::File::open(path?, &options)?;
-//         let st = File::new(file).stat()?;
-//         unsafe { *buf = st };
-//         Ok(0)
-//     })
-// }
-
-/// Get the file metadata by `path` and write into `buf`.
-///
-/// Return 0 if success.
 pub unsafe fn sys_stat(path: *const c_char, buf: *mut core::ffi::c_void) -> c_int {
     let path = char_ptr_to_str(path);
     debug!("sys_stat <= {:?} {:#x}", path, buf as usize);
@@ -265,6 +246,7 @@ pub unsafe fn sys_stat(path: *const c_char, buf: *mut core::ffi::c_void) -> c_in
 
         #[cfg(not(feature = "musl"))]
         {
+            let buf = buf as *mut ctypes::stat;
             unsafe { *buf = st };
             Ok(0)
         }
@@ -559,8 +541,8 @@ pub unsafe fn sys_getdents64(
     );
 
     syscall_body!(sys_getdents64, {
-        let expect_entries = count as usize / 280;
-        let dir = Directory::from_fd(fd as i32)?;
+        let expect_entries = count / 280;
+        let dir = Directory::from_fd(fd)?;
         let mut my_dirent: Vec<DirEntry> =
             (0..expect_entries).map(|_| DirEntry::default()).collect();
 

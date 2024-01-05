@@ -183,7 +183,7 @@ pub fn syscall(syscall_id: SyscallId, args: [usize; 6]) -> isize {
             ) as _,
             SyscallId::CLOCK_SETTIME => ruxos_posix_api::sys_clock_settime(
                 args[0] as ctypes::clockid_t,
-                args[1] as *mut ctypes::timespec,
+                args[1] as *const ctypes::timespec,
             ) as _,
             SyscallId::CLOCK_GETTIME => ruxos_posix_api::sys_clock_gettime(
                 args[0] as ctypes::clockid_t,

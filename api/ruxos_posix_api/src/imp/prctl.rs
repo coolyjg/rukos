@@ -28,3 +28,12 @@ pub fn sys_arch_prctl(code: c_int, addr: c_ulong) -> c_int {
         }
     })
 }
+
+/// TODO: fake implementation for prctl
+pub fn sys_prctl(op: c_int, arg0: c_ulong, arg1: c_ulong, arg2: c_ulong, arg3: c_ulong) -> c_int {
+    debug!(
+        "sys_prctl <= op: {}, arg0: {}, arg1: {}, arg2: {}, arg3: {}",
+        op, arg0, arg1, arg2, arg3
+    );
+    syscall_body!(sys_prctl, Ok(0))
+}

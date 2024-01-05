@@ -154,8 +154,73 @@ pub enum SyscallId {
 
     UMASK = 95,
 
+    GETTIMEOFDAY = 96,
+
+    GETRLIMIT = 97,
+
+    SYSINFO = 99,
+
+    #[cfg(feature = "signal")]
+    SIGALTSTACK = 131,
+
+    PRCTL = 157,
+
     ARCH_PRCTL = 158,
 
     #[cfg(feature = "multitask")]
+    FUTEX = 202,
+
+    #[cfg(feature = "epoll")]
+    EPOLL_CREATE = 213,
+
+    #[cfg(feature = "fs")]
+    GETDENTS64 = 217,
+
+    #[cfg(feature = "multitask")]
     SET_TID_ADDRESS = 218,
+
+    CLOCK_SETTIME = 227,
+
+    CLOCK_GETTIME = 228,
+
+    #[cfg(feature = "epoll")]
+    EPOLL_WAIT = 232,
+
+    #[cfg(feature = "epoll")]
+    EPOLL_CTL = 233,
+
+    #[cfg(feature = "fs")]
+    OPENAT = 257,
+
+    #[cfg(feature = "fs")]
+    MKDIRAT = 258,
+
+    #[cfg(feature = "fs")]
+    NEWFSTATAT = 262,
+
+    #[cfg(feature = "fs")]
+    UNLINKAT = 263,
+
+    #[cfg(feature = "fs")]
+    RENAMEAT = 264,
+
+    #[cfg(feature = "select")]
+    PSELECT6 = 270,
+
+    #[cfg(feature = "poll")]
+    PPOLL = 271,
+
+    #[cfg(feature = "epoll")]
+    EPOLL_PWAIT = 281,
+
+    #[cfg(feature = "epoll")]
+    EPOLL_CREATE1 = 291,
+
+    #[cfg(feature = "fd")]
+    DUP3 = 292,
+
+    #[cfg(feature = "pipe")]
+    PIPE2 = 293,
+
+    PRLIMIT64 = 302,
 }

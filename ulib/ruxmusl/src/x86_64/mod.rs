@@ -317,12 +317,174 @@ pub fn syscall(syscall_id: SyscallId, args: [usize; 6]) -> isize {
 
             SyscallId::UMASK => ruxos_posix_api::sys_umask(args[0] as ctypes::mode_t) as _,
 
+            SyscallId::GETTIMEOFDAY => ruxos_posix_api::sys_gettimeofday(
+                args[0] as *mut ctypes::timespec,
+                args[1] as c_int,
+            ) as _,
+
+            SyscallId::GETRLIMIT => {
+                ruxos_posix_api::sys_getrlimit(args[0] as c_int, args[1] as *mut ctypes::rlimit)
+                    as _
+            }
+
+            SyscallId::SYSINFO => {
+                ruxos_posix_api::sys_sysinfo(args[0] as *mut ctypes::sysinfo) as _
+            }
+
+            #[cfg(feature = "signal")]
+            SyscallId::SIGALTSTACK => {
+                ruxos_posix_api::sys_sigaltstack(args[0] as *const c_void, args[1] as *mut c_void)
+                    as _
+            }
+
+            SyscallId::PRCTL => ruxos_posix_api::sys_prctl(
+                args[0] as c_int,
+                args[1] as c_ulong,
+                args[2] as c_ulong,
+                args[3] as c_ulong,
+                args[4] as c_ulong,
+            ) as _,
+
             SyscallId::ARCH_PRCTL => {
                 ruxos_posix_api::sys_arch_prctl(args[0] as c_int, args[1] as c_ulong) as _
             }
 
             #[cfg(feature = "multitask")]
+            SyscallId::FUTEX => ruxos_posix_api::sys_futex(
+                args[0],
+                args[1] as c_int,
+                args[2] as c_int,
+                args[3],
+                args[4] as c_int,
+                args[5] as c_int,
+            ) as _,
+
+            #[cfg(feature = "epoll")]
+            SyscallId::EPOLL_CREATE => ruxos_posix_api::sys_epoll_create(args[0] as c_int) as _,
+
+            #[cfg(feature = "fs")]
+            SyscallId::GETDENTS64 => ruxos_posix_api::sys_getdents64(
+                args[0] as c_int,
+                args[1] as *mut ctypes::dirent,
+                args[2],
+            ) as _,
+
+            #[cfg(feature = "multitask")]
             SyscallId::SET_TID_ADDRESS => ruxos_posix_api::sys_set_tid_address(args[0]) as _,
+
+            SyscallId::CLOCK_SETTIME => ruxos_posix_api::sys_clock_settime(
+                args[0] as c_int,
+                args[1] as *const ctypes::timespec,
+            ) as _,
+
+            SyscallId::CLOCK_GETTIME => ruxos_posix_api::sys_clock_gettime(
+                args[0] as c_int,
+                args[1] as *mut ctypes::timespec,
+            ) as _,
+
+            #[cfg(feature = "epoll")]
+            SyscallId::EPOLL_WAIT => ruxos_posix_api::sys_epoll_wait(
+                args[0] as c_int,
+                args[1] as *mut ctypes::epoll_event,
+                args[2] as c_int,
+                args[3] as c_int,
+            ) as _,
+
+            #[cfg(feature = "epoll")]
+            SyscallId::EPOLL_CTL => ruxos_posix_api::sys_epoll_ctl(
+                args[0] as c_int,
+                args[1] as c_int,
+                args[2] as c_int,
+                args[3] as *mut ctypes::epoll_event,
+            ) as _,
+
+            #[cfg(feature = "fs")]
+            SyscallId::OPENAT => ruxos_posix_api::sys_openat(
+                args[0],
+                args[1] as *const core::ffi::c_char,
+                args[2] as c_int,
+                args[3] as ctypes::mode_t,
+            ) as _,
+
+            #[cfg(feature = "fs")]
+            SyscallId::MKDIRAT => ruxos_posix_api::sys_mkdirat(
+                args[0] as c_int,
+                args[1] as *const core::ffi::c_char,
+                args[2] as ctypes::mode_t,
+            ) as _,
+
+            #[cfg(feature = "fs")]
+            SyscallId::NEWFSTATAT => ruxos_posix_api::sys_newfstatat(
+                args[0] as c_int,
+                args[1] as *const core::ffi::c_char,
+                args[2] as *mut ctypes::kstat,
+                args[3] as c_int,
+            ) as _,
+
+            #[cfg(feature = "fs")]
+            SyscallId::UNLINKAT => ruxos_posix_api::sys_unlinkat(
+                args[0] as c_int,
+                args[1] as *const core::ffi::c_char,
+                args[2] as c_int,
+            ) as _,
+
+            #[cfg(feature = "fs")]
+            SyscallId::RENAMEAT => ruxos_posix_api::sys_renameat(
+                args[0] as c_int,
+                args[1] as *const core::ffi::c_char,
+                args[2] as c_int,
+                args[3] as *const core::ffi::c_char,
+            ) as _,
+
+            #[cfg(feature = "select")]
+            SyscallId::PSELECT6 => ruxos_posix_api::sys_pselect6(
+                args[0] as c_int,
+                args[1] as *mut ctypes::fd_set,
+                args[2] as *mut ctypes::fd_set,
+                args[3] as *mut ctypes::fd_set,
+                args[4] as *mut ctypes::timeval,
+                args[5] as *const c_void,
+            ) as _,
+
+            #[cfg(feature = "poll")]
+            SyscallId::PPOLL => ruxos_posix_api::sys_ppoll(
+                args[0] as *mut ctypes::pollfd,
+                args[1] as ctypes::nfds_t,
+                args[2] as *const ctypes::timespec,
+                args[3] as *const ctypes::sigset_t,
+                args[4] as ctypes::size_t,
+            ) as _,
+
+            #[cfg(feature = "epoll")]
+            SyscallId::EPOLL_PWAIT => ruxos_posix_api::sys_epoll_pwait(
+                args[0] as c_int,
+                args[1] as *mut ctypes::epoll_event,
+                args[2] as c_int,
+                args[3] as c_int,
+                args[4] as *const ctypes::sigset_t,
+                args[5] as *const ctypes::size_t,
+            ) as _,
+
+            #[cfg(feature = "epoll")]
+            SyscallId::EPOLL_CREATE1 => ruxos_posix_api::sys_epoll_create(args[0] as c_int) as _,
+
+            #[cfg(feature = "fd")]
+            SyscallId::DUP3 => {
+                ruxos_posix_api::sys_dup3(args[0] as c_int, args[1] as c_int, args[2] as c_int) as _
+            }
+
+            #[cfg(feature = "pipe")]
+            SyscallId::PIPE2 => ruxos_posix_api::sys_pipe2(
+                core::slice::from_raw_parts_mut(args[0] as *mut c_int, 2),
+                args[1] as c_int,
+            ) as _,
+
+            SyscallId::PRLIMIT64 => ruxos_posix_api::sys_prlimit64(
+                args[0] as ctypes::pid_t,
+                args[1] as c_int,
+                args[2] as *const ctypes::rlimit,
+                args[3] as *mut ctypes::rlimit,
+            ) as _,
         }
     }
 }

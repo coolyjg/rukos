@@ -303,6 +303,11 @@ pub fn syscall(syscall_id: SyscallId, args: [usize; 6]) -> isize {
             ) as _,
 
             #[cfg(feature = "fs")]
+            SyscallId::RMDIR => {
+                ruxos_posix_api::sys_rmdir(args[0] as *const core::ffi::c_char) as _
+            }
+
+            #[cfg(feature = "fs")]
             SyscallId::UNLINK => {
                 ruxos_posix_api::sys_unlink(args[0] as *const core::ffi::c_char) as _
             }

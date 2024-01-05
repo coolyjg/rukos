@@ -147,6 +147,9 @@ pub enum SyscallId {
     MKDIR = 83,
 
     #[cfg(feature = "fs")]
+    RMDIR = 84,
+
+    #[cfg(feature = "fs")]
     UNLINK = 87,
 
     #[cfg(feature = "fs")]

@@ -20,8 +20,6 @@ x86_syscall_entry:
     push    rdx
     push    rcx
 
-    mov     rdi, rsp
-    sub     rsp, 8
     mov     rcx, r10
     push    r9
     mov     r9, r8

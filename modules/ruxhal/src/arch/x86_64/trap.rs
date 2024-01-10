@@ -19,26 +19,26 @@ const IRQ_VECTOR_END: u8 = 0xff;
 #[no_mangle]
 fn x86_trap_handler(tf: &mut TrapFrame) {
     match tf.vector as u8 {
-        #[cfg(feature = "musl")]
-        INVALID_OPCODE_VECTOR => {
-            debug!(
-                "rax: {:#x}, rdi: {:#x}, rsi: {:#x}, rdx:{:#x}, \nr10: {:#x}, r8: {:#x}, r9: {:#x}",
-                tf.rax, tf.rdi, tf.rsi, tf.rdx, tf.r10, tf.r8, tf.r9,
-            );
-            let ret = crate::trap::handle_syscall(
-                tf.rax as usize,
-                [
-                    tf.rdi as _,
-                    tf.rsi as _,
-                    tf.rdx as _,
-                    tf.r10 as _,
-                    tf.r8 as _,
-                    tf.r9 as _,
-                ],
-            );
-            tf.rax = ret as _;
-            tf.rip += 2; // `syscall` instruction
-        }
+        // #[cfg(feature = "musl")]
+        // INVALID_OPCODE_VECTOR => {
+        //     debug!(
+        //         "rax: {:#x}, rdi: {:#x}, rsi: {:#x}, rdx:{:#x}, \nr10: {:#x}, r8: {:#x}, r9: {:#x}",
+        //         tf.rax, tf.rdi, tf.rsi, tf.rdx, tf.r10, tf.r8, tf.r9,
+        //     );
+        //     let ret = crate::trap::handle_syscall(
+        //         tf.rax as usize,
+        //         [
+        //             tf.rdi as _,
+        //             tf.rsi as _,
+        //             tf.rdx as _,
+        //             tf.r10 as _,
+        //             tf.r8 as _,
+        //             tf.r9 as _,
+        //         ],
+        //     );
+        //     tf.rax = ret as _;
+        //     tf.rip += 2; // `syscall` instruction
+        // }
         PAGE_FAULT_VECTOR => {
             if tf.is_user() {
                 warn!(
@@ -72,4 +72,18 @@ fn x86_trap_handler(tf: &mut TrapFrame) {
             );
         }
     }
+}
+
+#[no_mangle]
+fn x86_syscall_handler(
+    syscall_id: usize,
+    arg1: usize,
+    arg2: usize,
+    arg3: usize,
+    arg4: usize,
+    arg5: usize,
+    arg6: usize,
+) -> isize {
+    debug!("into x86_syscall_handler");
+    crate::trap::handle_syscall(syscall_id, [arg1, arg2, arg3, arg4, arg5, arg6])
 }

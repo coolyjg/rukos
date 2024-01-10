@@ -117,3 +117,14 @@ pub fn read_thread_pointer() -> usize {
 pub unsafe fn write_thread_pointer(fs_base: usize) {
     unsafe { msr::wrmsr(msr::IA32_FS_BASE, fs_base as u64) }
 }
+
+core::arch::global_asm!(include_str!("syscall.S"),);
+
+/// Set syscall entry
+#[inline]
+pub unsafe fn init_syscall_entry() {
+    extern "C" {
+        fn x86_syscall_entry();
+    }
+    unsafe { msr::wrmsr(msr::IA32_LSTAR, x86_syscall_entry as u64) }
+}

@@ -254,8 +254,9 @@ pub fn syscall(syscall_id: SyscallId, args: [usize; 6]) -> isize {
                 args[0] as c_int,
                 args[1] as *mut c_void,
                 args[2] as *mut ctypes::pid_t,
-                args[3] as *mut c_void,
-                args[4] as *mut ctypes::pid_t,
+                args[3] as *mut ctypes::pid_t,
+                args[4] as *mut c_void,
+                args[5] as *mut c_void,
             ) as _,
 
             #[cfg(not(feature = "multitask"))]

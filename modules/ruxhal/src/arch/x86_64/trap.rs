@@ -22,7 +22,7 @@ fn x86_trap_handler(tf: &mut TrapFrame) {
         #[cfg(feature = "musl")]
         INVALID_OPCODE_VECTOR => {
             debug!(
-                "rax: {}, rdi: {}, rsi: {}, rdx:{}, \nr10: {}, r8: {}, r9: {}",
+                "rax: {:#x}, rdi: {:#x}, rsi: {:#x}, rdx:{:#x}, \nr10: {:#x}, r8: {:#x}, r9: {:#x}",
                 tf.rax, tf.rdi, tf.rsi, tf.rdx, tf.r10, tf.r8, tf.r9,
             );
             let ret = crate::trap::handle_syscall(

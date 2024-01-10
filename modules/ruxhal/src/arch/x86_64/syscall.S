@@ -3,8 +3,6 @@
 .code64
 .global x86_syscall_entry
 x86_syscall_entry:
-    swapgs
-
     push    r15
     push    r14
     push    r13
@@ -31,7 +29,7 @@ x86_syscall_entry:
 
     call    x86_syscall_handler
 
-    add     rsp, 8
+    pop     r9
     pop     rcx
     pop     rdx
     pop     rbx
@@ -46,7 +44,5 @@ x86_syscall_entry:
     pop     r13
     pop     r14
     pop     r15
-
-    swapgs
 
     iretq

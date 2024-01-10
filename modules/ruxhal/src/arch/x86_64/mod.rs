@@ -126,7 +126,6 @@ pub unsafe fn init_syscall_entry() {
     extern "C" {
         fn x86_syscall_entry();
     }
-    // processor::wrmsr(msr::IA32_STAR,  (cs << CS_SELECTOR_SHIFT) << IA_32_STAR_SYSCALL_SHIFT);
 
     unsafe { 
         msr::wrmsr(msr::IA32_STAR, (1 << 3) << 32);
@@ -135,9 +134,3 @@ pub unsafe fn init_syscall_entry() {
         msr::wrmsr(msr::IA32_EFER, msr::rdmsr(msr::IA32_EFER) | 1);
     }
 }
-// processor::wrmsr(msr::IA32_LSTAR, reinterpret_cast<uint64_t>(syscall_entry));
-//     // syscall does rflag = rflag and not fmask
-//     // we want no minimize the impact of the syscall instruction so we choose
-//     // fmask as zero
-//     processor::wrmsr(msr::IA32_FMASK, 0);
-//     processor::wrmsr(msr::IA32_EFER,  processor::rdmsr(msr::IA32_EFER) | IA32_EFER_SCE);

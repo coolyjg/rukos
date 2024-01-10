@@ -3,6 +3,9 @@
 .code64
 .global x86_syscall_entry
 x86_syscall_entry:
+
+    swapgs
+
     push    r15
     push    r14
     push    r13
@@ -45,4 +48,6 @@ x86_syscall_entry:
     pop     r14
     pop     r15
 
-    iretq
+    swapgs
+
+    jmp     rcx

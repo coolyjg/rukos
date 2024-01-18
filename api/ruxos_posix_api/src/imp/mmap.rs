@@ -85,14 +85,15 @@ pub fn sys_mremap(
         old_addr, old_size, new_size, _flags, _new_addr
     );
     syscall_body!(sys_mremap, {
-        if old_addr.is_null() {
-            // TODO: It should be ctypes::MAP_FAILED,
-            // but it is not defined in ctypes for an unknown reason
-            return Ok(-1 as _);
-        } else {
-            sys_munmap(old_addr, old_size);
-            Ok(sys_mmap(core::ptr::null_mut(), new_size, 0, 0, 0, 0))
-        }
+        Ok::<*mut c_void, LinuxError>(-1 as _)
+        // if old_addr.is_null() {
+        //     // TODO: It should be ctypes::MAP_FAILED,
+        //     // but it is not defined in ctypes for an unknown reason
+        //     return Ok(-1 as _);
+        // } else {
+        //     sys_munmap(old_addr, old_size);
+        //     Ok(sys_mmap(core::ptr::null_mut(), new_size, 0, 0, 0, 0))
+        // }
     })
 }
 

@@ -351,6 +351,7 @@ pub fn sys_set_tid_address(tid: usize) -> c_int {
     syscall_body!(sys_set_tid_address, {
         debug!("set_tid_address <= addr: {:#x}", tid);
         let id = ruxtask::current().id().as_u64() as c_int;
+        debug!("?");
         ruxtask::current().as_task_ref().set_child_tid(tid);
         Ok(id)
     })

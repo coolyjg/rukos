@@ -175,11 +175,6 @@ pub extern "C" fn rust_main(cpu_id: usize, dtb: usize) -> ! {
     info!("Logging is enabled.");
     info!("Primary CPU {} started, dtb = {:#x}.", cpu_id, dtb);
 
-    unsafe {
-        debug!("init syscall_entry succeed");
-        ruxhal::arch::init_syscall_entry();
-    }
-
     info!("Found physcial memory regions:");
     for r in ruxhal::mem::memory_regions() {
         info!(

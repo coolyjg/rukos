@@ -256,7 +256,7 @@ pub unsafe fn sys_stat(path: *const c_char, buf: *mut core::ffi::c_void) -> c_in
             let kst = buf as *mut ctypes::kstat;
             unsafe {
                 (*kst).st_dev = st.st_dev;
-                (*kst).st_ino = st.st_dev;
+                (*kst).st_ino = st.st_ino;
                 (*kst).st_mode = st.st_mode;
                 (*kst).st_nlink = st.st_nlink;
                 (*kst).st_uid = st.st_uid;
@@ -286,10 +286,11 @@ pub unsafe fn sys_fstat(fd: c_int, kst: *mut core::ffi::c_void) -> c_int {
         #[cfg(feature = "musl")]
         {
             let st = get_file_like(fd)?.stat()?;
+            debug!("sys_fstat: st: {:?}", st);
             let kst = kst as *mut ctypes::kstat;
             unsafe {
                 (*kst).st_dev = st.st_dev;
-                (*kst).st_ino = st.st_dev;
+                (*kst).st_ino = st.st_ino;
                 (*kst).st_mode = st.st_mode;
                 (*kst).st_nlink = st.st_nlink;
                 (*kst).st_uid = st.st_uid;
@@ -297,6 +298,15 @@ pub unsafe fn sys_fstat(fd: c_int, kst: *mut core::ffi::c_void) -> c_int {
                 (*kst).st_size = st.st_size;
                 (*kst).st_blocks = st.st_blocks;
                 (*kst).st_blksize = st.st_blksize;
+                (*kst).st_atime_sec = st.st_atime.tv_sec;
+                (*kst).st_atime_nsec = st.st_atime.tv_nsec;
+                (*kst).st_mtime_sec = st.st_mtime.tv_sec;
+                (*kst).st_mtime_nsec = st.st_mtime.tv_nsec;
+                (*kst).st_ctime_sec = st.st_ctime.tv_sec;
+                (*kst).st_ctime_nsec = st.st_ctime.tv_nsec;
+                (*kst).st_rdev = st.st_rdev;
+                let copy_kst = (*kst).clone();
+                debug!("sys_kst: copy_kst: {:?}", copy_kst);
             }
             Ok(0)
         }

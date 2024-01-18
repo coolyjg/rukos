@@ -4,8 +4,6 @@
 .global x86_syscall_entry
 x86_syscall_entry:
 
-    swapgs
-
     push    r15
     push    r14
     push    r13
@@ -22,7 +20,10 @@ x86_syscall_entry:
     push    rcx
 
     mov     rcx, r10
-    push    r9
+
+    sub     rsp, 8
+    mov     [rsp], r9
+
     mov     r9, r8
     mov     r8, rcx
     mov     rcx, rdx
@@ -32,7 +33,8 @@ x86_syscall_entry:
 
     call    x86_syscall_handler
 
-    pop     r9
+    add     rsp, 8
+
     pop     rcx
     pop     rdx
     pop     rbx
@@ -48,6 +50,8 @@ x86_syscall_entry:
     pop     r14
     pop     r15
 
-    swapgs
+    # restore rflags
+    push    r11
+    popfq
 
     jmp     rcx

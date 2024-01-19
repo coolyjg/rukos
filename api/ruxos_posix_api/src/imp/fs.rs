@@ -286,7 +286,6 @@ pub unsafe fn sys_fstat(fd: c_int, kst: *mut core::ffi::c_void) -> c_int {
         #[cfg(feature = "musl")]
         {
             let st = get_file_like(fd)?.stat()?;
-            debug!("sys_fstat: st: {:?}", st);
             let kst = kst as *mut ctypes::kstat;
             unsafe {
                 (*kst).st_dev = st.st_dev;
@@ -305,8 +304,6 @@ pub unsafe fn sys_fstat(fd: c_int, kst: *mut core::ffi::c_void) -> c_int {
                 (*kst).st_ctime_sec = st.st_ctime.tv_sec;
                 (*kst).st_ctime_nsec = st.st_ctime.tv_nsec;
                 (*kst).st_rdev = st.st_rdev;
-                let copy_kst = (*kst).clone();
-                debug!("sys_kst: copy_kst: {:?}", copy_kst);
             }
             Ok(0)
         }
@@ -351,7 +348,7 @@ pub unsafe fn sys_newfstatat(
         let st = File::new(file).stat()?;
         unsafe {
             (*kst).st_dev = st.st_dev;
-            (*kst).st_ino = st.st_dev;
+            (*kst).st_ino = st.st_ino;
             (*kst).st_mode = st.st_mode;
             (*kst).st_nlink = st.st_nlink;
             (*kst).st_uid = st.st_uid;

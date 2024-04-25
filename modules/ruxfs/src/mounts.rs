@@ -22,12 +22,10 @@ pub(crate) fn devfs() -> Arc<fs::devfs::DeviceFileSystem> {
     let random = fs::devfs::RandomDev;
     let urandom = fs::devfs::RandomDev;
     let devfs = fs::devfs::DeviceFileSystem::new();
-    let foo_dir = devfs.mkdir("foo");
     devfs.add("null", Arc::new(null));
     devfs.add("zero", Arc::new(zero));
     devfs.add("random", Arc::new(random));
     devfs.add("urandom", Arc::new(urandom));
-    foo_dir.add("bar", Arc::new(bar));
     Arc::new(devfs)
 }
 

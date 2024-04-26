@@ -11,7 +11,7 @@ authors = [
     "Shiping Yuan <robert_yuan@pku.edu.com>",
 ]
 description = "POSIX-compatible APIs for Ruxos modules"
-license = "GPL-3.0-or-later OR Apache-2.0"
+license = "Mulan PSL v2"
 repository = "https://github.com/syswonder/ruxos/tree/main/api/ruxos_posix_api"
 
 [features]
